@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
+    android:accessibilityFlags="flagRetrieveInteractiveWindows"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:canRetrieveWindowContent="true"
+    android:notificationTimeout="100"
+    android:description="@string/dialog_watcher_description" />

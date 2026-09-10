@@ -44,12 +44,14 @@ class MotionCuesService : Service() {
 
     private lateinit var windowManager: WindowManager
     private var overlayView: CueOverlayView? = null
+    private var overlayParams: WindowManager.LayoutParams? = null
     private lateinit var motionEstimator: MotionEstimator
     private lateinit var settingsRepository: CueSettingsRepository
 
     private val scope = CoroutineScope(Dispatchers.Main)
     private var collectJob: Job? = null
     private var settingsJob: Job? = null
+    private var dialogJob: Job? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -87,6 +89,14 @@ class MotionCuesService : Service() {
                 overlayView?.applySettings(settings, cueColorPalette(this@MotionCuesService))
             }
         }
+        dialogJob?.cancel()
+        dialogJob = scope.launch {
+            // DialogWatcherService (an opt-in accessibility service) flips this when a
+            // system/app dialog appears, so its buttons stay tappable underneath us.
+            _dialogVisible.collectLatest { dialogShowing ->
+                if (dialogShowing) hideOverlayForDialog() else restoreOverlayAfterDialog()
+            }
+        }
         _isRunning.value = true
         notifyTileOfStateChange(this)
         return START_STICKY
@@ -117,6 +127,23 @@ class MotionCuesService : Service() {
         }
         windowManager.addView(view, params)
         overlayView = view
+        overlayParams = params
+    }
+
+    /**
+     * Pulls the overlay's window entirely (rather than just toggling touchability or alpha)
+     * while a dialog is showing — see [DialogWatcherService] for why that's necessary. The
+     * [overlayView] instance and its [overlayParams] are kept around so [restoreOverlayAfterDialog]
+     * can put the same view back once the dialog is gone, instead of recreating it.
+     */
+    private fun hideOverlayForDialog() {
+        overlayView?.let { view -> runCatching { windowManager.removeViewImmediate(view) } }
+    }
+
+    private fun restoreOverlayAfterDialog() {
+        val view = overlayView ?: return
+        val params = overlayParams ?: return
+        runCatching { windowManager.addView(view, params) }
     }
 
     private fun detachOverlay() {
@@ -124,6 +151,7 @@ class MotionCuesService : Service() {
             runCatching { windowManager.removeView(it) }
             overlayView = null
         }
+        overlayParams = null
     }
 
     private fun stopSelfCleanly() {
@@ -131,6 +159,8 @@ class MotionCuesService : Service() {
         collectJob = null
         settingsJob?.cancel()
         settingsJob = null
+        dialogJob?.cancel()
+        dialogJob = null
         motionEstimator.stop()
         detachOverlay()
         stopForeground(STOP_FOREGROUND_REMOVE)
@@ -191,6 +221,13 @@ class MotionCuesService : Service() {
 
         private val _isRunning = MutableStateFlow(false)
         val isRunning: StateFlow<Boolean> = _isRunning.asStateFlow()
+
+        // Set by DialogWatcherService (if the user has enabled it) whenever a system/app
+        // dialog is showing, so the running instance can pull its overlay window out of the
+        // way. A plain top-level flow, same pattern as [isRunning] — there's only ever one
+        // instance of this service, so it doesn't need to be routed through a bound interface.
+        private val _dialogVisible = MutableStateFlow(false)
+        fun setDialogVisible(visible: Boolean) { _dialogVisible.value = visible }
 
         fun start(context: Context) {
             val intent = Intent(context, MotionCuesService::class.java)
