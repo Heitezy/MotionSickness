@@ -56,6 +56,14 @@ class CueOverlayView(context: Context) : View(context) {
     @Volatile private var yawRateRps = 0f
     @Volatile private var pitchRateRps = 0f
 
+    private var smoothedMotionX = 0f
+    private var smoothedMotionY = 0f
+    private var smoothedMotionOutOfPlane = 0f
+    private var smoothedRollCos = 1f
+    private var smoothedRollSin = 0f
+    private var smoothedYawRateRps = 0f
+    private var smoothedPitchRateRps = 0f
+
     private val pixelDensity = context.resources.displayMetrics.density
 
     private val particles = Array(PARTICLE_COUNT) { Particle() }
@@ -175,6 +183,7 @@ class CueOverlayView(context: Context) : View(context) {
             val dt = if (lastFrameNs == 0L) 1f / 60f
                      else ((frameTimeNanos - lastFrameNs) / 1e9f).coerceIn(0.001f, 0.1f)
             lastFrameNs = frameTimeNanos
+            applyInputSmoothing(dt)
             step(dt)
             updateSizeEnvelope(dt)
             updateRandomize(dt)
@@ -185,8 +194,8 @@ class CueOverlayView(context: Context) : View(context) {
 
     override fun onDraw(canvas: Canvas) {
         val sizeBoost = (1f + sizeEnvelope).coerceIn(1f, SIZE_BOOST_MAX)
-        val cosR = cos(rollRadians)
-        val sinR = sin(rollRadians)
+        val cosR = smoothedRollCos
+        val sinR = smoothedRollSin
         val ext = GRID_EXTENT
         val span = 2f * ext
 
@@ -287,10 +296,10 @@ class CueOverlayView(context: Context) : View(context) {
     }
 
     private fun step(dt: Float) {
-        val cosR = cos(rollRadians)
-        val sinR = sin(rollRadians)
-        val driveLx = motionX * cosR - motionY * sinR
-        val driveLy = motionX * sinR + motionY * cosR
+        val cosR = smoothedRollCos
+        val sinR = smoothedRollSin
+        val driveLx = smoothedMotionX * cosR - smoothedMotionY * sinR
+        val driveLy = smoothedMotionX * sinR + smoothedMotionY * cosR
 
         gridVx += (-driveLx * DRIVE_GAIN) * dt
         gridVy += (-driveLy * DRIVE_GAIN) * dt
@@ -302,8 +311,8 @@ class CueOverlayView(context: Context) : View(context) {
 
         // Rotation scrolls the grid directly — sustained rotation → sustained flow,
         // stop rotating → flow stops.
-        gridOx += yawRateRps * YAW_GAIN * dt
-        gridOy += pitchRateRps * PITCH_GAIN * dt
+        gridOx += smoothedYawRateRps * YAW_GAIN * dt
+        gridOy += smoothedPitchRateRps * PITCH_GAIN * dt
 
         val wrapSpan = 2f * GRID_EXTENT
         if (gridOx > GRID_EXTENT) gridOx -= wrapSpan
@@ -313,9 +322,27 @@ class CueOverlayView(context: Context) : View(context) {
     }
 
     private fun updateSizeEnvelope(dt: Float) {
-        val target = max(0f, motionOutOfPlane) * SIZE_OUT_OF_PLANE_GAIN
+        val target = max(0f, smoothedMotionOutOfPlane) * SIZE_OUT_OF_PLANE_GAIN
         if (target > sizeEnvelope) sizeEnvelope = target
         sizeEnvelope *= exp(-dt / SIZE_RELEASE_SEC)
+    }
+
+    private fun applyInputSmoothing(dt: Float) {
+        val alpha = dt / (SMOOTH_TIME_SEC + dt)
+        smoothedMotionX += alpha * (motionX - smoothedMotionX)
+        smoothedMotionY += alpha * (motionY - smoothedMotionY)
+        smoothedMotionOutOfPlane += alpha * (motionOutOfPlane - smoothedMotionOutOfPlane)
+
+        val targetCos = cos(rollRadians)
+        val targetSin = sin(rollRadians)
+        smoothedRollCos += alpha * (targetCos - smoothedRollCos)
+        smoothedRollSin += alpha * (targetSin - smoothedRollSin)
+        val invLen = 1f / sqrt(smoothedRollCos * smoothedRollCos + smoothedRollSin * smoothedRollSin)
+        smoothedRollCos *= invLen
+        smoothedRollSin *= invLen
+
+        smoothedYawRateRps += alpha * (yawRateRps - smoothedYawRateRps)
+        smoothedPitchRateRps += alpha * (pitchRateRps - smoothedPitchRateRps)
     }
 
     private fun resetParticles() {
@@ -350,9 +377,9 @@ class CueOverlayView(context: Context) : View(context) {
         private const val GRID_EXTENT = 3.5f
 
         private const val DRIVE_GAIN = 0.6f
-        private const val DAMP = 1.2f
-        private const val YAW_GAIN = 1.5f
-        private const val PITCH_GAIN = 1.5f
+        private const val DAMP = 2.7f
+        private const val YAW_GAIN = 1.2f
+        private const val PITCH_GAIN = 1.2f
         private const val DOT_SIZE_PX = 8f
 
         private const val SIZE_OUT_OF_PLANE_GAIN = 1.2f
@@ -367,6 +394,8 @@ class CueOverlayView(context: Context) : View(context) {
         // How often (seconds) the randomizer picks a new shape/color while enabled — matches
         // Android Motion Assist's "every few seconds" randomization cadence.
         private const val RANDOMIZE_INTERVAL_SEC = 4f
+
+        private const val SMOOTH_TIME_SEC = 0.05f
 
         // Focus-mode radial falloff: below FOCUS_INNER (normalized distance from center,
         // 0=center 1=corner) dots are invisible; above FOCUS_OUTER they're full size.
