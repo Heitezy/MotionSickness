@@ -1,0 +1,4 @@
+- New Customize screen: pick dot shape (circle/diamond/meteoroid), color (from your device theme), opacity, dot placement (edges-only, edge columns, or full screen), and an optional randomizer
+- New "Edge columns" placement, matching the layout of Android's own Motion Assist (dots hug the left/right edges rather than the whole screen)
+- Optional auto-start: turn the overlay on and off automatically when you get in and out of a moving vehicle
+- Quick Settings tile to toggle the overlay without opening the app

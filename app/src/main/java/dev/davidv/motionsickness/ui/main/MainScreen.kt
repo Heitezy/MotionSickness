@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Heitezy
 // SPDX-FileCopyrightText: 2026 David Ventura
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -38,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation3.runtime.NavKey
 import dev.davidv.motionsickness.R
+import dev.davidv.motionsickness.Settings as SettingsKey
 import dev.davidv.motionsickness.motion.MotionCuesService
 import dev.davidv.motionsickness.theme.MyApplicationTheme
 
@@ -117,6 +119,12 @@ fun MainScreen(
                 modifier = Modifier.fillMaxWidth(),
             ) { Text(stringResource(R.string.main_stop)) }
         }
+
+        Button(
+            onClick = { onItemClick(SettingsKey) },
+            colors = ButtonDefaults.outlinedButtonColors(),
+            modifier = Modifier.fillMaxWidth(),
+        ) { Text(stringResource(R.string.main_open_settings)) }
     }
 }
 

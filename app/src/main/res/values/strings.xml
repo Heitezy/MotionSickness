@@ -1,3 +1,4 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
 <!-- SPDX-FileCopyrightText: 2026 David Ventura -->
 <!-- SPDX-License-Identifier: GPL-3.0-only -->
 <resources>
@@ -13,4 +14,34 @@
     <string name="main_grant_overlay">Grant draw-over-apps permission</string>
     <string name="main_start">Start cues</string>
     <string name="main_stop">Stop cues</string>
+    <string name="main_open_settings">Customize</string>
+
+    <string name="settings_title">Customize</string>
+    <string name="settings_back">Back</string>
+
+    <string name="settings_mode_title">Dot placement</string>
+    <string name="settings_mode_focus">Edges only</string>
+    <string name="settings_mode_uniform">Full screen</string>
+    <string name="settings_mode_columns">Columns</string>
+
+    <string name="settings_shape_title">Shape</string>
+    <string name="settings_shape_circle">Circle</string>
+    <string name="settings_shape_diamond">Diamond</string>
+    <string name="settings_shape_meteoroid">Meteoroid</string>
+
+    <string name="settings_color_title">Color</string>
+    <string name="settings_color_primary">Primary</string>
+    <string name="settings_color_secondary">Secondary</string>
+    <string name="settings_color_tertiary">Tertiary</string>
+
+    <string name="settings_opacity_title">Opacity</string>
+
+    <string name="settings_randomize_title">Randomize shape and color</string>
+    <string name="settings_randomize_subtitle">Cycles the look every few seconds</string>
+
+    <string name="settings_autostart_title">Start in a moving vehicle</string>
+    <string name="settings_autostart_subtitle">Detects vehicle motion and turns cues on and off automatically</string>
+    <string name="settings_autostart_grant_permission">Allow physical activity access</string>
+
+    <string name="tile_label">Motion cues</string>
 </resources>

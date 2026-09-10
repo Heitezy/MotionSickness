@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Heitezy
 // SPDX-FileCopyrightText: 2026 David Ventura
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -6,8 +7,12 @@ package dev.davidv.motionsickness.motion
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
 import android.view.Choreographer
 import android.view.View
+import dev.davidv.motionsickness.data.CueSettings
+import dev.davidv.motionsickness.data.DotShape
+import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.exp
 import kotlin.math.max
@@ -21,8 +26,11 @@ import kotlin.random.Random
  * - [Uniform]: every dot at the same base size, covering the whole screen.
  * - [Focus]: dots fade to zero near the center and reach full size at the edges/corners, so
  *   the middle of the screen stays clear for content and motion cues stay in peripheral vision.
+ * - [Columns]: dots only appear in a couple of columns hugging the left and right edges —
+ *   matches how Android's own Motion Assist actually lays cues out (screenshots of the
+ *   shipped feature show 2–3 dot columns per side, not a full radial falloff).
  */
-enum class CueMode { Uniform, Focus }
+enum class CueMode { Uniform, Focus, Columns }
 
 /**
  * Overlay view that renders the infinite dot field with a hardware-accelerated `Canvas`.
@@ -55,8 +63,24 @@ class CueOverlayView(context: Context) : View(context) {
     private var halfDiag = 1f
     private var centerX = 0f
     private var centerY = 0f
+    private var screenWidth = 1f
 
     @Volatile var mode: CueMode = CueMode.Focus
+
+    // Appearance, driven by CueSettings. [colorPalette] always holds the three theme ARGB
+    // colors (primary/secondary/tertiary) so the randomizer can cycle between them even while
+    // a single fixed slot is configured.
+    @Volatile private var configuredShape: DotShape = DotShape.Circle
+    @Volatile private var configuredColorArgb: Int = 0xFFFFFFFF.toInt()
+    @Volatile private var colorPalette: IntArray = intArrayOf(0xFFFFFFFF.toInt())
+    @Volatile private var randomize: Boolean = false
+    @Volatile private var baseAlpha: Int = 217 // 0.85 * 255, matches CueSettings.DEFAULT_OPACITY
+
+    // What's actually drawn this frame — equal to the configured shape/color unless the
+    // randomizer has picked something else.
+    @Volatile private var activeShape: DotShape = DotShape.Circle
+    private var randomizeAccumSec = 0f
+    private val randomRng = Random(System.nanoTime())
 
     private var gridVx = 0f
     private var gridVy = 0f
@@ -74,6 +98,8 @@ class CueOverlayView(context: Context) : View(context) {
         style = Paint.Style.FILL
     }
 
+    private val shapePath = Path()
+
     init {
         setBackgroundColor(0)
         isClickable = false
@@ -89,12 +115,44 @@ class CueOverlayView(context: Context) : View(context) {
         pitchRateRps = m.pitchRateRps
     }
 
+    /**
+     * Applies a full [CueSettings] snapshot plus the resolved theme [palette] (primary,
+     * secondary, tertiary ARGB, matching [dev.davidv.motionsickness.data.CueColorSlot.ordinal]).
+     * Safe to call every time settings change, including from a background collector.
+     */
+    fun applySettings(settings: CueSettings, palette: IntArray) {
+        mode = settings.mode
+        configuredShape = settings.shape
+        colorPalette = if (palette.isNotEmpty()) palette else intArrayOf(configuredColorArgb)
+        configuredColorArgb = palette.getOrElse(settings.colorSlot.ordinal) { configuredColorArgb }
+        randomize = settings.randomize
+        baseAlpha = (settings.opacity.coerceIn(0f, 1f) * 255).toInt()
+        if (!randomize) {
+            activeShape = configuredShape
+            setPaintColor(configuredColorArgb)
+        } else {
+            paint.alpha = baseAlpha
+        }
+    }
+
+    /**
+     * `Paint.setColor(argb)` also overwrites the paint's alpha with that color's own alpha
+     * channel — and theme colors are fully opaque — so every call site that changes the dot
+     * color must re-apply [baseAlpha] afterward, or the opacity setting silently gets clobbered
+     * back to 100%. Centralizing that here so it can't be forgotten at a new call site.
+     */
+    private fun setPaintColor(argb: Int) {
+        paint.color = argb
+        paint.alpha = baseAlpha
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         halfShortDim = min(w, h) / 2f
         halfDiag = sqrt((w.toFloat() * w + h.toFloat() * h)) / 2f
         centerX = w / 2f
         centerY = h / 2f
+        screenWidth = w.toFloat()
         resetParticles()
     }
 
@@ -119,6 +177,7 @@ class CueOverlayView(context: Context) : View(context) {
             lastFrameNs = frameTimeNanos
             step(dt)
             updateSizeEnvelope(dt)
+            updateRandomize(dt)
             invalidate()
             Choreographer.getInstance().postFrameCallback(this)
         }
@@ -132,6 +191,29 @@ class CueOverlayView(context: Context) : View(context) {
         val span = 2f * ext
 
         val focusMode = mode == CueMode.Focus
+        val columnsMode = mode == CueMode.Columns
+        val shape = activeShape
+
+        // Column band width, in pixels: a fixed fraction of screen width per edge. (Earlier
+        // version derived this from the wrap-grid's own dot pitch, but that pitch is ~29% of
+        // screen width here, so a "2.5 columns" band worked out wider than half the screen —
+        // the fade never actually reached zero before the center, making Columns mode
+        // indistinguishable from Uniform. Anchoring to screen width directly avoids that.)
+        val columnBandOuterPx = COLUMN_BAND_OUTER_FRAC * screenWidth
+        val columnBandInnerPx = COLUMN_BAND_INNER_FRAC * screenWidth
+
+        // Meteoroid streaks are elongated along the on-screen travel direction, computed once
+        // per frame from the grid's velocity (same rotation the positions themselves get).
+        var streakAngleDeg = 0f
+        var streakStretch = 0f
+        if (shape == DotShape.Meteoroid) {
+            val velSx = gridVx * cosR + gridVy * sinR
+            val velSy = -(-gridVx * sinR + gridVy * cosR) // matches the py sign flip below
+            val speedPx = sqrt(velSx * velSx + velSy * velSy) * halfShortDim
+            if (speedPx > 1e-3f) streakAngleDeg = Math.toDegrees(atan2(velSy.toDouble(), velSx.toDouble())).toFloat()
+            streakStretch = (speedPx * METEOR_STRETCH_GAIN).coerceIn(0f, METEOR_STRETCH_MAX)
+        }
+
         for (p in particles) {
             // Apply global grid offset and wrap into the toroidal iso square.
             val lx = wrap(p.homeX + gridOx, ext, span)
@@ -154,9 +236,54 @@ class CueOverlayView(context: Context) : View(context) {
                 val focus = smoothstep(FOCUS_INNER, FOCUS_OUTER, distNorm)
                 if (focus <= 0.01f) continue
                 radius *= focus
+            } else if (columnsMode) {
+                // Distance to the *nearer* vertical edge — small near either edge, large in
+                // the middle — so both left and right columns light up symmetrically.
+                val distFromEdgeX = min(px, screenWidth - px)
+                val columnFactor = 1f - smoothstep(columnBandInnerPx, columnBandOuterPx, distFromEdgeX)
+                if (columnFactor <= 0.01f) continue
+                radius *= columnFactor
             }
-            canvas.drawCircle(px, py, radius, paint)
+
+            when (shape) {
+                DotShape.Circle -> canvas.drawCircle(px, py, radius, paint)
+                DotShape.Diamond -> drawDiamond(canvas, px, py, radius)
+                DotShape.Meteoroid -> drawMeteoroid(canvas, px, py, radius, streakAngleDeg, streakStretch)
+            }
         }
+    }
+
+    private fun drawDiamond(canvas: Canvas, cx: Float, cy: Float, r: Float) {
+        shapePath.reset()
+        shapePath.moveTo(cx, cy - r)
+        shapePath.lineTo(cx + r, cy)
+        shapePath.lineTo(cx, cy + r)
+        shapePath.lineTo(cx - r, cy)
+        shapePath.close()
+        canvas.drawPath(shapePath, paint)
+    }
+
+    /** A capsule stretched along [angleDeg], approximating a comet-like streaking dot. */
+    private fun drawMeteoroid(canvas: Canvas, cx: Float, cy: Float, r: Float, angleDeg: Float, stretch: Float) {
+        val halfLen = r * (1f + stretch)
+        canvas.save()
+        canvas.translate(cx, cy)
+        canvas.rotate(angleDeg)
+        canvas.drawRoundRect(-halfLen, -r, halfLen, r, r, r, paint)
+        canvas.restore()
+    }
+
+    private fun updateRandomize(dt: Float) {
+        if (!randomize) {
+            randomizeAccumSec = 0f
+            return
+        }
+        randomizeAccumSec += dt
+        if (randomizeAccumSec < RANDOMIZE_INTERVAL_SEC) return
+        randomizeAccumSec = 0f
+        val shapes = DotShape.entries
+        activeShape = shapes[randomRng.nextInt(shapes.size)]
+        setPaintColor(colorPalette[randomRng.nextInt(colorPalette.size)])
     }
 
     private fun step(dt: Float) {
@@ -232,10 +359,26 @@ class CueOverlayView(context: Context) : View(context) {
         private const val SIZE_RELEASE_SEC = 0.9f
         private const val SIZE_BOOST_MAX = 8f
 
+        // Meteoroid shape: how much on-screen speed (px/s) stretches the streak, and the cap
+        // on that stretch (as a multiple of the dot's own radius) so it can't run away.
+        private const val METEOR_STRETCH_GAIN = 0.02f
+        private const val METEOR_STRETCH_MAX = 6f
+
+        // How often (seconds) the randomizer picks a new shape/color while enabled — matches
+        // Android Motion Assist's "every few seconds" randomization cadence.
+        private const val RANDOMIZE_INTERVAL_SEC = 4f
+
         // Focus-mode radial falloff: below FOCUS_INNER (normalized distance from center,
         // 0=center 1=corner) dots are invisible; above FOCUS_OUTER they're full size.
         private const val FOCUS_INNER = 0.25f
         private const val FOCUS_OUTER = 0.9f
+
+        // Columns mode: band width per edge, as a fraction of screen width. The dot grid's own
+        // on-screen pitch is roughly 29% of screen width (a coarse 12x12 grid spread over a
+        // wrap range several times the visible area), so a band this size reliably shows about
+        // one full dot column plus a partially-faded second one at each edge.
+        private const val COLUMN_BAND_OUTER_FRAC = 0.20f
+        private const val COLUMN_BAND_INNER_FRAC = 0.10f
 
         private fun wrap(v: Float, ext: Float, span: Float): Float {
             var r = (v + ext) % span

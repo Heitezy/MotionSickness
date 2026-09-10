@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Heitezy
 // SPDX-FileCopyrightText: 2026 David Ventura
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -8,6 +9,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -15,11 +17,14 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
+import android.service.quicksettings.TileService
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.core.app.NotificationCompat
 import dev.davidv.motionsickness.MainActivity
 import dev.davidv.motionsickness.R
+import dev.davidv.motionsickness.data.CueSettingsRepository
+import dev.davidv.motionsickness.theme.cueColorPalette
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -40,9 +45,11 @@ class MotionCuesService : Service() {
     private lateinit var windowManager: WindowManager
     private var overlayView: CueOverlayView? = null
     private lateinit var motionEstimator: MotionEstimator
+    private lateinit var settingsRepository: CueSettingsRepository
 
     private val scope = CoroutineScope(Dispatchers.Main)
     private var collectJob: Job? = null
+    private var settingsJob: Job? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -50,6 +57,7 @@ class MotionCuesService : Service() {
         super.onCreate()
         windowManager = getSystemService(WindowManager::class.java)
         motionEstimator = MotionEstimator(this)
+        settingsRepository = CueSettingsRepository(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -70,7 +78,16 @@ class MotionCuesService : Service() {
         collectJob = scope.launch {
             motionEstimator.motion.collectLatest { overlayView?.setMotion(it) }
         }
+        settingsJob?.cancel()
+        settingsJob = scope.launch {
+            // Palette is resolved fresh alongside every settings change (rather than cached)
+            // since dark/light mode can flip while the overlay is running.
+            settingsRepository.settings.collectLatest { settings ->
+                overlayView?.applySettings(settings, cueColorPalette(this@MotionCuesService))
+            }
+        }
         _isRunning.value = true
+        notifyTileOfStateChange(this)
         return START_STICKY
     }
 
@@ -111,6 +128,8 @@ class MotionCuesService : Service() {
     private fun stopSelfCleanly() {
         collectJob?.cancel()
         collectJob = null
+        settingsJob?.cancel()
+        settingsJob = null
         motionEstimator.stop()
         detachOverlay()
         stopForeground(STOP_FOREGROUND_REMOVE)
@@ -119,6 +138,7 @@ class MotionCuesService : Service() {
 
     override fun onDestroy() {
         _isRunning.value = false
+        notifyTileOfStateChange(this)
         scope.cancel()
         motionEstimator.stop()
         detachOverlay()
@@ -179,6 +199,18 @@ class MotionCuesService : Service() {
         fun stop(context: Context) {
             val intent = Intent(context, MotionCuesService::class.java).setAction(ACTION_STOP)
             context.startService(intent)
+        }
+
+        /**
+         * [CuesTileService] is declared as an "Active tile" (ACTIVE_TILE metadata), which per
+         * Android's docs means the *app* — not the system — is responsible for prompting a
+         * refresh whenever the underlying state changes outside of the tile itself being tapped
+         * (from the notification's Stop action, the app's own Start/Stop button, or vehicle
+         * auto-detection). Without this, the tile only ever picks up the current state when the
+         * user happens to already have the Quick Settings panel open.
+         */
+        private fun notifyTileOfStateChange(context: Context) {
+            TileService.requestListeningState(context, ComponentName(context, CuesTileService::class.java))
         }
     }
 }

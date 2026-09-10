@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Heitezy
 // SPDX-FileCopyrightText: 2026 David Ventura
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -14,8 +15,8 @@ android {
         applicationId = "dev.davidv.motionsickness"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "0.0.3"
+        versionCode = 4
+        versionName = "0.1.0"
     }
 
     buildTypes {
@@ -87,4 +88,10 @@ dependencies {
   implementation(libs.androidx.navigation3.ui)
   implementation(libs.androidx.navigation3.runtime)
   implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+
+  // Settings persistence
+  implementation(libs.androidx.datastore.preferences)
+
+  // Auto-start: vehicle (activity) detection
+  implementation(libs.play.services.location)
 }
