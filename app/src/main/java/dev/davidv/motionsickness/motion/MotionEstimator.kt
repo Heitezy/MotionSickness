@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Heitezy
 // SPDX-FileCopyrightText: 2026 David Ventura
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -40,14 +41,36 @@ data class MotionVector(
 }
 
 /**
+ * Which sensor-fusion strategy [MotionEstimator] uses to turn raw sensor data into the
+ * [MotionVector] the renderer consumes.
+ *
+ * [WorldRelative] projects acceleration onto the world-horizontal plane and drives the grid's
+ * scroll from yaw/pitch rotation rate too, so the dot field behaves like a fixed world you move
+ * and rotate through — tilting the phone without translating it doesn't drive the dots, but
+ * turning it does scroll them.
+ *
+ * [Raw] skips all of that: acceleration is read directly in the device frame (gravity
+ * subtracted, nothing else compensated for), and rotation rate is not published at all. Dots
+ * react only to how the phone physically accelerates, matching the simpler, more direct feel of
+ * Apple's vehicle motion cues.
+ */
+enum class MotionFusionMode { WorldRelative, Raw }
+
+/**
  * Fuses linear-acceleration, rotation-vector, and gyroscope data into the inputs the renderer
- * needs to make the dot field feel like a fixed world you're moving and rotating through.
+ * needs to make the dot field feel like a fixed world you're moving and rotating through
+ * ([MotionFusionMode.WorldRelative]), or reads raw accelerometer/gravity data directly in the
+ * device frame for a simpler, non-compensated feel ([MotionFusionMode.Raw]).
  */
 class MotionEstimator(context: Context) {
+
+    @Volatile var fusionMode: MotionFusionMode = MotionFusionMode.WorldRelative
 
     private val sensorManager = context.getSystemService(SensorManager::class.java)
     private val linearAccel = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
     private val rotationVector = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+    private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    private val gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
     private val gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
     private val _motion = MutableStateFlow(MotionVector.ZERO)
@@ -55,6 +78,14 @@ class MotionEstimator(context: Context) {
 
     private val rotationMatrix = FloatArray(9)
     private var hasRotation = false
+
+    // Latest fused gravity reading, subtracted from raw accelerometer readings in Raw mode to
+    // isolate device-frame linear acceleration. TYPE_GRAVITY updates instantly with device
+    // orientation (unlike a self-tracked low-pass estimate), so tilting the phone in Raw mode
+    // doesn't get misread as acceleration.
+    @Volatile private var gravX = 0f
+    @Volatile private var gravY = 0f
+    @Volatile private var gravZ = SensorManager.GRAVITY_EARTH
 
     private var filteredX = 0f
     private var filteredY = 0f
@@ -82,11 +113,22 @@ class MotionEstimator(context: Context) {
                     SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values)
                     hasRotation = true
                 }
+                Sensor.TYPE_GRAVITY -> {
+                    gravX = event.values[0]
+                    gravY = event.values[1]
+                    gravZ = event.values[2]
+                }
                 Sensor.TYPE_LINEAR_ACCELERATION -> {
+                    if (fusionMode != MotionFusionMode.WorldRelative) return
                     if (!hasRotation) return
                     updateAccel(event.values[0], event.values[1], event.values[2], event.timestamp)
                 }
+                Sensor.TYPE_ACCELEROMETER -> {
+                    if (fusionMode != MotionFusionMode.Raw) return
+                    updateAccelRaw(event.values[0], event.values[1], event.values[2], event.timestamp)
+                }
                 Sensor.TYPE_GYROSCOPE -> {
+                    if (fusionMode != MotionFusionMode.WorldRelative) return
                     if (!hasRotation) return
                     updateGyro(event.values[0], event.values[1], event.values[2], event.timestamp)
                 }
@@ -122,6 +164,29 @@ class MotionEstimator(context: Context) {
         if (projLenSq > FLAT_ROLL_GUARD_SQ) {
             lastRollRadians = atan2(ux, uy)
         }
+
+        publish()
+    }
+
+    /**
+     * Raw-mode counterpart to [updateAccel]: subtracts the fused gravity reading directly from
+     * device-frame accelerometer output, with no world-frame projection. Cheaper and simpler,
+     * at the cost of not knowing which way is "world up" — fine for [MotionFusionMode.Raw],
+     * which doesn't compensate for phone orientation anyway.
+     */
+    private fun updateAccelRaw(ax: Float, ay: Float, az: Float, tsNs: Long) {
+        val hx = ax - gravX
+        val hy = ay - gravY
+        val hz = az - gravZ
+
+        val dt = if (lastAccelTsNs == 0L) 0.02f else ((tsNs - lastAccelTsNs) / 1e9f).coerceIn(0.001f, 0.2f)
+        lastAccelTsNs = tsNs
+        val alpha = dt / (ACCEL_TIME_CONSTANT_SEC + dt)
+        filteredX += alpha * (hx - filteredX)
+        filteredY += alpha * (hy - filteredY)
+        filteredZ += alpha * (hz - filteredZ)
+
+        lastAccelMagSq = hx * hx + hy * hy + hz * hz
 
         publish()
     }
@@ -179,19 +244,25 @@ class MotionEstimator(context: Context) {
         if (v > threshold) v - threshold else if (v < -threshold) v + threshold else 0f
 
     private fun publish() {
+        // Raw mode doesn't compensate for phone orientation, so it has no meaningful roll and
+        // never scrolls the grid from rotation — only translation (via x/y/outOfPlane) drives
+        // the dots.
+        val isRaw = fusionMode == MotionFusionMode.Raw
         _motion.value = MotionVector(
             x = filteredX,
             y = filteredY,
             outOfPlane = filteredZ,
-            rollRadians = lastRollRadians,
-            yawRateRps = deadband(filteredYawRate, GYRO_DEADBAND_RPS),
-            pitchRateRps = deadband(filteredPitchRate, GYRO_DEADBAND_RPS),
+            rollRadians = if (isRaw) 0f else lastRollRadians,
+            yawRateRps = if (isRaw) 0f else deadband(filteredYawRate, GYRO_DEADBAND_RPS),
+            pitchRateRps = if (isRaw) 0f else deadband(filteredPitchRate, GYRO_DEADBAND_RPS),
         )
     }
 
     fun start() {
         sensorManager.registerListener(listener, linearAccel, SensorManager.SENSOR_DELAY_GAME)
         sensorManager.registerListener(listener, rotationVector, SensorManager.SENSOR_DELAY_GAME)
+        sensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_GAME)
+        sensorManager.registerListener(listener, gravitySensor, SensorManager.SENSOR_DELAY_GAME)
         sensorManager.registerListener(listener, gyroscope, SensorManager.SENSOR_DELAY_GAME)
     }
 
@@ -206,7 +277,8 @@ class MotionEstimator(context: Context) {
         lastRollRadians = 0f
         filteredYawRate = 0f
         filteredPitchRate = 0f
-        // Don't clear gx/gy/gzBias — bias is a hardware property; persist across stop/start.
+        // Don't clear gx/gy/gzBias or the gravity estimate — all are hardware/orientation
+        // properties that should persist across stop/start.
         stillAccumSec = 0f
         lastAccelMagSq = 0f
         _motion.value = MotionVector.ZERO

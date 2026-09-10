@@ -12,6 +12,7 @@ import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dev.davidv.motionsickness.motion.CueMode
+import dev.davidv.motionsickness.motion.MotionFusionMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -28,6 +29,7 @@ data class CueSettings(
   val opacity: Float = DEFAULT_OPACITY,
   val randomize: Boolean = false,
   val autoStart: Boolean = false,
+  val motionFusionMode: MotionFusionMode = MotionFusionMode.WorldRelative,
 ) {
   companion object {
     const val DEFAULT_OPACITY = 0.85f
@@ -45,6 +47,7 @@ class CueSettingsRepository(context: Context) {
     val OPACITY = floatPreferencesKey("opacity")
     val RANDOMIZE = booleanPreferencesKey("randomize")
     val AUTO_START = booleanPreferencesKey("auto_start")
+    val MOTION_FUSION_MODE = stringPreferencesKey("motion_fusion_mode")
   }
 
   val settings: Flow<CueSettings> =
@@ -56,6 +59,7 @@ class CueSettingsRepository(context: Context) {
         opacity = (prefs[Keys.OPACITY] ?: CueSettings.DEFAULT_OPACITY).coerceIn(CueSettings.MIN_OPACITY, 1f),
         randomize = prefs[Keys.RANDOMIZE] ?: false,
         autoStart = prefs[Keys.AUTO_START] ?: false,
+        motionFusionMode = prefs.enumOrDefault(Keys.MOTION_FUSION_MODE, MotionFusionMode.WorldRelative),
       )
     }
 
@@ -81,6 +85,10 @@ class CueSettingsRepository(context: Context) {
 
   suspend fun setAutoStart(enabled: Boolean) {
     dataStore.edit { it[Keys.AUTO_START] = enabled }
+  }
+
+  suspend fun setMotionFusionMode(mode: MotionFusionMode) {
+    dataStore.edit { it[Keys.MOTION_FUSION_MODE] = mode.name }
   }
 
   private inline fun <reified T : Enum<T>> Preferences.enumOrDefault(

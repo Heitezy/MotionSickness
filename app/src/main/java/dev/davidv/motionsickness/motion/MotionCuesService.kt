@@ -83,6 +83,7 @@ class MotionCuesService : Service() {
             // Palette is resolved fresh alongside every settings change (rather than cached)
             // since dark/light mode can flip while the overlay is running.
             settingsRepository.settings.collectLatest { settings ->
+                motionEstimator.fusionMode = settings.motionFusionMode
                 overlayView?.applySettings(settings, cueColorPalette(this@MotionCuesService))
             }
         }

@@ -42,6 +42,7 @@ import dev.davidv.motionsickness.data.CueSettings
 import dev.davidv.motionsickness.data.CueSettingsRepository
 import dev.davidv.motionsickness.data.DotShape
 import dev.davidv.motionsickness.motion.CueMode
+import dev.davidv.motionsickness.motion.MotionFusionMode
 import dev.davidv.motionsickness.motion.VehicleDetection
 import dev.davidv.motionsickness.motion.VehicleDetectionReceiver
 import kotlinx.coroutines.launch
@@ -126,6 +127,29 @@ fun SettingsScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
         value = settings.opacity,
         onValueChange = { scope.launch { repository.setOpacity(it) } },
         valueRange = CueSettings.MIN_OPACITY..1f,
+      )
+    }
+
+    HorizontalDivider()
+
+    SettingsSection(stringResource(R.string.settings_motion_feel_title)) {
+      SegmentedChoice(
+        options = MotionFusionMode.entries,
+        selected = settings.motionFusionMode,
+        label = {
+          when (it) {
+            MotionFusionMode.WorldRelative -> stringResource(R.string.settings_motion_feel_world_relative)
+            MotionFusionMode.Raw -> stringResource(R.string.settings_motion_feel_raw)
+          }
+        },
+        onSelect = { scope.launch { repository.setMotionFusionMode(it) } },
+      )
+      Text(
+        when (settings.motionFusionMode) {
+          MotionFusionMode.WorldRelative -> stringResource(R.string.settings_motion_feel_world_relative_subtitle)
+          MotionFusionMode.Raw -> stringResource(R.string.settings_motion_feel_raw_subtitle)
+        },
+        style = MaterialTheme.typography.bodySmall,
       )
     }
 

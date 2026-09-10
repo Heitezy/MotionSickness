@@ -36,6 +36,12 @@
 
     <string name="settings_opacity_title">Opacity</string>
 
+    <string name="settings_motion_feel_title">Motion feel</string>
+    <string name="settings_motion_feel_world_relative">World-relative</string>
+    <string name="settings_motion_feel_raw">Raw</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Dots track a fixed world as you move and rotate the phone through it</string>
+    <string name="settings_motion_feel_raw_subtitle">Dots react only to how the phone accelerates, not to tilting or rotating it — closer to Apple\'s vehicle motion cues</string>
+
     <string name="settings_randomize_title">Randomize shape and color</string>
     <string name="settings_randomize_subtitle">Cycles the look every few seconds</string>
 
