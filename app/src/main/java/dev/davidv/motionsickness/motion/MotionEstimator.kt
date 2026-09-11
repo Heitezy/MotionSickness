@@ -9,6 +9,8 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Handler
+import android.os.Looper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -69,9 +71,18 @@ class MotionEstimator(context: Context) {
     private val sensorManager = context.getSystemService(SensorManager::class.java)
     private val linearAccel = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
     private val rotationVector = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+    private val gameRotationVector = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
     private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     private val gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
     private val gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+
+    // TYPE_ROTATION_VECTOR is fused from accelerometer + gyroscope + magnetometer, so it's
+    // unavailable (or present but silently dead) on devices with no working magnetometer —
+    // see https://github.com/DavidVentura/motion-sickness-app/issues/15. We only ever read
+    // tilt/gravity direction and relative rotation rate out of it, never the compass heading
+    // the magnetometer actually contributes, so TYPE_GAME_ROTATION_VECTOR (accelerometer +
+    // gyroscope only) is a perfectly good substitute when that happens.
+    private val watchdogHandler = Handler(Looper.getMainLooper())
 
     private val _motion = MutableStateFlow(MotionVector.ZERO)
     val motion: StateFlow<MotionVector> = _motion.asStateFlow()
@@ -109,7 +120,7 @@ class MotionEstimator(context: Context) {
     private val listener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
             when (event.sensor.type) {
-                Sensor.TYPE_ROTATION_VECTOR -> {
+                Sensor.TYPE_ROTATION_VECTOR, Sensor.TYPE_GAME_ROTATION_VECTOR -> {
                     SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values)
                     hasRotation = true
                 }
@@ -260,14 +271,43 @@ class MotionEstimator(context: Context) {
 
     fun start() {
         sensorManager.registerListener(listener, linearAccel, SensorManager.SENSOR_DELAY_GAME)
-        sensorManager.registerListener(listener, rotationVector, SensorManager.SENSOR_DELAY_GAME)
         sensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_GAME)
         sensorManager.registerListener(listener, gravitySensor, SensorManager.SENSOR_DELAY_GAME)
         sensorManager.registerListener(listener, gyroscope, SensorManager.SENSOR_DELAY_GAME)
+
+        if (rotationVector != null) {
+            sensorManager.registerListener(listener, rotationVector, SensorManager.SENSOR_DELAY_GAME)
+            watchdogHandler.postDelayed(rotationFallbackCheck, ROTATION_FALLBACK_TIMEOUT_MS)
+        } else {
+            // No TYPE_ROTATION_VECTOR sensor at all — most likely no magnetometer. Skip
+            // straight to the fallback instead of waiting to time out.
+            registerGameRotationVector()
+        }
+    }
+
+    private val rotationFallbackCheck = Runnable {
+        if (!hasRotation) {
+            // TYPE_ROTATION_VECTOR exists but hasn't produced a single event after a
+            // reasonable wait — a device with a present-but-non-functional magnetometer
+            // driver, which we've seen reported in the wild. Fall back live.
+            rotationVector?.let { sensorManager.unregisterListener(listener, it) }
+            registerGameRotationVector()
+        }
+    }
+
+    private fun registerGameRotationVector() {
+        if (gameRotationVector != null) {
+            sensorManager.registerListener(listener, gameRotationVector, SensorManager.SENSOR_DELAY_GAME)
+        }
+        // If even TYPE_GAME_ROTATION_VECTOR is unavailable, hasRotation simply never becomes
+        // true and WorldRelative mode stays inert — this is a device with no gyroscope, which
+        // MotionFusionMode.Raw doesn't depend on. The Customize screen's Raw mode remains a
+        // usable option for anyone who hits this.
     }
 
     fun stop() {
         sensorManager.unregisterListener(listener)
+        watchdogHandler.removeCallbacks(rotationFallbackCheck)
         hasRotation = false
         lastAccelTsNs = 0L
         lastGyroTsNs = 0L
@@ -302,5 +342,10 @@ class MotionEstimator(context: Context) {
         private const val BIAS_TRACK_SEC = 1.5f
         // Residual rate below this is rounded to zero to kill micro-drift.
         private const val GYRO_DEADBAND_RPS = 0.01f // ~0.57 deg/s
+
+        // How long to wait for TYPE_ROTATION_VECTOR to produce its first event before
+        // assuming it's dead (no working magnetometer) and switching to
+        // TYPE_GAME_ROTATION_VECTOR. Generous enough to not misfire on a slow cold start.
+        private const val ROTATION_FALLBACK_TIMEOUT_MS = 1500L
     }
 }
