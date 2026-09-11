@@ -117,6 +117,17 @@ class MotionEstimator(context: Context) {
     private var stillAccumSec = 0f
     private var lastAccelMagSq = 0f
 
+    // Raw-mode accelerometer bias, tracked the same way as the gyro bias above. Unlike
+    // WorldRelative's TYPE_LINEAR_ACCELERATION — a vendor-calibrated virtual sensor tuned to
+    // read ~zero at rest — Raw mode's (accelerometer - gravity) has no such calibration, so a
+    // few hundredths of a m/s^2 of hardware offset survives the subtraction and would
+    // otherwise settle into a small but constant grid velocity (gridVx is damped, not zeroed,
+    // each frame — see CueOverlayView.step) and drift forever while the phone sits still.
+    private var axBias = 0f
+    private var ayBias = 0f
+    private var azBias = 0f
+    private var rawStillAccumSec = 0f
+
     private val listener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
             when (event.sensor.type) {
@@ -192,12 +203,33 @@ class MotionEstimator(context: Context) {
 
         val dt = if (lastAccelTsNs == 0L) 0.02f else ((tsNs - lastAccelTsNs) / 1e9f).coerceIn(0.001f, 0.2f)
         lastAccelTsNs = tsNs
-        val alpha = dt / (ACCEL_TIME_CONSTANT_SEC + dt)
-        filteredX += alpha * (hx - filteredX)
-        filteredY += alpha * (hy - filteredY)
-        filteredZ += alpha * (hz - filteredZ)
 
-        lastAccelMagSq = hx * hx + hy * hy + hz * hz
+        // Same stillness-gated bias tracking as updateGyro: only trust a reading as "the
+        // bias" once it's held steady and small for a sustained stretch, so a real (if gentle)
+        // acceleration never gets mistaken for offset and subtracted away.
+        val rawMagSq = hx * hx + hy * hy + hz * hz
+        if (rawMagSq < STILL_ACCEL_MAG_SQ) {
+            rawStillAccumSec += dt
+            if (rawStillAccumSec > STILL_SETTLE_SEC) {
+                val biasAlpha = dt / (BIAS_TRACK_SEC + dt)
+                axBias += biasAlpha * (hx - axBias)
+                ayBias += biasAlpha * (hy - ayBias)
+                azBias += biasAlpha * (hz - azBias)
+            }
+        } else {
+            rawStillAccumSec = 0f
+        }
+
+        val debiasedX = hx - axBias
+        val debiasedY = hy - ayBias
+        val debiasedZ = hz - azBias
+
+        val alpha = dt / (ACCEL_TIME_CONSTANT_SEC + dt)
+        filteredX += alpha * (debiasedX - filteredX)
+        filteredY += alpha * (debiasedY - filteredY)
+        filteredZ += alpha * (debiasedZ - filteredZ)
+
+        lastAccelMagSq = debiasedX * debiasedX + debiasedY * debiasedY + debiasedZ * debiasedZ
 
         publish()
     }
@@ -317,9 +349,10 @@ class MotionEstimator(context: Context) {
         lastRollRadians = 0f
         filteredYawRate = 0f
         filteredPitchRate = 0f
-        // Don't clear gx/gy/gzBias or the gravity estimate — all are hardware/orientation
-        // properties that should persist across stop/start.
+        // Don't clear gx/gy/gzBias, ax/ay/azBias, or the gravity estimate — all are
+        // hardware/orientation properties that should persist across stop/start.
         stillAccumSec = 0f
+        rawStillAccumSec = 0f
         lastAccelMagSq = 0f
         _motion.value = MotionVector.ZERO
     }
