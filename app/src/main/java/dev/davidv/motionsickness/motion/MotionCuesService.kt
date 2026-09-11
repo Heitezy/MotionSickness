@@ -23,6 +23,7 @@ import android.view.WindowManager
 import androidx.core.app.NotificationCompat
 import dev.davidv.motionsickness.MainActivity
 import dev.davidv.motionsickness.R
+import dev.davidv.motionsickness.data.CueSettings
 import dev.davidv.motionsickness.data.CueSettingsRepository
 import dev.davidv.motionsickness.theme.cueColorPalette
 import kotlinx.coroutines.CoroutineScope
@@ -42,22 +43,22 @@ import kotlinx.coroutines.launch
  */
 class MotionCuesService : Service() {
 
-    private lateinit var windowManager: WindowManager
+    private var currentWindowManager: WindowManager? = null
     private var overlayView: CueOverlayView? = null
     private var overlayParams: WindowManager.LayoutParams? = null
+    private var currentSettings: CueSettings? = null
     private lateinit var motionEstimator: MotionEstimator
     private lateinit var settingsRepository: CueSettingsRepository
 
     private val scope = CoroutineScope(Dispatchers.Main)
     private var collectJob: Job? = null
     private var settingsJob: Job? = null
-    private var dialogJob: Job? = null
+    private var accessibilityJob: Job? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()
-        windowManager = getSystemService(WindowManager::class.java)
         motionEstimator = MotionEstimator(this)
         settingsRepository = CueSettingsRepository(this)
     }
@@ -74,7 +75,6 @@ class MotionCuesService : Service() {
         }
 
         startForegroundWithNotification()
-        attachOverlay()
         motionEstimator.start()
         collectJob?.cancel()
         collectJob = scope.launch {
@@ -85,16 +85,18 @@ class MotionCuesService : Service() {
             // Palette is resolved fresh alongside every settings change (rather than cached)
             // since dark/light mode can flip while the overlay is running.
             settingsRepository.settings.collectLatest { settings ->
+                currentSettings = settings
                 motionEstimator.fusionMode = settings.motionFusionMode
                 overlayView?.applySettings(settings, cueColorPalette(this@MotionCuesService))
             }
         }
-        dialogJob?.cancel()
-        dialogJob = scope.launch {
-            // DialogWatcherService (an opt-in accessibility service) flips this when a
-            // system/app dialog appears, so its buttons stay tappable underneath us.
-            _dialogVisible.collectLatest { dialogShowing ->
-                if (dialogShowing) hideOverlayForDialog() else restoreOverlayAfterDialog()
+        accessibilityJob?.cancel()
+        accessibilityJob = scope.launch {
+            // If the accessibility service is granted/enabled while we're running,
+            // we want to "upgrade" to its overlay type.
+            AccessibilityOverlayService.instance.collectLatest {
+                detachOverlay()
+                attachOverlay()
             }
         }
         _isRunning.value = true
@@ -104,11 +106,24 @@ class MotionCuesService : Service() {
 
     private fun attachOverlay() {
         if (overlayView != null) return
+
+        val accessibilityOverlay = AccessibilityOverlayService.instance.value
+        val hostContext = accessibilityOverlay ?: this
+        val wm = hostContext.getSystemService(WindowManager::class.java)
+        currentWindowManager = wm
+
+        val type = if (accessibilityOverlay != null) {
+            WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
+        } else {
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        }
+        _isUsingAccessibilityOverlay.value = (accessibilityOverlay != null)
+
         val view = CueOverlayView(this)
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+            type,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
@@ -121,37 +136,26 @@ class MotionCuesService : Service() {
             // views reject — if the overlay window's alpha is above ~0.8. Setting it just below
             // that threshold lets taps fall through to apps below. The slight dimming is barely
             // noticeable in practice.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // This is not needed for TYPE_ACCESSIBILITY_OVERLAY.
+            if (accessibilityOverlay == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 alpha = 0.79f
             }
         }
-        windowManager.addView(view, params)
+        wm.addView(view, params)
         overlayView = view
         overlayParams = params
-    }
 
-    /**
-     * Pulls the overlay's window entirely (rather than just toggling touchability or alpha)
-     * while a dialog is showing — see [DialogWatcherService] for why that's necessary. The
-     * [overlayView] instance and its [overlayParams] are kept around so [restoreOverlayAfterDialog]
-     * can put the same view back once the dialog is gone, instead of recreating it.
-     */
-    private fun hideOverlayForDialog() {
-        overlayView?.let { view -> runCatching { windowManager.removeViewImmediate(view) } }
-    }
-
-    private fun restoreOverlayAfterDialog() {
-        val view = overlayView ?: return
-        val params = overlayParams ?: return
-        runCatching { windowManager.addView(view, params) }
+        // Immediately apply current settings to the new view
+        currentSettings?.let { view.applySettings(it, cueColorPalette(this)) }
     }
 
     private fun detachOverlay() {
         overlayView?.let {
-            runCatching { windowManager.removeView(it) }
+            runCatching { currentWindowManager?.removeViewImmediate(it) }
             overlayView = null
         }
         overlayParams = null
+        currentWindowManager = null
     }
 
     private fun stopSelfCleanly() {
@@ -159,8 +163,8 @@ class MotionCuesService : Service() {
         collectJob = null
         settingsJob?.cancel()
         settingsJob = null
-        dialogJob?.cancel()
-        dialogJob = null
+        accessibilityJob?.cancel()
+        accessibilityJob = null
         motionEstimator.stop()
         detachOverlay()
         stopForeground(STOP_FOREGROUND_REMOVE)
@@ -171,6 +175,8 @@ class MotionCuesService : Service() {
         _isRunning.value = false
         notifyTileOfStateChange(this)
         scope.cancel()
+        accessibilityJob?.cancel()
+        accessibilityJob = null
         motionEstimator.stop()
         detachOverlay()
         super.onDestroy()
@@ -222,12 +228,8 @@ class MotionCuesService : Service() {
         private val _isRunning = MutableStateFlow(false)
         val isRunning: StateFlow<Boolean> = _isRunning.asStateFlow()
 
-        // Set by DialogWatcherService (if the user has enabled it) whenever a system/app
-        // dialog is showing, so the running instance can pull its overlay window out of the
-        // way. A plain top-level flow, same pattern as [isRunning] — there's only ever one
-        // instance of this service, so it doesn't need to be routed through a bound interface.
-        private val _dialogVisible = MutableStateFlow(false)
-        fun setDialogVisible(visible: Boolean) { _dialogVisible.value = visible }
+        private val _isUsingAccessibilityOverlay = MutableStateFlow(false)
+        val isUsingAccessibilityOverlay: StateFlow<Boolean> = _isUsingAccessibilityOverlay.asStateFlow()
 
         fun start(context: Context) {
             val intent = Intent(context, MotionCuesService::class.java)

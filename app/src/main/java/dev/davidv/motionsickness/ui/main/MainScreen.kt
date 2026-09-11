@@ -41,7 +41,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation3.runtime.NavKey
 import dev.davidv.motionsickness.R
 import dev.davidv.motionsickness.Settings as SettingsKey
-import dev.davidv.motionsickness.motion.DialogWatcherService
+import dev.davidv.motionsickness.motion.AccessibilityOverlayService
 import dev.davidv.motionsickness.motion.MotionCuesService
 import dev.davidv.motionsickness.theme.MyApplicationTheme
 
@@ -55,7 +55,7 @@ fun MainScreen(
 
     var overlayGranted by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
     var notifGranted by remember { mutableStateOf(hasNotificationPermission(context)) }
-    var dialogWatcherGranted by remember { mutableStateOf(isDialogWatcherEnabled(context)) }
+    var accessibilityOverlayGranted by remember { mutableStateOf(isAccessibilityOverlayEnabled(context)) }
     val cuesRunning by MotionCuesService.isRunning.collectAsStateWithLifecycle()
 
     // Permissions can change while we're backgrounded (user toggled them in Settings).
@@ -65,7 +65,7 @@ fun MainScreen(
             if (event == Lifecycle.Event.ON_RESUME) {
                 overlayGranted = Settings.canDrawOverlays(context)
                 notifGranted = hasNotificationPermission(context)
-                dialogWatcherGranted = isDialogWatcherEnabled(context)
+                accessibilityOverlayGranted = isAccessibilityOverlayEnabled(context)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -109,12 +109,12 @@ fun MainScreen(
             ) { Text("Allow notifications") }
         }
 
-        if (!dialogWatcherGranted) {
+        if (!accessibilityOverlayGranted) {
             Button(
                 onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.outlinedButtonColors(),
-            ) { Text(stringResource(R.string.main_grant_dialog_detection)) }
+            ) { Text(stringResource(R.string.main_grant_accessibility_overlay)) }
         }
 
         Spacer(Modifier.height(8.dp))
@@ -151,9 +151,9 @@ private fun hasNotificationPermission(context: android.content.Context): Boolean
  * only way to check whether ours is enabled is to look it up by component name in the list
  * Android reports as currently active.
  */
-private fun isDialogWatcherEnabled(context: android.content.Context): Boolean {
+private fun isAccessibilityOverlayEnabled(context: android.content.Context): Boolean {
     val am = context.getSystemService(AccessibilityManager::class.java) ?: return false
-    val target = android.content.ComponentName(context, DialogWatcherService::class.java).flattenToString()
+    val target = android.content.ComponentName(context, AccessibilityOverlayService::class.java).flattenToString()
     return am.getEnabledAccessibilityServiceList(android.accessibilityservice.AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
         .any { it.id == target }
 }
