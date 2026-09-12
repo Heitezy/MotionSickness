@@ -12,10 +12,10 @@ import android.view.Choreographer
 import android.view.View
 import dev.davidv.motionsickness.data.CueSettings
 import dev.davidv.motionsickness.data.DotShape
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.exp
-import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sin
 import kotlin.math.sqrt
@@ -66,7 +66,10 @@ class CueOverlayView(context: Context) : View(context) {
 
     private val pixelDensity = context.resources.displayMetrics.density
 
-    private val particles = Array(PARTICLE_COUNT) { Particle() }
+    // Grid dimension is configurable (CueSettings.density), so the particle array is rebuilt
+    // whenever it changes rather than sized once from a fixed constant.
+    private var gridDim = DEFAULT_GRID_DIM
+    private var particles = Array(gridDim * gridDim) { Particle() }
     private var halfShortDim = 1f
     private var halfDiag = 1f
     private var centerX = 0f
@@ -83,6 +86,7 @@ class CueOverlayView(context: Context) : View(context) {
     @Volatile private var colorPalette: IntArray = intArrayOf(0xFFFFFFFF.toInt())
     @Volatile private var randomize: Boolean = false
     @Volatile private var baseAlpha: Int = 217 // 0.85 * 255, matches CueSettings.DEFAULT_OPACITY
+    @Volatile private var dotSizeScale: Float = 1f
 
     // What's actually drawn this frame — equal to the configured shape/color unless the
     // randomizer has picked something else.
@@ -95,6 +99,14 @@ class CueOverlayView(context: Context) : View(context) {
     private var gridOx = 0f
     private var gridOy = 0f
     private var sizeEnvelope = 0f
+
+    // Vertical grid velocity driven specifically by signed out-of-plane (forward/back) motion,
+    // separate from gridVx/gridVy's in-plane driving. Positive out-of-plane (deceleration/
+    // braking) scrolls the grid up; negative (acceleration) scrolls it down — matching Apple's
+    // documented Vehicle Motion Cues behavior, where accelerating moves dots down and braking
+    // moves them up. This runs alongside, not instead of, the size-pulse cue below: direction
+    // carries the sign of the event, the pulse carries its magnitude regardless of sign.
+    private var outOfPlaneGridVy = 0f
 
     private var lastFrameNs = 0L
     private var running = false
@@ -135,11 +147,21 @@ class CueOverlayView(context: Context) : View(context) {
         configuredColorArgb = palette.getOrElse(settings.colorSlot.ordinal) { configuredColorArgb }
         randomize = settings.randomize
         baseAlpha = (settings.opacity.coerceIn(0f, 1f) * 255).toInt()
+        dotSizeScale = settings.dotSizeScale.coerceIn(
+            CueSettings.MIN_DOT_SIZE_SCALE,
+            CueSettings.MAX_DOT_SIZE_SCALE,
+        )
         if (!randomize) {
             activeShape = configuredShape
             setPaintColor(configuredColorArgb)
         } else {
             paint.alpha = baseAlpha
+        }
+
+        val newDim = settings.density.gridDim
+        if (newDim != gridDim) {
+            gridDim = newDim
+            resetParticles()
         }
     }
 
@@ -235,7 +257,7 @@ class CueOverlayView(context: Context) : View(context) {
             val px = centerX + sx * halfShortDim
             val py = centerY - sy * halfShortDim
 
-            var radius = p.size * pixelDensity * sizeBoost * 0.5f
+            var radius = p.size * pixelDensity * sizeBoost * dotSizeScale * 0.5f
             if (focusMode) {
                 val dx = px - centerX
                 val dy = py - centerY
@@ -303,11 +325,21 @@ class CueOverlayView(context: Context) : View(context) {
 
         gridVx += (-driveLx * DRIVE_GAIN) * dt
         gridVy += (-driveLy * DRIVE_GAIN) * dt
+
+        // Signed, directional response to forward/back (out-of-plane) motion: braking
+        // (positive out-of-plane) scrolls the grid up, accelerating (negative) scrolls it
+        // down. Previously only
+        // the positive half of this signal did anything (see updateSizeEnvelope below), so
+        // braking produced no visual cue at all; this restores the missing half as an actual
+        // direction rather than folding it into the symmetric size pulse.
+        outOfPlaneGridVy += (-smoothedMotionOutOfPlane * OUT_OF_PLANE_DRIVE_GAIN) * dt
+
         val damping = exp(-DAMP * dt)
         gridVx *= damping
         gridVy *= damping
+        outOfPlaneGridVy *= damping
         gridOx += gridVx * dt
-        gridOy += gridVy * dt
+        gridOy += (gridVy + outOfPlaneGridVy) * dt
 
         // Rotation scrolls the grid directly — sustained rotation → sustained flow,
         // stop rotating → flow stops.
@@ -322,7 +354,12 @@ class CueOverlayView(context: Context) : View(context) {
     }
 
     private fun updateSizeEnvelope(dt: Float) {
-        val target = max(0f, smoothedMotionOutOfPlane) * SIZE_OUT_OF_PLANE_GAIN
+        // Magnitude-only: both accelerating and braking are abrupt longitudinal events and
+        // both deserve the size pulse. (Previously this used max(0f, ...), which silently
+        // dropped one sign of out-of-plane motion — meaning braking produced no cue of any
+        // kind, visual or otherwise. Direction is now carried separately by
+        // outOfPlaneGridVy in step(); this pulse only communicates magnitude.)
+        val target = abs(smoothedMotionOutOfPlane) * SIZE_OUT_OF_PLANE_GAIN
         if (target > sizeEnvelope) sizeEnvelope = target
         sizeEnvelope *= exp(-dt / SIZE_RELEASE_SEC)
     }
@@ -346,13 +383,18 @@ class CueOverlayView(context: Context) : View(context) {
     }
 
     private fun resetParticles() {
+        // gridDim can change at runtime (CueSettings.density), so the array is rebuilt here
+        // rather than assumed to already be the right size.
+        if (particles.size != gridDim * gridDim) {
+            particles = Array(gridDim * gridDim) { Particle() }
+        }
         val rng = Random(42)
-        val spacing = 2f * GRID_EXTENT / GRID_DIM
+        val spacing = 2f * GRID_EXTENT / gridDim
         var i = 0
         // Staggered layout: odd rows shifted by half a column → hex-like pattern.
-        for (row in 0 until GRID_DIM) {
+        for (row in 0 until gridDim) {
             val rowOffsetX = if (row % 2 == 1) spacing * 0.5f else 0f
-            for (col in 0 until GRID_DIM) {
+            for (col in 0 until gridDim) {
                 val nx = (col + 0.5f) * spacing - GRID_EXTENT + rowOffsetX
                 val ny = (row + 0.5f) * spacing - GRID_EXTENT
                 val jitterX = (rng.nextFloat() - 0.5f) * 0.04f
@@ -372,15 +414,36 @@ class CueOverlayView(context: Context) : View(context) {
     }
 
     companion object {
-        private const val GRID_DIM = 12
-        private const val PARTICLE_COUNT = GRID_DIM * GRID_DIM
+        // Default grid dimension when no density preference has been set yet
+        // (CueSettings.DotDensity.Normal). The live value is [gridDim], which can be resized
+        // at runtime via applySettings().
+        private const val DEFAULT_GRID_DIM = 12
         private const val GRID_EXTENT = 3.5f
 
         private const val DRIVE_GAIN = 0.6f
-        private const val DAMP = 2.7f
+
+        // Grid-velocity damping. Lower = the flow from a sustained acceleration (a long
+        // highway curve, extended braking) persists longer before decaying to rest; higher =
+        // it snaps back to rest faster after a brief jolt but also loses sustained cues sooner.
+        //
+        // Previously 2.7 (≈370ms time constant), which decays a sustained turn's visual cue
+        // to near-zero in about a second — despite sustained low-frequency acceleration being
+        // exactly the case most associated with real motion sickness (a car holding a curve
+        // for several seconds, not a single bump). 0.9 (≈1.1s time constant) keeps that signal
+        // alive for roughly the duration of a real turn or braking event, at the cost of a
+        // larger steady-state grid drift if the sensor's residual acceleration bias isn't
+        // fully zeroed by MotionEstimator's bias tracking — a trade worth revisiting with
+        // real-vehicle testing rather than treating either number as final.
+        private const val DAMP = 0.9f
+
         private const val YAW_GAIN = 1.2f
         private const val PITCH_GAIN = 1.2f
         private const val DOT_SIZE_PX = 8f
+
+        // Directional response to forward/back (out-of-plane) motion — see step(). Tuned
+        // independently from DRIVE_GAIN since out-of-plane acceleration is a smaller, noisier
+        // signal (a component of a component) than the in-plane horizontal drive.
+        private const val OUT_OF_PLANE_DRIVE_GAIN = 0.6f
 
         private const val SIZE_OUT_OF_PLANE_GAIN = 1.2f
         private const val SIZE_RELEASE_SEC = 0.9f
@@ -403,9 +466,11 @@ class CueOverlayView(context: Context) : View(context) {
         private const val FOCUS_OUTER = 0.9f
 
         // Columns mode: band width per edge, as a fraction of screen width. The dot grid's own
-        // on-screen pitch is roughly 29% of screen width (a coarse 12x12 grid spread over a
-        // wrap range several times the visible area), so a band this size reliably shows about
-        // one full dot column plus a partially-faded second one at each edge.
+        // on-screen pitch is roughly 29% of screen width at the default density (a coarse grid
+        // spread over a wrap range several times the visible area), so a band this size
+        // reliably shows about one full dot column plus a partially-faded second one at each
+        // edge. Denser/sparser settings shift the pitch somewhat but the band remains a
+        // reasonable approximation across the supported range.
         private const val COLUMN_BAND_OUTER_FRAC = 0.20f
         private const val COLUMN_BAND_INNER_FRAC = 0.10f
 

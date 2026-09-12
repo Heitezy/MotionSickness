@@ -22,11 +22,21 @@ enum class DotShape { Circle, Diamond, Meteoroid }
 
 enum class CueColorSlot { Primary, Secondary, Tertiary }
 
+/**
+ * How many dots make up the grid. Exposed as a discrete choice (rather than a raw grid
+ * dimension) so it reads the same way Apple's "More Dots" visibility toggle does — a coarse,
+ * low-vision-friendly control rather than a fiddly numeric one. [gridDim] is the side length of
+ * the square particle grid; total dot count is gridDim * gridDim.
+ */
+enum class DotDensity(val gridDim: Int) { Sparse(8), Normal(12), Dense(16) }
+
 data class CueSettings(
   val mode: CueMode = CueMode.Focus,
   val shape: DotShape = DotShape.Circle,
   val colorSlot: CueColorSlot = CueColorSlot.Primary,
   val opacity: Float = DEFAULT_OPACITY,
+  val dotSizeScale: Float = DEFAULT_DOT_SIZE_SCALE,
+  val density: DotDensity = DotDensity.Normal,
   val randomize: Boolean = false,
   val autoStart: Boolean = false,
   val motionFusionMode: MotionFusionMode = MotionFusionMode.WorldRelative,
@@ -34,6 +44,12 @@ data class CueSettings(
   companion object {
     const val DEFAULT_OPACITY = 0.85f
     const val MIN_OPACITY = 0.1f
+
+    // Mirrors Apple's "Larger Dots" visibility control: a multiplier on the base dot size
+    // rather than an absolute pixel value, so it composes cleanly with screen density.
+    const val DEFAULT_DOT_SIZE_SCALE = 1f
+    const val MIN_DOT_SIZE_SCALE = 0.5f
+    const val MAX_DOT_SIZE_SCALE = 2f
   }
 }
 
@@ -45,6 +61,8 @@ class CueSettingsRepository(context: Context) {
     val SHAPE = stringPreferencesKey("shape")
     val COLOR_SLOT = stringPreferencesKey("color_slot")
     val OPACITY = floatPreferencesKey("opacity")
+    val DOT_SIZE_SCALE = floatPreferencesKey("dot_size_scale")
+    val DENSITY = stringPreferencesKey("density")
     val RANDOMIZE = booleanPreferencesKey("randomize")
     val AUTO_START = booleanPreferencesKey("auto_start")
     val MOTION_FUSION_MODE = stringPreferencesKey("motion_fusion_mode")
@@ -57,6 +75,9 @@ class CueSettingsRepository(context: Context) {
         shape = prefs.enumOrDefault(Keys.SHAPE, DotShape.Circle),
         colorSlot = prefs.enumOrDefault(Keys.COLOR_SLOT, CueColorSlot.Primary),
         opacity = (prefs[Keys.OPACITY] ?: CueSettings.DEFAULT_OPACITY).coerceIn(CueSettings.MIN_OPACITY, 1f),
+        dotSizeScale = (prefs[Keys.DOT_SIZE_SCALE] ?: CueSettings.DEFAULT_DOT_SIZE_SCALE)
+          .coerceIn(CueSettings.MIN_DOT_SIZE_SCALE, CueSettings.MAX_DOT_SIZE_SCALE),
+        density = prefs.enumOrDefault(Keys.DENSITY, DotDensity.Normal),
         randomize = prefs[Keys.RANDOMIZE] ?: false,
         autoStart = prefs[Keys.AUTO_START] ?: false,
         motionFusionMode = prefs.enumOrDefault(Keys.MOTION_FUSION_MODE, MotionFusionMode.WorldRelative),
@@ -77,6 +98,16 @@ class CueSettingsRepository(context: Context) {
 
   suspend fun setOpacity(opacity: Float) {
     dataStore.edit { it[Keys.OPACITY] = opacity.coerceIn(CueSettings.MIN_OPACITY, 1f) }
+  }
+
+  suspend fun setDotSizeScale(scale: Float) {
+    dataStore.edit {
+      it[Keys.DOT_SIZE_SCALE] = scale.coerceIn(CueSettings.MIN_DOT_SIZE_SCALE, CueSettings.MAX_DOT_SIZE_SCALE)
+    }
+  }
+
+  suspend fun setDensity(density: DotDensity) {
+    dataStore.edit { it[Keys.DENSITY] = density.name }
   }
 
   suspend fun setRandomize(enabled: Boolean) {

@@ -40,6 +40,7 @@ import dev.davidv.motionsickness.R
 import dev.davidv.motionsickness.data.CueColorSlot
 import dev.davidv.motionsickness.data.CueSettings
 import dev.davidv.motionsickness.data.CueSettingsRepository
+import dev.davidv.motionsickness.data.DotDensity
 import dev.davidv.motionsickness.data.DotShape
 import dev.davidv.motionsickness.motion.CueMode
 import dev.davidv.motionsickness.motion.MotionFusionMode
@@ -48,9 +49,10 @@ import dev.davidv.motionsickness.motion.VehicleDetectionReceiver
 import kotlinx.coroutines.launch
 
 /**
- * Customization screen covering the same knobs Android's own Motion Assist exposes: dot
- * placement, shape, color (sourced from the device's Material You theme), opacity, a
- * randomizer, and automatic activation in a moving vehicle.
+ * Customization screen covering the knobs Android's Motion Assist exposes — dot placement,
+ * shape, color (sourced from the device's Material You theme), opacity, a randomizer, and
+ * automatic activation in a moving vehicle — plus dot size and count, matching the
+ * accessibility-oriented "Larger Dots" / "More Dots" controls in Apple's Vehicle Motion Cues.
  */
 @Composable
 fun SettingsScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
@@ -127,6 +129,29 @@ fun SettingsScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
         value = settings.opacity,
         onValueChange = { scope.launch { repository.setOpacity(it) } },
         valueRange = CueSettings.MIN_OPACITY..1f,
+      )
+    }
+
+    SettingsSection(stringResource(R.string.settings_dot_size_title)) {
+      Slider(
+        value = settings.dotSizeScale,
+        onValueChange = { scope.launch { repository.setDotSizeScale(it) } },
+        valueRange = CueSettings.MIN_DOT_SIZE_SCALE..CueSettings.MAX_DOT_SIZE_SCALE,
+      )
+    }
+
+    SettingsSection(stringResource(R.string.settings_density_title)) {
+      SegmentedChoice(
+        options = DotDensity.entries,
+        selected = settings.density,
+        label = {
+          when (it) {
+            DotDensity.Sparse -> stringResource(R.string.settings_density_sparse)
+            DotDensity.Normal -> stringResource(R.string.settings_density_normal)
+            DotDensity.Dense -> stringResource(R.string.settings_density_dense)
+          }
+        },
+        onSelect = { scope.launch { repository.setDensity(it) } },
       )
     }
 

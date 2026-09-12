@@ -37,6 +37,13 @@
 
     <string name="settings_opacity_title">Opacity</string>
 
+    <string name="settings_dot_size_title">Dot size</string>
+
+    <string name="settings_density_title">Dot count</string>
+    <string name="settings_density_sparse">Fewer</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">More</string>
+
     <string name="settings_motion_feel_title">Motion feel</string>
     <string name="settings_motion_feel_world_relative">World-relative</string>
     <string name="settings_motion_feel_raw">Raw</string>
