@@ -98,6 +98,11 @@ class MotionCuesService : Service() {
                 // effect of some other setting changing.
                 val wantsSpeed = settings.speedScaledTurnCues && speedProvider.hasPermission()
                 if (wantsSpeed && speedJob == null) {
+                    // Re-declare the foreground service type now that we know location is
+                    // actually permitted, then start collecting updates. See
+                    // startForegroundWithNotification() for why the location type can't just
+                    // be included unconditionally at startup.
+                    startForegroundWithNotification()
                     speedProvider.start()
                     speedJob = scope.launch {
                         speedProvider.speedMps.collectLatest { motionEstimator.speedMps = it }
@@ -107,6 +112,8 @@ class MotionCuesService : Service() {
                     speedJob = null
                     speedProvider.stop()
                     motionEstimator.speedMps = null
+                    // Drop back to the non-location type now that we've stopped using it.
+                    startForegroundWithNotification()
                 }
             }
         }
@@ -239,13 +246,21 @@ class MotionCuesService : Service() {
             .build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            // FOREGROUND_SERVICE_TYPE_LOCATION is included unconditionally, matching the
-            // manifest's declared type: this service only *starts* location updates when the
-            // person has both enabled CueSettings.speedScaledTurnCues and granted the
-            // permission (see SpeedProvider), but Android wants the running foreground
-            // service's declared capabilities to match what's declared up front, not to be
-            // renegotiated every time a setting toggles mid-run.
-            val types = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            // FOREGROUND_SERVICE_TYPE_LOCATION may only be included when the app currently
+            // holds the location permission: Android checks this at the moment
+            // startForeground() is called, not just what's declared in the manifest. Since
+            // speed-scaled turn cues are off by default and the location permission is only
+            // ever requested when the person explicitly opts in (see SpeedProvider), most
+            // installs never hold it — including it unconditionally here throws a
+            // SecurityException on every single service start.
+            //
+            // This method is called again whenever speedProvider.hasPermission() combined
+            // with the speedScaledTurnCues setting flips (see the settings collector above),
+            // so the declared type stays in sync with whether we're actually consuming
+            // location right now.
+            val types = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+                speedProvider.hasPermission()
+            ) {
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE or ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION
             } else {
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
