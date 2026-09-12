@@ -44,6 +44,9 @@
     <string name="settings_density_normal">Normal</string>
     <string name="settings_density_dense">More</string>
 
+    <string name="settings_intensity_title">Cue intensity</string>
+    <string name="settings_intensity_subtitle">How strongly the dots react to motion — lower is subtler, higher is more pronounced</string>
+
     <string name="settings_motion_feel_title">Motion feel</string>
     <string name="settings_motion_feel_world_relative">World-relative</string>
     <string name="settings_motion_feel_raw">Raw</string>
@@ -56,6 +59,9 @@
     <string name="settings_autostart_title">Start in a moving vehicle</string>
     <string name="settings_autostart_subtitle">Detects vehicle motion and turns cues on and off automatically</string>
     <string name="settings_autostart_grant_permission">Allow physical activity access</string>
+
+    <string name="settings_speed_scale_title">Scale turns by vehicle speed</string>
+    <string name="settings_speed_scale_subtitle">Uses GPS speed so a fixed steering rate looks like a bigger turn at highway speed and a smaller one in slow traffic. Requires location access; only used for this calculation.</string>
 
     <string name="tile_label">Motion cues</string>
     <string name="accessibility_overlay_description">Allows Motion cues to use a specialized accessibility overlay that doesn\'t interfere with other apps\' buttons.</string>

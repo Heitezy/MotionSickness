@@ -68,6 +68,12 @@ class MotionEstimator(context: Context) {
 
     @Volatile var fusionMode: MotionFusionMode = MotionFusionMode.WorldRelative
 
+    // Ground speed in m/s from SpeedProvider, or null when unknown (no permission granted,
+    // feature disabled, or no fix yet). Used only to scale yaw-driven turn cues — see
+    // speedFactor() below and MotionCuesService, which feeds this from location updates when
+    // CueSettings.speedScaledTurnCues is enabled.
+    @Volatile var speedMps: Float? = null
+
     private val sensorManager = context.getSystemService(SensorManager::class.java)
     private val linearAccel = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
     private val rotationVector = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
@@ -286,6 +292,27 @@ class MotionEstimator(context: Context) {
     private fun deadband(v: Float, threshold: Float): Float =
         if (v > threshold) v - threshold else if (v < -threshold) v + threshold else 0f
 
+    /**
+     * Scales yaw-driven turn cues by actual ground speed, when known. A fixed yaw rate means
+     * very different things at different speeds: for a coordinated turn, lateral acceleration
+     * is approximately speed * yaw rate, so the same rotation that's a gentle nudge while
+     * creeping through a parking lot is a sharp, high-g highway curve at speed — but yaw rate
+     * alone can't tell those apart. When speedMps is null (no permission, feature off, or no
+     * GPS fix yet) this returns 1.0, i.e. the original speed-independent behavior, unchanged.
+     */
+    private fun speedFactor(): Float {
+        val speed = speedMps ?: return 1f
+        // Below this, GPS speed itself is typically too noisy to trust (stationary GPS speed
+        // readings commonly show up to ~1 m/s of jitter), so treat it as "unknown" rather than
+        // let noise modulate the cue.
+        if (speed < MIN_CONFIDENT_SPEED_MPS) return 1f
+        // REFERENCE_SPEED_MPS is the speed at which this factor is 1.0 — i.e. where the
+        // existing YAW_GAIN tuning is assumed to already feel right — so this only stretches
+        // or compresses the cue away from that point, rather than changing the baseline feel
+        // for anyone who hasn't opted into speed scaling.
+        return (speed / REFERENCE_SPEED_MPS).coerceIn(MIN_SPEED_FACTOR, MAX_SPEED_FACTOR)
+    }
+
     private fun publish() {
         // Raw mode doesn't compensate for phone orientation, so it has no meaningful roll and
         // never scrolls the grid from rotation — only translation (via x/y/outOfPlane) drives
@@ -296,7 +323,7 @@ class MotionEstimator(context: Context) {
             y = filteredY,
             outOfPlane = filteredZ,
             rollRadians = if (isRaw) 0f else lastRollRadians,
-            yawRateRps = if (isRaw) 0f else deadband(filteredYawRate, GYRO_DEADBAND_RPS),
+            yawRateRps = if (isRaw) 0f else deadband(filteredYawRate, GYRO_DEADBAND_RPS) * speedFactor(),
             pitchRateRps = if (isRaw) 0f else deadband(filteredPitchRate, GYRO_DEADBAND_RPS),
         )
     }
@@ -380,5 +407,11 @@ class MotionEstimator(context: Context) {
         // assuming it's dead (no working magnetometer) and switching to
         // TYPE_GAME_ROTATION_VECTOR. Generous enough to not misfire on a slow cold start.
         private const val ROTATION_FALLBACK_TIMEOUT_MS = 1500L
+
+        // Speed-scaling for yaw-driven turn cues — see speedFactor().
+        private const val MIN_CONFIDENT_SPEED_MPS = 1.5f // ~5.4 km/h; below this, GPS speed is mostly noise
+        private const val REFERENCE_SPEED_MPS = 15f // ~54 km/h — factor is 1.0 here, matching existing YAW_GAIN tuning
+        private const val MIN_SPEED_FACTOR = 0.3f // still show *something* for slow, tight turns (parking, traffic)
+        private const val MAX_SPEED_FACTOR = 2.5f // cap so a highway curve doesn't overwhelm the display
     }
 }

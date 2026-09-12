@@ -37,8 +37,10 @@ data class CueSettings(
   val opacity: Float = DEFAULT_OPACITY,
   val dotSizeScale: Float = DEFAULT_DOT_SIZE_SCALE,
   val density: DotDensity = DotDensity.Normal,
+  val intensity: Float = DEFAULT_INTENSITY,
   val randomize: Boolean = false,
   val autoStart: Boolean = false,
+  val speedScaledTurnCues: Boolean = false,
   val motionFusionMode: MotionFusionMode = MotionFusionMode.WorldRelative,
 ) {
   companion object {
@@ -50,6 +52,14 @@ data class CueSettings(
     const val DEFAULT_DOT_SIZE_SCALE = 1f
     const val MIN_DOT_SIZE_SCALE = 0.5f
     const val MAX_DOT_SIZE_SCALE = 2f
+
+    // Overall sensitivity: a single multiplier applied to every motion→grid gain together
+    // (translation, rotation, and the out-of-plane pulse), so susceptibility can be tuned
+    // without exposing the individual physics constants themselves. 1.0 matches the tuning
+    // the defaults were picked against; below 1.0 is subtler, above is more pronounced.
+    const val DEFAULT_INTENSITY = 1f
+    const val MIN_INTENSITY = 0.4f
+    const val MAX_INTENSITY = 2f
   }
 }
 
@@ -63,8 +73,10 @@ class CueSettingsRepository(context: Context) {
     val OPACITY = floatPreferencesKey("opacity")
     val DOT_SIZE_SCALE = floatPreferencesKey("dot_size_scale")
     val DENSITY = stringPreferencesKey("density")
+    val INTENSITY = floatPreferencesKey("intensity")
     val RANDOMIZE = booleanPreferencesKey("randomize")
     val AUTO_START = booleanPreferencesKey("auto_start")
+    val SPEED_SCALED_TURN_CUES = booleanPreferencesKey("speed_scaled_turn_cues")
     val MOTION_FUSION_MODE = stringPreferencesKey("motion_fusion_mode")
   }
 
@@ -78,8 +90,11 @@ class CueSettingsRepository(context: Context) {
         dotSizeScale = (prefs[Keys.DOT_SIZE_SCALE] ?: CueSettings.DEFAULT_DOT_SIZE_SCALE)
           .coerceIn(CueSettings.MIN_DOT_SIZE_SCALE, CueSettings.MAX_DOT_SIZE_SCALE),
         density = prefs.enumOrDefault(Keys.DENSITY, DotDensity.Normal),
+        intensity = (prefs[Keys.INTENSITY] ?: CueSettings.DEFAULT_INTENSITY)
+          .coerceIn(CueSettings.MIN_INTENSITY, CueSettings.MAX_INTENSITY),
         randomize = prefs[Keys.RANDOMIZE] ?: false,
         autoStart = prefs[Keys.AUTO_START] ?: false,
+        speedScaledTurnCues = prefs[Keys.SPEED_SCALED_TURN_CUES] ?: false,
         motionFusionMode = prefs.enumOrDefault(Keys.MOTION_FUSION_MODE, MotionFusionMode.WorldRelative),
       )
     }
@@ -110,12 +125,20 @@ class CueSettingsRepository(context: Context) {
     dataStore.edit { it[Keys.DENSITY] = density.name }
   }
 
+  suspend fun setIntensity(intensity: Float) {
+    dataStore.edit { it[Keys.INTENSITY] = intensity.coerceIn(CueSettings.MIN_INTENSITY, CueSettings.MAX_INTENSITY) }
+  }
+
   suspend fun setRandomize(enabled: Boolean) {
     dataStore.edit { it[Keys.RANDOMIZE] = enabled }
   }
 
   suspend fun setAutoStart(enabled: Boolean) {
     dataStore.edit { it[Keys.AUTO_START] = enabled }
+  }
+
+  suspend fun setSpeedScaledTurnCues(enabled: Boolean) {
+    dataStore.edit { it[Keys.SPEED_SCALED_TURN_CUES] = enabled }
   }
 
   suspend fun setMotionFusionMode(mode: MotionFusionMode) {

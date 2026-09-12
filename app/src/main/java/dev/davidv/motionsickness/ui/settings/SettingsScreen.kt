@@ -5,6 +5,7 @@ package dev.davidv.motionsickness.ui.settings
 
 import android.Manifest
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,6 +36,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.davidv.motionsickness.R
 import dev.davidv.motionsickness.data.CueColorSlot
@@ -67,6 +69,14 @@ fun SettingsScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
     if (granted) {
       VehicleDetection.start(context)
       scope.launch { repository.setAutoStart(true) }
+    }
+  }
+
+  val speedPermissionLauncher = rememberLauncherForActivityResult(
+    ActivityResultContracts.RequestPermission(),
+  ) { granted ->
+    if (granted) {
+      scope.launch { repository.setSpeedScaledTurnCues(true) }
     }
   }
 
@@ -155,6 +165,18 @@ fun SettingsScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
       )
     }
 
+    SettingsSection(stringResource(R.string.settings_intensity_title)) {
+      Slider(
+        value = settings.intensity,
+        onValueChange = { scope.launch { repository.setIntensity(it) } },
+        valueRange = CueSettings.MIN_INTENSITY..CueSettings.MAX_INTENSITY,
+      )
+      Text(
+        stringResource(R.string.settings_intensity_subtitle),
+        style = MaterialTheme.typography.bodySmall,
+      )
+    }
+
     HorizontalDivider()
 
     SettingsSection(stringResource(R.string.settings_motion_feel_title)) {
@@ -204,6 +226,29 @@ fun SettingsScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
           scope.launch { repository.setAutoStart(true) }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
           autoStartPermissionLauncher.launch(Manifest.permission.ACTIVITY_RECOGNITION)
+        }
+      },
+    )
+
+    HorizontalDivider()
+
+    ToggleRow(
+      title = stringResource(R.string.settings_speed_scale_title),
+      subtitle = stringResource(R.string.settings_speed_scale_subtitle),
+      checked = settings.speedScaledTurnCues,
+      onCheckedChange = { enabled ->
+        if (!enabled) {
+          scope.launch { repository.setSpeedScaledTurnCues(false) }
+          return@ToggleRow
+        }
+        val hasPermission = ContextCompat.checkSelfPermission(
+          context,
+          Manifest.permission.ACCESS_FINE_LOCATION,
+        ) == PackageManager.PERMISSION_GRANTED
+        if (hasPermission) {
+          scope.launch { repository.setSpeedScaledTurnCues(true) }
+        } else {
+          speedPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
       },
     )

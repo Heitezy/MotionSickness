@@ -49,11 +49,13 @@ class MotionCuesService : Service() {
     private var currentSettings: CueSettings? = null
     private lateinit var motionEstimator: MotionEstimator
     private lateinit var settingsRepository: CueSettingsRepository
+    private lateinit var speedProvider: SpeedProvider
 
     private val scope = CoroutineScope(Dispatchers.Main)
     private var collectJob: Job? = null
     private var settingsJob: Job? = null
     private var accessibilityJob: Job? = null
+    private var speedJob: Job? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -61,6 +63,7 @@ class MotionCuesService : Service() {
         super.onCreate()
         motionEstimator = MotionEstimator(this)
         settingsRepository = CueSettingsRepository(this)
+        speedProvider = SpeedProvider(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -88,6 +91,23 @@ class MotionCuesService : Service() {
                 currentSettings = settings
                 motionEstimator.fusionMode = settings.motionFusionMode
                 overlayView?.applySettings(settings, cueColorPalette(this@MotionCuesService))
+
+                // Speed scaling is opt-in and permission-gated (see SpeedProvider), so this
+                // only ever starts requesting location updates when the person has explicitly
+                // enabled the setting *and* already granted the permission — never as a side
+                // effect of some other setting changing.
+                val wantsSpeed = settings.speedScaledTurnCues && speedProvider.hasPermission()
+                if (wantsSpeed && speedJob == null) {
+                    speedProvider.start()
+                    speedJob = scope.launch {
+                        speedProvider.speedMps.collectLatest { motionEstimator.speedMps = it }
+                    }
+                } else if (!wantsSpeed && speedJob != null) {
+                    speedJob?.cancel()
+                    speedJob = null
+                    speedProvider.stop()
+                    motionEstimator.speedMps = null
+                }
             }
         }
         accessibilityJob?.cancel()
@@ -165,6 +185,9 @@ class MotionCuesService : Service() {
         settingsJob = null
         accessibilityJob?.cancel()
         accessibilityJob = null
+        speedJob?.cancel()
+        speedJob = null
+        speedProvider.stop()
         motionEstimator.stop()
         detachOverlay()
         stopForeground(STOP_FOREGROUND_REMOVE)
@@ -177,6 +200,7 @@ class MotionCuesService : Service() {
         scope.cancel()
         accessibilityJob?.cancel()
         accessibilityJob = null
+        speedProvider.stop()
         motionEstimator.stop()
         detachOverlay()
         super.onDestroy()
@@ -215,7 +239,18 @@ class MotionCuesService : Service() {
             .build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(NOTIFICATION_ID, notif, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+            // FOREGROUND_SERVICE_TYPE_LOCATION is included unconditionally, matching the
+            // manifest's declared type: this service only *starts* location updates when the
+            // person has both enabled CueSettings.speedScaledTurnCues and granted the
+            // permission (see SpeedProvider), but Android wants the running foreground
+            // service's declared capabilities to match what's declared up front, not to be
+            // renegotiated every time a setting toggles mid-run.
+            val types = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE or ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION
+            } else {
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+            }
+            startForeground(NOTIFICATION_ID, notif, types)
         } else {
             startForeground(NOTIFICATION_ID, notif)
         }

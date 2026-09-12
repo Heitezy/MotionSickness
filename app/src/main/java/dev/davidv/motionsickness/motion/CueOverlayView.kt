@@ -87,6 +87,7 @@ class CueOverlayView(context: Context) : View(context) {
     @Volatile private var randomize: Boolean = false
     @Volatile private var baseAlpha: Int = 217 // 0.85 * 255, matches CueSettings.DEFAULT_OPACITY
     @Volatile private var dotSizeScale: Float = 1f
+    @Volatile private var intensity: Float = 1f
 
     // What's actually drawn this frame — equal to the configured shape/color unless the
     // randomizer has picked something else.
@@ -151,6 +152,7 @@ class CueOverlayView(context: Context) : View(context) {
             CueSettings.MIN_DOT_SIZE_SCALE,
             CueSettings.MAX_DOT_SIZE_SCALE,
         )
+        intensity = settings.intensity.coerceIn(CueSettings.MIN_INTENSITY, CueSettings.MAX_INTENSITY)
         if (!randomize) {
             activeShape = configuredShape
             setPaintColor(configuredColorArgb)
@@ -323,8 +325,8 @@ class CueOverlayView(context: Context) : View(context) {
         val driveLx = smoothedMotionX * cosR - smoothedMotionY * sinR
         val driveLy = smoothedMotionX * sinR + smoothedMotionY * cosR
 
-        gridVx += (-driveLx * DRIVE_GAIN) * dt
-        gridVy += (-driveLy * DRIVE_GAIN) * dt
+        gridVx += (-driveLx * DRIVE_GAIN * intensity) * dt
+        gridVy += (-driveLy * DRIVE_GAIN * intensity) * dt
 
         // Signed, directional response to forward/back (out-of-plane) motion: braking
         // (positive out-of-plane) scrolls the grid up, accelerating (negative) scrolls it
@@ -332,7 +334,7 @@ class CueOverlayView(context: Context) : View(context) {
         // the positive half of this signal did anything (see updateSizeEnvelope below), so
         // braking produced no visual cue at all; this restores the missing half as an actual
         // direction rather than folding it into the symmetric size pulse.
-        outOfPlaneGridVy += (-smoothedMotionOutOfPlane * OUT_OF_PLANE_DRIVE_GAIN) * dt
+        outOfPlaneGridVy += (-smoothedMotionOutOfPlane * OUT_OF_PLANE_DRIVE_GAIN * intensity) * dt
 
         val damping = exp(-DAMP * dt)
         gridVx *= damping
@@ -342,9 +344,11 @@ class CueOverlayView(context: Context) : View(context) {
         gridOy += (gridVy + outOfPlaneGridVy) * dt
 
         // Rotation scrolls the grid directly — sustained rotation → sustained flow,
-        // stop rotating → flow stops.
-        gridOx += smoothedYawRateRps * YAW_GAIN * dt
-        gridOy += smoothedPitchRateRps * PITCH_GAIN * dt
+        // stop rotating → flow stops. smoothedYawRateRps already carries MotionEstimator's
+        // own GPS-speed scaling (see MotionEstimator.speedFactor); intensity multiplies on
+        // top of that as the user's separate, independent sensitivity preference.
+        gridOx += smoothedYawRateRps * YAW_GAIN * intensity * dt
+        gridOy += smoothedPitchRateRps * PITCH_GAIN * intensity * dt
 
         val wrapSpan = 2f * GRID_EXTENT
         if (gridOx > GRID_EXTENT) gridOx -= wrapSpan
@@ -359,7 +363,7 @@ class CueOverlayView(context: Context) : View(context) {
         // dropped one sign of out-of-plane motion — meaning braking produced no cue of any
         // kind, visual or otherwise. Direction is now carried separately by
         // outOfPlaneGridVy in step(); this pulse only communicates magnitude.)
-        val target = abs(smoothedMotionOutOfPlane) * SIZE_OUT_OF_PLANE_GAIN
+        val target = abs(smoothedMotionOutOfPlane) * SIZE_OUT_OF_PLANE_GAIN * intensity
         if (target > sizeEnvelope) sizeEnvelope = target
         sizeEnvelope *= exp(-dt / SIZE_RELEASE_SEC)
     }
