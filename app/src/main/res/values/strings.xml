@@ -2,14 +2,14 @@
 <!-- SPDX-FileCopyrightText: 2026 David Ventura -->
 <!-- SPDX-License-Identifier: GPL-3.0-only -->
 <resources>
-    <string name="app_name">Motion cues</string>
+    <string name="app_name">Motion Sickness Relief</string>
 
-    <string name="motion_cues_channel_name">Motion cues overlay</string>
-    <string name="motion_cues_notification_title">Motion cues active</string>
+    <string name="motion_cues_channel_name">Motion Sickness Relief overlay</string>
+    <string name="motion_cues_notification_title">Motion Sickness Relief active</string>
     <string name="motion_cues_notification_text">Drawing motion dots over other apps</string>
     <string name="motion_cues_notification_stop">Stop</string>
 
-    <string name="main_title">Vehicle motion cues</string>
+    <string name="main_title">Motion Sickness Relief</string>
     <string name="main_subtitle">Reduces motion sickness by showing dots that drift with the car\'s motion.</string>
     <string name="main_grant_overlay">Grant draw-over-apps permission</string>
     <string name="main_grant_accessibility_overlay">Grant accessibility permission (recommended)</string>
@@ -51,7 +51,7 @@
     <string name="settings_motion_feel_world_relative">World-relative</string>
     <string name="settings_motion_feel_raw">Raw</string>
     <string name="settings_motion_feel_world_relative_subtitle">Dots track a fixed world as you move and rotate the phone through it</string>
-    <string name="settings_motion_feel_raw_subtitle">Dots react only to how the phone accelerates, not to tilting or rotating it — closer to Apple\'s vehicle motion cues</string>
+    <string name="settings_motion_feel_raw_subtitle">Dots react only to how the phone accelerates, not to tilting or rotating it</string>
 
     <string name="settings_randomize_title">Randomize shape and color</string>
     <string name="settings_randomize_subtitle">Cycles the look every few seconds</string>
@@ -63,6 +63,6 @@
     <string name="settings_speed_scale_title">Scale turns by vehicle speed</string>
     <string name="settings_speed_scale_subtitle">Uses GPS speed so a fixed steering rate looks like a bigger turn at highway speed and a smaller one in slow traffic. Requires location access; only used for this calculation.</string>
 
-    <string name="tile_label">Motion cues</string>
-    <string name="accessibility_overlay_description">Allows Motion cues to use a specialized accessibility overlay that doesn\'t interfere with other apps\' buttons.</string>
+    <string name="tile_label">Motion Sickness Relief</string>
+    <string name="accessibility_overlay_description">Allows Motion Sickness Relief to use a specialized accessibility overlay that doesn\'t interfere with other apps\' buttons.</string>
 </resources>
