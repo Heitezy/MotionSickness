@@ -10,10 +10,11 @@ plugins {
 
 android {
     namespace = "dev.davidv.motionsickness"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "dev.davidv.motionsickness"
         minSdk = 26
+        //noinspection OldTargetApi
         targetSdk = 36
         versionCode = 4
         versionName = "0.1.0"
@@ -74,11 +75,11 @@ dependencies {
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)
   debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-  // Local tests: jUnit, coroutines, Android runner
+  // Local tests: JUnit, coroutines, Android runner
   testImplementation(libs.junit)
   testImplementation(libs.kotlinx.coroutines.test)
 
-  // Instrumented tests: jUnit rules and runners
+  // Instrumented tests: JUnit rules and runners
   androidTestImplementation(libs.androidx.test.core)
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.androidx.test.runner)
