@@ -1,0 +1,87 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Полегшення заколисування</string>
+
+    <string name="motion_cues_channel_name">Оверлей полегшення заколисування</string>
+    <string name="motion_cues_notification_title">Полегшення заколисування активне</string>
+    <string name="motion_cues_notification_text">Відображення рухомих точок поверх інших додатків</string>
+    <string name="motion_cues_notification_stop">Зупинити</string>
+
+    <string name="main_title">Полегшення заколисування</string>
+    <string name="main_subtitle">Зменшує заколисування, показуючи точки, які рухаються разом із рухом автомобіля.</string>
+    <string name="main_grant_overlay">Надати дозвіл на відображення поверх інших додатків</string>
+    <string name="main_grant_accessibility_overlay">Надати дозвіл на спеціальні можливості (рекомендовано)</string>
+    <string name="main_start">Увімкнути точки</string>
+    <string name="main_stop">Вимкнути точки</string>
+    <string name="main_open_settings">Налаштувати</string>
+    <string name="main_open_about">Про додаток</string>
+
+    <string name="settings_title">Налаштувати</string>
+    <string name="settings_back">Назад</string>
+
+    <string name="settings_mode_title">Розміщення точок</string>
+    <string name="settings_mode_focus">Тільки по краях</string>
+    <string name="settings_mode_uniform">На весь екран</string>
+    <string name="settings_mode_columns">Стовпці</string>
+
+    <string name="settings_shape_title">Форма</string>
+    <string name="settings_shape_circle">Коло</string>
+    <string name="settings_shape_diamond">Ромб</string>
+    <string name="settings_shape_meteoroid">Метеороїд</string>
+
+    <string name="settings_color_title">Колір</string>
+    <string name="settings_color_primary">Первинний</string>
+    <string name="settings_color_secondary">Вторинний</string>
+    <string name="settings_color_tertiary">Третинний</string>
+
+    <string name="settings_opacity_title">Прозорість</string>
+
+    <string name="settings_dot_size_title">Розмір точок</string>
+
+    <string name="settings_density_title">Кількість точок</string>
+    <string name="settings_density_sparse">Менше</string>
+    <string name="settings_density_normal">Звичайна</string>
+    <string name="settings_density_dense">Більше</string>
+
+    <string name="settings_intensity_title">Інтенсивність реакції</string>
+    <string name="settings_intensity_subtitle">Наскільки сильно точки реагують на рух — менше значення для слабшої реакції, більше для вираженішої</string>
+
+    <string name="settings_motion_feel_title">Сприйняття руху</string>
+    <string name="settings_motion_feel_world_relative">Відносно навколишнього світу</string>
+    <string name="settings_motion_feel_raw">Необроблені дані</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Точки відстежують фіксований світ, коли ви рухаєте та обертаєте телефон крізь нього</string>
+    <string name="settings_motion_feel_raw_subtitle">Точки реагують лише на прискорення телефону, а не на його нахил чи обертання</string>
+
+    <string name="settings_randomize_title">Випадкова форма та колір</string>
+    <string name="settings_randomize_subtitle">Змінює вигляд кожні кілька секунд</string>
+
+    <string name="settings_autostart_title">Запуск у транспорті, що рухається</string>
+    <string name="settings_autostart_subtitle">Автоматично виявляє рух транспортного засобу та вмикає або вимикає точки</string>
+    <string name="settings_autostart_grant_permission">Дозволити доступ до фізичної активності</string>
+
+    <string name="settings_speed_scale_title">Масштабування поворотів за швидкістю</string>
+    <string name="settings_speed_scale_subtitle">Використовує швидкість GPS, тому фіксована швидкість повороту керма виглядає як більший поворот на швидкості шосе та менший у повільному трафіку. Потрібен доступ до геопозиції; використовується лише для цього розрахунку.</string>
+
+    <string name="tile_label">Полегшення заколисування</string>
+    <string name="accessibility_overlay_description">Дозволяє додатку використовувати спеціалізований оверлей спеціальних можливостей, який не заважає кнопкам інших додатків.</string>
+
+    <!-- About -->
+    <string name="label_about">Про додаток</string>
+    <string name="about_version">Версія %1$s</string>
+    <string name="about_tagline">Відображає оверлей із точок, які рухаються відповідно до руху вашого транспортного засобу, щоб допомогти зменшити заколисування.</string>
+    <string name="about_source">Вихідний код</string>
+    <string name="about_source_desc">Цей додаток є відкритим. Переглядайте код, створюйте повідомлення про проблеми або надсилайте запити на злиття.</string>
+    <string name="about_repository">Репозиторій</string>
+    <string name="about_license">Ліцензія</string>
+    <string name="about_license_name">Ліцензія GPL-3.0</string>
+    <string name="about_license_body">Випущено під GNU General Public License v3.0. Ви можете вільно використовувати, вивчати, змінювати та поширювати цей додаток, за умови, що похідні роботи залишаються під тією самою ліцензією.</string>
+    <string name="about_license_read">Прочитати повний текст ліцензії</string>
+    <string name="about_contributors">Учасники</string>
+    <string name="about_contributors_desc">Створено всіма, хто зробив свій внесок у проєкт на GitHub.</string>
+    <string name="about_contributors_all">Переглянути всіх учасників</string>
+    <string name="about_contributors_all_desc">Відкриває графік учасників на GitHub</string>
+    <string name="about_libraries">Бібліотеки з відкритим вихідним кодом</string>
+    <string name="about_libraries_count">Ліцензії для %1$d використаних бібліотек</string>
+    <string name="about_libraries_desc">Цей додаток побудовано на основі таких бібліотек з відкритим вихідним кодом.</string>
+</resources>
