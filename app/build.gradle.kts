@@ -9,10 +9,10 @@ plugins {
 }
 
 android {
-    namespace = "dev.davidv.motionsickness"
+    namespace = "heitezy.motionsicknessrelief"
     compileSdk = 37
     defaultConfig {
-        applicationId = "dev.davidv.motionsickness"
+        applicationId = "heitezy.motionsicknessrelief"
         minSdk = 26
         //noinspection OldTargetApi
         targetSdk = 36
