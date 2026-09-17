@@ -40,7 +40,7 @@ android {
     buildFeatures {
       compose = true
       aidl = false
-      buildConfig = false
+      buildConfig = true
       shaders = false
     }
 
@@ -69,6 +69,10 @@ dependencies {
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.material3)
+  // Extended icon set (Code, Gavel, People, ChevronRight, LibraryBooks, OpenInNew, …) used
+  // by AboutScreen — not part of the small core icon set material3 bundles by default.
+  // Safe to include: release builds already run with R8 minify + resource shrinking enabled.
+  implementation(libs.androidx.compose.material.icons.extended)
   // Tooling
   debugImplementation(libs.androidx.compose.ui.tooling)
   // Instrumented tests

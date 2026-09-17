@@ -7,7 +7,6 @@ package heitezy.motionsicknessrelief.ui.main
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
@@ -39,6 +38,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation3.runtime.NavKey
+import heitezy.motionsicknessrelief.About as AboutKey
 import heitezy.motionsicknessrelief.R
 import heitezy.motionsicknessrelief.Settings as SettingsKey
 import heitezy.motionsicknessrelief.motion.AccessibilityOverlayService
@@ -138,6 +138,12 @@ fun MainScreen(
             colors = ButtonDefaults.outlinedButtonColors(),
             modifier = Modifier.fillMaxWidth(),
         ) { Text(stringResource(R.string.main_open_settings)) }
+
+        Button(
+            onClick = { onItemClick(AboutKey) },
+            colors = ButtonDefaults.outlinedButtonColors(),
+            modifier = Modifier.fillMaxWidth(),
+        ) { Text(stringResource(R.string.main_open_about)) }
     }
 }
 

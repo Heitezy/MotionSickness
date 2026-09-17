@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import heitezy.motionsicknessrelief.ui.about.AboutScreen
 import heitezy.motionsicknessrelief.ui.main.MainScreen
 import heitezy.motionsicknessrelief.ui.settings.SettingsScreen
 
@@ -29,6 +30,9 @@ fun MainNavigation() {
         }
         entry<Settings> {
           SettingsScreen(onBack = { backStack.removeLastOrNull() }, modifier = Modifier.safeDrawingPadding().padding(16.dp))
+        }
+        entry<About> {
+          AboutScreen(onBack = { backStack.removeLastOrNull() }, modifier = Modifier.safeDrawingPadding().padding(16.dp))
         }
       },
   )
