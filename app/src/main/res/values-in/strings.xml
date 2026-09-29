@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Pereda Mabuk Perjalanan</string>
+
+    <string name="motion_cues_channel_name">Overlay Pereda Mabuk Perjalanan</string>
+    <string name="motion_cues_notification_title">Pereda Mabuk Perjalanan aktif</string>
+    <string name="motion_cues_notification_text">Menampilkan titik gerakan di atas aplikasi lain</string>
+    <string name="motion_cues_notification_stop">Hentikan</string>
+
+    <string name="main_title">Pereda Mabuk Perjalanan</string>
+    <string name="main_subtitle">Mengurangi mabuk perjalanan dengan menampilkan titik-titik yang bergerak mengikuti gerakan kendaraan.</string>
+    <string name="main_grant_overlay">Berikan izin tampilkan di atas aplikasi lain</string>
+    <string name="main_grant_accessibility_overlay">Berikan izin aksesibilitas (disarankan)</string>
+    <string name="main_start">Mulai titik gerakan</string>
+    <string name="main_stop">Hentikan titik gerakan</string>
+    <string name="main_open_settings">Sesuaikan</string>
+    <string name="main_open_about">Tentang</string>
+
+    <string name="settings_title">Sesuaikan</string>
+    <string name="settings_back">Kembali</string>
+
+    <string name="settings_mode_title">Penempatan titik</string>
+    <string name="settings_mode_focus">Hanya di tepi</string>
+    <string name="settings_mode_uniform">Layar penuh</string>
+    <string name="settings_mode_columns">Kolom</string>
+
+    <string name="settings_shape_title">Bentuk</string>
+    <string name="settings_shape_circle">Lingkaran</string>
+    <string name="settings_shape_diamond">Belah ketupat</string>
+    <string name="settings_shape_meteoroid">Meteoroid</string>
+
+    <string name="settings_color_title">Warna</string>
+    <string name="settings_color_primary">Utama</string>
+    <string name="settings_color_secondary">Sekunder</string>
+    <string name="settings_color_tertiary">Tersier</string>
+
+    <string name="settings_opacity_title">Opasitas</string>
+
+    <string name="settings_dot_size_title">Ukuran titik</string>
+
+    <string name="settings_density_title">Jumlah titik</string>
+    <string name="settings_density_sparse">Lebih sedikit</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Lebih banyak</string>
+
+    <string name="settings_intensity_title">Intensitas gerakan</string>
+    <string name="settings_intensity_subtitle">Seberapa kuat titik bereaksi terhadap gerakan — semakin rendah semakin halus, semakin tinggi semakin jelas</string>
+
+    <string name="settings_motion_feel_title">Sensasi gerakan</string>
+    <string name="settings_motion_feel_world_relative">Relatif terhadap dunia</string>
+    <string name="settings_motion_feel_raw">Langsung</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Titik-titik mengikuti posisi dunia nyata saat Anda memindahkan dan memutar ponsel</string>
+    <string name="settings_motion_feel_raw_subtitle">Titik-titik hanya bereaksi terhadap percepatan ponsel, bukan terhadap kemiringan atau rotasinya</string>
+
+    <string name="settings_randomize_title">Acak bentuk dan warna</string>
+    <string name="settings_randomize_subtitle">Mengubah tampilan secara berkala setiap beberapa detik</string>
+
+    <string name="settings_autostart_title">Mulai di kendaraan bergerak</string>
+    <string name="settings_autostart_subtitle">Mendeteksi gerakan kendaraan dan mengaktifkan atau mematikan titik secara otomatis</string>
+    <string name="settings_autostart_grant_permission">Izinkan akses aktivitas fisik</string>
+
+    <string name="settings_speed_scale_title">Sesuaikan belokan berdasarkan kecepatan kendaraan</string>
+    <string name="settings_speed_scale_subtitle">Menggunakan kecepatan GPS sehingga belokan dengan kecepatan sama tampak lebih besar saat di jalan bebas hambatan dan lebih kecil saat lalu lintas lambat. Memerlukan akses lokasi; hanya digunakan untuk perhitungan ini.</string>
+
+    <string name="tile_label">Pereda Mabuk Perjalanan</string>
+    <string name="accessibility_overlay_description">Izinkan Pereda Mabuk Perjalanan menggunakan lapisan aksesibilitas khusus yang tidak mengganggu tombol aplikasi lain.</string>
+
+    <!-- About -->
+    <string name="label_about">Tentang</string>
+    <string name="about_version">Versi %1$s</string>
+    <string name="about_tagline">Menampilkan lapisan titik-titik yang bergerak mengikuti gerakan kendaraan untuk membantu mengurangi mabuk perjalanan.</string>
+    <string name="about_source">Kode sumber</string>
+    <string name="about_source_desc">Aplikasi ini adalah sumber terbuka. Baca kode, laporkan masalah, atau kirim pull request.</string>
+    <string name="about_repository">Repositori</string>
+    <string name="about_license">Lisensi</string>
+    <string name="about_license_name">Lisensi GPL-3.0</string>
+    <string name="about_license_body">Rilis di bawah Lisensi Publik Umum GNU v3.0. Anda bebas menggunakan, mempelajari, mengubah, dan membagikan aplikasi ini, selama karya turunan tetap menggunakan lisensi yang sama.</string>
+    <string name="about_license_read">Baca teks lisensi selengkapnya</string>
+    <string name="about_contributors">Kontributor</string>
+    <string name="about_contributors_desc">Dibuat oleh semua orang yang telah berkontribusi pada proyek ini di GitHub.</string>
+    <string name="about_contributors_all">Lihat semua kontributor</string>
+    <string name="about_contributors_all_desc">Membuka grafik kontributor di GitHub</string>
+    <string name="about_libraries">Pustaka sumber terbuka</string>
+    <string name="about_libraries_count">Lisensi untuk %1$d pustaka yang digunakan</string>
+    <string name="about_libraries_desc">Aplikasi ini dibangun menggunakan pustaka sumber terbuka berikut.</string>
+    <string name="allow_notifications">Izinkan notifikasi</string>
+</resources>
