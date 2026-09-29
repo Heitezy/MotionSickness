@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Linderung von Reisekrankheit</string>
+
+    <string name="motion_cues_channel_name">Overlay zur Linderung von Reisekrankheit</string>
+    <string name="motion_cues_notification_title">Linderung von Reisekrankheit aktiv</string>
+    <string name="motion_cues_notification_text">Bewegungspunkte werden über anderen Apps angezeigt</string>
+    <string name="motion_cues_notification_stop">Stoppen</string>
+
+    <string name="main_title">Linderung von Reisekrankheit</string>
+    <string name="main_subtitle">Reduziert Reisekrankheit durch Punkte, die sich mit der Bewegung des Fahrzeugs mitbewegen.</string>
+    <string name="main_grant_overlay">Berechtigung zum Einblenden über anderen Apps erteilen</string>
+    <string name="main_grant_accessibility_overlay">Barrierefreiheitsberechtigung erteilen (empfohlen)</string>
+    <string name="main_start">Punkte aktivieren</string>
+    <string name="main_stop">Punkte deaktivieren</string>
+    <string name="main_open_settings">Anpassen</string>
+    <string name="main_open_about">Über die App</string>
+
+    <string name="settings_title">Anpassen</string>
+    <string name="settings_back">Zurück</string>
+
+    <string name="settings_mode_title">Anordnung der Punkte</string>
+    <string name="settings_mode_focus">Nur an den Rändern</string>
+    <string name="settings_mode_uniform">Vollbild</string>
+    <string name="settings_mode_columns">Spalten</string>
+
+    <string name="settings_shape_title">Form</string>
+    <string name="settings_shape_circle">Kreis</string>
+    <string name="settings_shape_diamond">Raute</string>
+    <string name="settings_shape_meteoroid">Meteoroid</string>
+
+    <string name="settings_color_title">Farbe</string>
+    <string name="settings_color_primary">Primär</string>
+    <string name="settings_color_secondary">Sekundär</string>
+    <string name="settings_color_tertiary">Tertiär</string>
+
+    <string name="settings_opacity_title">Deckkraft</string>
+
+    <string name="settings_dot_size_title">Punktgröße</string>
+
+    <string name="settings_density_title">Anzahl der Punkte</string>
+    <string name="settings_density_sparse">Weniger</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Mehr</string>
+
+    <string name="settings_intensity_title">Reaktionsintensität</string>
+    <string name="settings_intensity_subtitle">Wie stark die Punkte auf Bewegung reagieren – niedriger ist dezenter, höher ist ausgeprägter</string>
+
+    <string name="settings_motion_feel_title">Bewegungsverhalten</string>
+    <string name="settings_motion_feel_world_relative">Weltrelativ</string>
+    <string name="settings_motion_feel_raw">Unverarbeitet</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Punkte orientieren sich an einer festen Welt, während Sie das Smartphone bewegen und drehen</string>
+    <string name="settings_motion_feel_raw_subtitle">Punkte reagieren nur auf die Beschleunigung des Smartphones, nicht auf Neigen oder Drehen</string>
+
+    <string name="settings_randomize_title">Form und Farbe zufällig wechseln</string>
+    <string name="settings_randomize_subtitle">Wechselt das Aussehen alle paar Sekunden</string>
+
+    <string name="settings_autostart_title">In fahrendem Fahrzeug starten</string>
+    <string name="settings_autostart_subtitle">Erkennt die Bewegung des Fahrzeugs und schaltet die Punkte automatisch ein und aus</string>
+    <string name="settings_autostart_grant_permission">Zugriff auf körperliche Aktivität zulassen</string>
+
+    <string name="settings_speed_scale_title">Kurven an Fahrzeuggeschwindigkeit anpassen</string>
+    <string name="settings_speed_scale_subtitle">Verwendet die GPS-Geschwindigkeit, sodass ein bestimmter Lenkeinschlag bei Autobahngeschwindigkeit wie eine größere Kurve und im langsamen Verkehr wie eine kleinere Kurve erscheint. Erfordert Standortzugriff; wird nur für diese Berechnung verwendet.</string>
+
+    <string name="tile_label">Linderung von Reisekrankheit</string>
+    <string name="accessibility_overlay_description">Ermöglicht der App die Verwendung eines speziellen Barrierefreiheits-Overlays, das die Schaltflächen anderer Apps nicht beeinträchtigt.</string>
+
+    <!-- About -->
+    <string name="label_about">Über die App</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_tagline">Zeigt ein Overlay aus Punkten an, die sich mit der Bewegung Ihres Fahrzeugs mitbewegen, um Reisekrankheit zu lindern.</string>
+    <string name="about_source">Quellcode</string>
+    <string name="about_source_desc">Diese App ist Open Source. Lesen Sie den Code, melden Sie ein Problem oder senden Sie einen Pull Request.</string>
+    <string name="about_repository">Repository</string>
+    <string name="about_license">Lizenz</string>
+    <string name="about_license_name">GPL-3.0-Lizenz</string>
+    <string name="about_license_body">Veröffentlicht unter der GNU General Public License v3.0. Sie können diese App frei verwenden, studieren, ändern und teilen, solange abgeleitete Werke unter derselben Lizenz bleiben.</string>
+    <string name="about_license_read">Vollständigen Lizenztext lesen</string>
+    <string name="about_contributors">Mitwirkende</string>
+    <string name="about_contributors_desc">Erstellt von allen, die auf GitHub zum Projekt beigetragen haben.</string>
+    <string name="about_contributors_all">Alle Mitwirkenden anzeigen</string>
+    <string name="about_contributors_all_desc">Öffnet das Mitwirkenden-Diagramm auf GitHub</string>
+    <string name="about_libraries">Open-Source-Bibliotheken</string>
+    <string name="about_libraries_count">Lizenzen für die %1$d verwendeten Bibliotheken</string>
+    <string name="about_libraries_desc">Diese App basiert auf den folgenden Open-Source-Bibliotheken.</string>
+    <string name="allow_notifications">Benachrichtigungen zulassen</string>
+</resources>
