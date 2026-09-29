@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Alivio del mareo</string>
+
+    <string name="motion_cues_channel_name">Superposición de Alivio del mareo</string>
+    <string name="motion_cues_notification_title">Alivio del mareo activo</string>
+    <string name="motion_cues_notification_text">Mostrando puntos de movimiento sobre otras aplicaciones</string>
+    <string name="motion_cues_notification_stop">Detener</string>
+
+    <string name="main_title">Alivio del mareo</string>
+    <string name="main_subtitle">Reduce el mareo mostrando puntos que se desplazan con el movimiento del vehículo.</string>
+    <string name="main_grant_overlay">Conceder permiso para mostrar sobre otras aplicaciones</string>
+    <string name="main_grant_accessibility_overlay">Conceder permiso de accesibilidad (recomendado)</string>
+    <string name="main_start">Iniciar puntos</string>
+    <string name="main_stop">Detener puntos</string>
+    <string name="main_open_settings">Personalizar</string>
+    <string name="main_open_about">Acerca de</string>
+
+    <string name="settings_title">Personalizar</string>
+    <string name="settings_back">Atrás</string>
+
+    <string name="settings_mode_title">Ubicación de los puntos</string>
+    <string name="settings_mode_focus">Solo en los bordes</string>
+    <string name="settings_mode_uniform">Pantalla completa</string>
+    <string name="settings_mode_columns">Columnas</string>
+
+    <string name="settings_shape_title">Forma</string>
+    <string name="settings_shape_circle">Círculo</string>
+    <string name="settings_shape_diamond">Rombo</string>
+    <string name="settings_shape_meteoroid">Meteoroide</string>
+
+    <string name="settings_color_title">Color</string>
+    <string name="settings_color_primary">Primario</string>
+    <string name="settings_color_secondary">Secundario</string>
+    <string name="settings_color_tertiary">Terciario</string>
+
+    <string name="settings_opacity_title">Opacidad</string>
+
+    <string name="settings_dot_size_title">Tamaño de los puntos</string>
+
+    <string name="settings_density_title">Cantidad de puntos</string>
+    <string name="settings_density_sparse">Menos</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Más</string>
+
+    <string name="settings_intensity_title">Intensidad del movimiento</string>
+    <string name="settings_intensity_subtitle">Con qué fuerza reaccionan los puntos al movimiento: un valor más bajo es más sutil, uno más alto es más pronunciado</string>
+
+    <string name="settings_motion_feel_title">Sensación de movimiento</string>
+    <string name="settings_motion_feel_world_relative">Relativo al entorno</string>
+    <string name="settings_motion_feel_raw">Directo</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Los puntos se orientan con respecto a un entorno fijo a medida que mueves y giras el teléfono</string>
+    <string name="settings_motion_feel_raw_subtitle">Los puntos reaccionan solo a la aceleración del teléfono, no a su inclinación o rotación</string>
+
+    <string name="settings_randomize_title">Alternar forma y color al azar</string>
+    <string name="settings_randomize_subtitle">Cambia la apariencia cada pocos segundos</string>
+
+    <string name="settings_autostart_title">Iniciar en un vehículo en movimiento</string>
+    <string name="settings_autostart_subtitle">Detecta el movimiento del vehículo y activa o desactiva los puntos automáticamente</string>
+    <string name="settings_autostart_grant_permission">Permitir acceso a la actividad física</string>
+
+    <string name="settings_speed_scale_title">Ajustar giros según la velocidad del vehículo</string>
+    <string name="settings_speed_scale_subtitle">Utiliza la velocidad GPS para que un giro al volante parezca más amplio a velocidad de autopista y más pequeño con tráfico lento. Requiere acceso a la ubicación; solo se utiliza para este cálculo.</string>
+
+    <string name="tile_label">Alivio del mareo</string>
+    <string name="accessibility_overlay_description">Permite a Alivio del mareo utilizar una superposición de accesibilidad especializada que no interfiere con los botones de otras aplicaciones.</string>
+
+    <!-- About -->
+    <string name="label_about">Acerca de</string>
+    <string name="about_version">Versión %1$s</string>
+    <string name="about_tagline">Muestra una capa de puntos que se desplazan con el movimiento de tu vehículo para ayudar a reducir el mareo.</string>
+    <string name="about_source">Código fuente</string>
+    <string name="about_source_desc">Esta aplicación es de código abierto. Lee el código, informa sobre un problema o envía una solicitud de extracción.</string>
+    <string name="about_repository">Repositorio</string>
+    <string name="about_license">Licencia</string>
+    <string name="about_license_name">Licencia GPL-3.0</string>
+    <string name="about_license_body">Publicado bajo la Licencia Pública General GNU v3.0. Eres libre de usar, estudiar, modificar y compartir esta aplicación, siempre que las obras derivadas permanezcan bajo la misma licencia.</string>
+    <string name="about_license_read">Leer el texto completo de la licencia</string>
+    <string name="about_contributors">Colaboradores</string>
+    <string name="about_contributors_desc">Desarrollado por todas las personas que han contribuido al proyecto en GitHub.</string>
+    <string name="about_contributors_all">Ver todos los colaboradores</string>
+    <string name="about_contributors_all_desc">Abre el gráfico de colaboradores en GitHub</string>
+    <string name="about_libraries">Bibliotecas de código abierto</string>
+    <string name="about_libraries_count">Licencias de las %1$d bibliotecas utilizadas</string>
+    <string name="about_libraries_desc">Esta aplicación está creada sobre las siguientes bibliotecas de código abierto.</string>
+    <string name="allow_notifications">Permitir notificaciones</string>
+</resources>
