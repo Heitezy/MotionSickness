@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Soulagement du mal des transports</string>
+
+    <string name="motion_cues_channel_name">Superposition Soulagement du mal des transports</string>
+    <string name="motion_cues_notification_title">Soulagement du mal des transports actif</string>
+    <string name="motion_cues_notification_text">Affichage de points en mouvement par-dessus les autres applications</string>
+    <string name="motion_cues_notification_stop">Arrêter</string>
+
+    <string name="main_title">Soulagement du mal des transports</string>
+    <string name="main_subtitle">Réduit le mal des transports en affichant des points qui se déplacent avec le mouvement du véhicule.</string>
+    <string name="main_grant_overlay">Accorder la permission d\'afficher par-dessus d\'autres applications</string>
+    <string name="main_grant_accessibility_overlay">Accorder la permission d\'accessibilité (recommandé)</string>
+    <string name="main_start">Démarrer les points</string>
+    <string name="main_stop">Arrêter les points</string>
+    <string name="main_open_settings">Personnaliser</string>
+    <string name="main_open_about">À propos</string>
+
+    <string name="settings_title">Personnaliser</string>
+    <string name="settings_back">Retour</string>
+
+    <string name="settings_mode_title">Disposition des points</string>
+    <string name="settings_mode_focus">Bords uniquement</string>
+    <string name="settings_mode_uniform">Plein écran</string>
+    <string name="settings_mode_columns">Colonnes</string>
+
+    <string name="settings_shape_title">Forme</string>
+    <string name="settings_shape_circle">Cercle</string>
+    <string name="settings_shape_diamond">Losange</string>
+    <string name="settings_shape_meteoroid">Météoroïde</string>
+
+    <string name="settings_color_title">Couleur</string>
+    <string name="settings_color_primary">Primaire</string>
+    <string name="settings_color_secondary">Secondaire</string>
+    <string name="settings_color_tertiary">Tertiaire</string>
+
+    <string name="settings_opacity_title">Opacité</string>
+
+    <string name="settings_dot_size_title">Taille des points</string>
+
+    <string name="settings_density_title">Nombre de points</string>
+    <string name="settings_density_sparse">Moins</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Plus</string>
+
+    <string name="settings_intensity_title">Intensité des mouvements</string>
+    <string name="settings_intensity_subtitle">Sensibilité de réaction des points au mouvement : plus elle est basse, plus elle est subtile, plus elle est haute, plus elle est prononcée</string>
+
+    <string name="settings_motion_feel_title">Ressenti du mouvement</string>
+    <string name="settings_motion_feel_world_relative">Relatif au monde</string>
+    <string name="settings_motion_feel_raw">Brut</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Les points suivent un monde fixe lorsque vous déplacez et pivotez le téléphone</string>
+    <string name="settings_motion_feel_raw_subtitle">Les points réagissent uniquement aux accélérations du téléphone, pas à son inclinaison ni à sa rotation</string>
+
+    <string name="settings_randomize_title">Mélanger forme et couleur</string>
+    <string name="settings_randomize_subtitle">Change d\'apparence toutes les quelques secondes</string>
+
+    <string name="settings_autostart_title">Démarrer dans un véhicule en mouvement</string>
+    <string name="settings_autostart_subtitle">Détecte le mouvement du véhicule et active ou désactive automatiquement les points</string>
+    <string name="settings_autostart_grant_permission">Autoriser l\'accès à l\'activité physique</string>
+
+    <string name="settings_speed_scale_title">Ajuster les virages selon la vitesse du véhicule</string>
+    <string name="settings_speed_scale_subtitle">Utilise la vitesse GPS pour qu\'un virage paraisse plus large à vitesse élevée et plus réduit à faible vitesse. Nécessite l\'accès à la localisation, utilisé uniquement pour ce calcul.</string>
+
+    <string name="tile_label">Soulagement du mal des transports</string>
+    <string name="accessibility_overlay_description">Permet à Soulagement du mal des transports d\'utiliser une superposition d\'accessibilité spécialisée qui n\'interfère pas avec les boutons d\'autres applications.</string>
+
+    <!-- About -->
+    <string name="label_about">À propos</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_tagline">Affiche une superposition de points qui se déplacent avec le mouvement de votre véhicule pour aider à réduire le mal des transports.</string>
+    <string name="about_source">Code source</string>
+    <string name="about_source_desc">Cette application est open source. Consultez le code, signalez un problème ou envoyez une demande de tirage (pull request).</string>
+    <string name="about_repository">Dépôt</string>
+    <string name="about_license">Licence</string>
+    <string name="about_license_name">Licence GPL-3.0</string>
+    <string name="about_license_body">Publié sous la licence GNU General Public License v3.0. Vous êtes libre d\'utiliser, d\'étudier, de modifier et de partager cette application, à condition que les œuvres dérivées restent sous la même licence.</string>
+    <string name="about_license_read">Lire le texte complet de la licence</string>
+    <string name="about_contributors">Contributeurs</string>
+    <string name="about_contributors_desc">Développé par toutes les personnes ayant contribué au projet sur GitHub.</string>
+    <string name="about_contributors_all">Voir tous les contributeurs</string>
+    <string name="about_contributors_all_desc">Ouvre le graphique des contributeurs sur GitHub</string>
+    <string name="about_libraries">Bibliothèques open source</string>
+    <string name="about_libraries_count">Licences pour les %1$d bibliothèques utilisées</string>
+    <string name="about_libraries_desc">Cette application est basée sur les bibliothèques open source suivantes.</string>
+    <string name="allow_notifications">Autoriser les notifications</string>
+</resources>
