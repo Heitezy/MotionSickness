@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Yol tutuvını yengilleştiriv</string>
+
+    <string name="motion_cues_channel_name">Yol tutuvını yengilleştiriv üst-qatlamı</string>
+    <string name="motion_cues_notification_title">Yol tutuvını yengilleştiriv faal</string>
+    <string name="motion_cues_notification_text">Başqa uyğulamalar üstünde hareketli noqtalarnı kösteriv</string>
+    <string name="motion_cues_notification_stop">Toqtat</string>
+
+    <string name="main_title">Yol tutuvını yengilleştiriv</string>
+    <string name="main_subtitle">Avtomobil hareketine köre sürçeklengen noqtalarnı kösterip, yol tutuvını azalta.</string>
+    <string name="main_grant_overlay">Başqa uyğulamalar üstünde kösterüv ruhsetini ber</string>
+    <string name="main_grant_accessibility_overlay">Mahsus imkânlar ruhsetini ber (tavsiye etile)</string>
+    <string name="main_start">Noqtalarnı başlat</string>
+    <string name="main_stop">Noqtalarnı toqtat</string>
+    <string name="main_open_settings">Sazlamaq</string>
+    <string name="main_open_about">Uyğulama haqqında</string>
+
+    <string name="settings_title">Sazlamaq</string>
+    <string name="settings_back">Keri</string>
+
+    <string name="settings_mode_title">Noqtalarnı yerleştiriş</string>
+    <string name="settings_mode_focus">Yalnız kenarlarda</string>
+    <string name="settings_mode_uniform">Bütün ekranda</string>
+    <string name="settings_mode_columns">Sütunlar</string>
+
+    <string name="settings_shape_title">Şekil</string>
+    <string name="settings_shape_circle">Daire</string>
+    <string name="settings_shape_diamond">Romb</string>
+    <string name="settings_shape_meteoroid">Meteoroid</string>
+
+    <string name="settings_color_title">Renk</string>
+    <string name="settings_color_primary">Esas</string>
+    <string name="settings_color_secondary">Ekinci</string>
+    <string name="settings_color_tertiary">Üçünci</string>
+
+    <string name="settings_opacity_title">Şeffafsızlıq</string>
+
+    <string name="settings_dot_size_title">Noqta ölçüsi</string>
+
+    <string name="settings_density_title">Noqta sayısı</string>
+    <string name="settings_density_sparse">Daa az</string>
+    <string name="settings_density_normal">Adiy</string>
+    <string name="settings_density_dense">Daa çoq</string>
+
+    <string name="settings_intensity_title">İşaret şiddeti</string>
+    <string name="settings_intensity_subtitle">Noqtalarnıñ hareketke ne qadar küçlü tepki köstergeni — az değer daa nazik, yüksek değer daa belirgin</string>
+
+    <string name="settings_motion_feel_title">Hareket duyğusı</string>
+    <string name="settings_motion_feel_world_relative">Dünyağa nisbeten</string>
+    <string name="settings_motion_feel_raw">İşlenmegen</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Telefonnı hareket ettirgeniñizde ve çevirgeniñizde noqtalar sabit dünyanı izley</string>
+    <string name="settings_motion_feel_raw_subtitle">Noqtalar telefonnıñ eğilgenine ya da çevirilgenine degil, yalnız tezleşmesine tepki köstere</string>
+
+    <string name="settings_randomize_title">Şekil ve renkni rasgele deñiştirüv</string>
+    <string name="settings_randomize_subtitle">Görünüşni her bir qaç saniye deñiştire</string>
+
+    <string name="settings_autostart_title">Hareket etken vasıtada başlat</string>
+    <string name="settings_autostart_subtitle">Vasıta hareketini tesbit ete ve noqtalarnı öz-özünden açıp toqtata</string>
+    <string name="settings_autostart_grant_permission">Fizikiy faaliyet erişimine ruhset ber</string>
+
+    <string name="settings_speed_scale_title">Burulmalarnı vasıta tezligine köre miqyasla</string>
+    <string name="settings_speed_scale_subtitle">GPS tezligini qullana, şunıñ içün sabit sürmek tezligi magistral tezliginde daa büyük burulma, yavaş trafikte ise daa kiçik görüne. Konum erişimi talap etile; yalnız bu hesaplav içün qullanıla.</string>
+
+    <string name="tile_label">Yol tutuvını yengilleştiriv</string>
+    <string name="accessibility_overlay_description">Uyğulamağa başqa uyğulamalarnıñ düymelerine mane olmağan mahsus imkânlar üst-qatlamını qullanmağa imkân bere.</string>
+
+    <!-- About -->
+    <string name="label_about">Haqqında</string>
+    <string name="about_version">Versiya %1$s</string>
+    <string name="about_tagline">Yol tutuvını azaltmaq içün vasıtañıznıñ hareketinen beraber sürçeklengen noqtalardan ibaret üst-qatlam çize.</string>
+    <string name="about_source">Menba kodu</string>
+    <string name="about_source_desc">Bu uyğulama açıq menbalıdır. Kodnı oquñız, mesele bildiriñiz ya da pull request yollañız.</string>
+    <string name="about_repository">Repozitoriy</string>
+    <string name="about_license">Litsenziya</string>
+    <string name="about_license_name">GPL-3.0 litsenziyası</string>
+    <string name="about_license_body">GNU General Public License v3.0 çerçivesinde yayınlandı. Töretilgen işler aynı litsenziya tübinde qalğan taqdirde, bu uyğulamanı serbest qullanıp, ögrenip, deñiştirip ve paylaşıp olasıñız.</string>
+    <string name="about_license_read">Litsenziyanıñ tam metnini oquñız</string>
+    <string name="about_contributors">İştirakçiler</string>
+    <string name="about_contributors_desc">GitHub proyektine hisse qoşqan herkes tarafından yaratıldı.</string>
+    <string name="about_contributors_all">Bütün iştirakçilerni köster</string>
+    <string name="about_contributors_all_desc">GitHub-ta iştirakçiler grafikasını aça</string>
+    <string name="about_libraries">Açıq menbalı kitaphaneler</string>
+    <string name="about_libraries_count">Qullanılğan %1$d kitaphane içün litsenziyalar</string>
+    <string name="about_libraries_desc">Bu uyğulama aşağıdaki açıq menbalı kitaphaneler esasında yaratılğan.</string>
+    <string name="allow_notifications">Bildirişlerge ruhset ber</string>
+</resources>
