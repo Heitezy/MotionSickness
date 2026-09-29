@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">تخفيف دوار الحركة</string>
+
+    <string name="motion_cues_channel_name">تراكب تخفيف دوار الحركة</string>
+    <string name="motion_cues_notification_title">تخفيف دوار الحركة نشط</string>
+    <string name="motion_cues_notification_text">رسم نقاط الحركة فوق التطبيقات الأخرى</string>
+    <string name="motion_cues_notification_stop">إيقاف</string>
+
+    <string name="main_title">تخفيف دوار الحركة</string>
+    <string name="main_subtitle">يقلل من دوار الحركة عن طريق عرض نقاط تتحرك مع حركة السيارة.</string>
+    <string name="main_grant_overlay">منح إذن الظهور فوق التطبيقات الأخرى</string>
+    <string name="main_grant_accessibility_overlay">منح إذن إمكانية الوصول (موصى به)</string>
+    <string name="main_start">بدء نقاط الحركة</string>
+    <string name="main_stop">إيقاف نقاط الحركة</string>
+    <string name="main_open_settings">تخصيص</string>
+    <string name="main_open_about">حول التطبيق</string>
+
+    <string name="settings_title">تخصيص</string>
+    <string name="settings_back">رجوع</string>
+
+    <string name="settings_mode_title">موقع النقاط</string>
+    <string name="settings_mode_focus">الحواف فقط</string>
+    <string name="settings_mode_uniform">ملء الشاشة</string>
+    <string name="settings_mode_columns">أعمدة</string>
+
+    <string name="settings_shape_title">الشكل</string>
+    <string name="settings_shape_circle">دائرة</string>
+    <string name="settings_shape_diamond">معين</string>
+    <string name="settings_shape_meteoroid">شهاب</string>
+
+    <string name="settings_color_title">اللون</string>
+    <string name="settings_color_primary">أولي</string>
+    <string name="settings_color_secondary">ثانوي</string>
+    <string name="settings_color_tertiary">ثالثي</string>
+
+    <string name="settings_opacity_title">الشفافية</string>
+
+    <string name="settings_dot_size_title">حجم النقاط</string>
+
+    <string name="settings_density_title">عدد النقاط</string>
+    <string name="settings_density_sparse">أقل</string>
+    <string name="settings_density_normal">عادي</string>
+    <string name="settings_density_dense">أكثر</string>
+
+    <string name="settings_intensity_title">شدة الاستجابة</string>
+    <string name="settings_intensity_subtitle">مدى تفاعل النقاط مع الحركة — القيمة الأقل تكون أكثر هدوءاً، والأعلى تكون أكثر وضوحاً</string>
+
+    <string name="settings_motion_feel_title">شعور الحركة</string>
+    <string name="settings_motion_feel_world_relative">نسبةً للعالم الخارجي</string>
+    <string name="settings_motion_feel_raw">بيانات خام</string>
+    <string name="settings_motion_feel_world_relative_subtitle">تتتبع النقاط عالماً ثابتاً أثناء تحريك وتدوير الهاتف خلاله</string>
+    <string name="settings_motion_feel_raw_subtitle">تتفاعل النقاط مع تسارع الهاتف فقط، وليس مع إمالته أو تدويره</string>
+
+    <string name="settings_randomize_title">تغيير الشكل واللون عشوائياً</string>
+    <string name="settings_randomize_subtitle">يغير المظهر كل بضع ثوانٍ</string>
+
+    <string name="settings_autostart_title">البدء تلقائياً في مركبة متحركة</string>
+    <string name="settings_autostart_subtitle">يتعرف على حركة المركبة ويشغل النقاط ويوقفها تلقائياً</string>
+    <string name="settings_autostart_grant_permission">السماح بالوصول إلى النشاط البدني</string>
+
+    <string name="settings_speed_scale_title">تعديل المنعطفات حسب سرعة المركبة</string>
+    <string name="settings_speed_scale_subtitle">يستخدم سرعة GPS بحيث يظهر الانعطاف الثابت كانعطاف أكبر على سرعات الطرق السريعة وأصغر في الازدحام المروري. يتطلب الوصول إلى الموقع الجغرافي؛ ويُستخدم فقط لهذا الحساب.</string>
+
+    <string name="tile_label">تخفيف دوار الحركة</string>
+    <string name="accessibility_overlay_description">يسمح لتطبيق تخفيف دوار الحركة باستخدام تراكب إمكانية الوصول الذي لا يتعارض مع أزرار التطبيقات الأخرى.</string>
+
+    <!-- About -->
+    <string name="label_about">حول التطبيق</string>
+    <string name="about_version">الإصدار %1$s</string>
+    <string name="about_tagline">يعرض طبقة من النقاط تتحرك مع حركة مركبتك للمساعدة في تقليل دوار الحركة.</string>
+    <string name="about_source">الكود المصدري</string>
+    <string name="about_source_desc">هذا التطبيق مفتوح المصدر. يمكنك قراءة الكود، أو الإبلاغ عن مشكلة، أو إرسال طلب سحب (Pull Request).</string>
+    <string name="about_repository">المستودع</string>
+    <string name="about_license">الترخيص</string>
+    <string name="about_license_name">ترخيص GPL-3.0</string>
+    <string name="about_license_body">تم إصداره بموجب رخصة جينو العمومية v3.0 (GNU GPL v3.0). يحق لك استخدام هذا التطبيق ودراسته وتعديله ومشاركته بحرية، بشرط أن تظل الأعمال المشتقة تحت نفس الرخصة.</string>
+    <string name="about_license_read">قراءة النص الكامل للرخصة</string>
+    <string name="about_contributors">المساهمون</string>
+    <string name="about_contributors_desc">تم تطويره بواسطة جميع من ساهم في المشروع على GitHub.</string>
+    <string name="about_contributors_all">عرض جميع المساهمين</string>
+    <string name="about_contributors_all_desc">يفتح رسم المساهمين البياني على GitHub</string>
+    <string name="about_libraries">المكتبات مفتوحة المصدر</string>
+    <string name="about_libraries_count">تراخيص المكتبات الـ %1$d المستخدمة</string>
+    <string name="about_libraries_desc">تم بناء هذا التطبيق باستخدام المكتبات مفتوحة المصدر التالية.</string>
+    <string name="allow_notifications">السماح بالإشعارات</string>
+</resources>
