@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Ανακούφιση από τη Ναυτία</string>
+
+    <string name="motion_cues_channel_name">Επικάλυψη Ανακούφισης από τη Ναυτία</string>
+    <string name="motion_cues_notification_title">Ανακούφιση από τη Ναυτία ενεργή</string>
+    <string name="motion_cues_notification_text">Εμφάνιση κουκκίδων κίνησης πάνω από άλλες εφαρμογές</string>
+    <string name="motion_cues_notification_stop">Διακοπή</string>
+
+    <string name="main_title">Ανακούφιση από τη Ναυτία</string>
+    <string name="main_subtitle">Μειώνει τη ναυτία εμφανίζοντας κουκκίδες που μετακινούνται ανάλογα με την κίνηση του οχήματος.</string>
+    <string name="main_grant_overlay">Παραχώρηση αδείας εμφάνισης πάνω από άλλες εφαρμογές</string>
+    <string name="main_grant_accessibility_overlay">Παραχώρηση αδείας προσβασιμότητας (συνιστάται)</string>
+    <string name="main_start">Έναρξη κουκκίδων</string>
+    <string name="main_stop">Διακοπή κουκκίδων</string>
+    <string name="main_open_settings">Προσαρμογή</string>
+    <string name="main_open_about">Σχετικά</string>
+
+    <string name="settings_title">Προσαρμογή</string>
+    <string name="settings_back">Πίσω</string>
+
+    <string name="settings_mode_title">Τοποθέτηση κουκκίδων</string>
+    <string name="settings_mode_focus">Μόνο στις άκρες</string>
+    <string name="settings_mode_uniform">Πλήρης οθόνη</string>
+    <string name="settings_mode_columns">Στήλες</string>
+
+    <string name="settings_shape_title">Σχήμα</string>
+    <string name="settings_shape_circle">Κύκλος</string>
+    <string name="settings_shape_diamond">Ρόμβος</string>
+    <string name="settings_shape_meteoroid">Μετεωροειδές</string>
+
+    <string name="settings_color_title">Χρώμα</string>
+    <string name="settings_color_primary">Πρωτεύον</string>
+    <string name="settings_color_secondary">Δευτερεύον</string>
+    <string name="settings_color_tertiary">Τριτεύον</string>
+
+    <string name="settings_opacity_title">Αδιαφάνεια</string>
+
+    <string name="settings_dot_size_title">Μέγεθος κουκκίδων</string>
+
+    <string name="settings_density_title">Αριθμός κουκκίδων</string>
+    <string name="settings_density_sparse">Λιγότερες</string>
+    <string name="settings_density_normal">Κανονική</string>
+    <string name="settings_density_dense">Περισσότερες</string>
+
+    <string name="settings_intensity_title">Ένταση απόκρισης</string>
+    <string name="settings_intensity_subtitle">Πόσο έντονα αντιδρούν οι κουκκίδες στην κίνηση — χαμηλότερη τιμή για πιο διακριτική απόκριση, υψηλότερη για πιο έντονη</string>
+
+    <string name="settings_motion_feel_title">Αίσθηση κίνησης</string>
+    <string name="settings_motion_feel_world_relative">Σχετική με το περιβάλλον</string>
+    <string name="settings_motion_feel_raw">Ανεπεξέργαστη</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Οι κουκκίδες παρακολουθούν ένα σταθερό σημείο αναφοράς καθώς μετακινείτε και περιστρέφετε τη συσκευή</string>
+    <string name="settings_motion_feel_raw_subtitle">Οι κουκκίδες αντιδρούν μόνο στην επιτάχυνση της συσκευής, όχι στην κλίση ή την περιστροφή της</string>
+
+    <string name="settings_randomize_title">Τυχαία αλλαγή σχήματος και χρώματος</string>
+    <string name="settings_randomize_subtitle">Αλλάζει την εμφάνιση κάθε λίγα δευτερόλεπτα</string>
+
+    <string name="settings_autostart_title">Έναρξη σε κινούμενο όχημα</string>
+    <string name="settings_autostart_subtitle">Ανιχνεύει την κίνηση του οχήματος και ενεργοποιεί ή απενεργοποιεί αυτόματα τις κουκκίδες</string>
+    <string name="settings_autostart_grant_permission">Να επιτρέπεται η πρόσβαση στη φυσική δραστηριότητα</string>
+
+    <string name="settings_speed_scale_title">Προσαρμογή στροφών βάσει ταχύτητας οχήματος</string>
+    <string name="settings_speed_scale_subtitle">Χρησιμοποιεί την ταχύτητα GPS ώστε ο ίδιος ρυθμός στριψίματος να φαίνεται ως μεγαλύτερη στροφή στις υψηλές ταχύτητες και ως μικρότερη στη βραδυκίνητη κυκλοφορία. Απαιτεί πρόσβαση στην τοποθεσία· χρησιμοποιείται μόνο για αυτόν τον υπολογισμό.</string>
+
+    <string name="tile_label">Ανακούφιση από τη Ναυτία</string>
+    <string name="accessibility_overlay_description">Επιτρέπει στην εφαρμογή Ανακούφιση από τη Ναυτία να χρησιμοποιεί μια ειδική επικάλυψη προσβασιμότητας που δεν παρεμβάλλεται στα κουμπιά άλλων εφαρμογών.</string>
+
+    <!-- About -->
+    <string name="label_about">Σχετικά</string>
+    <string name="about_version">Έκδοση %1$s</string>
+    <string name="about_tagline">Εμφανίζει μια επικάλυψη από κουκκίδες που μετακινούνται ανάλογα με την κίνηση του οχήματός σας, για τη μείωση της ναυτίας.</string>
+    <string name="about_source">Πηγαίος κώδικας</string>
+    <string name="about_source_desc">Αυτή η εφαρμογή είναι λογισμικό ανοιχτού κώδικα. Διαβάστε τον κώδικα, αναφέρετε κάποιο πρόβλημα ή στείλτε ένα pull request.</string>
+    <string name="about_repository">Αποθετήριο</string>
+    <string name="about_license">Άδεια χρήσης</string>
+    <string name="about_license_name">Άδεια GPL-3.0</string>
+    <string name="about_license_body">Κυκλοφορεί υπό την άδεια GNU General Public License v3.0. Είστε ελεύθεροι να χρησιμοποιήσετε, να μελετήσετε, να τροποποιήσετε και να κοινοποιήσετε αυτήν την εφαρμογή, με την προϋπόθεση ότι τα παράγωγα έργα παραμένουν υπό την ίδια άδεια.</string>
+    <string name="about_license_read">Διαβάστε το πλήρες κείμενο της αδείας</string>
+    <string name="about_contributors">Συντελεστές</string>
+    <string name="about_contributors_desc">Δημιουργήθηκε από όλους όσοι έχουν συνεισφέρει στο έργο στο GitHub.</string>
+    <string name="about_contributors_all">Προβολή όλων των συντελεστών</string>
+    <string name="about_contributors_all_desc">Ανοίγει το γράφημα συντελεστών στο GitHub</string>
+    <string name="about_libraries">Βιβλιοθήκες ανοιχτού κώδικα</string>
+    <string name="about_libraries_count">Άδειες χρήσης για τις %1$d βιβλιοθήκες που χρησιμοποιούνται</string>
+    <string name="about_libraries_desc">Αυτή η εφαρμογή έχει δημιουργηθεί με τις ακόλουθες βιβλιοθήκες ανοιχτού κώδικα.</string>
+    <string name="allow_notifications">Να επιτρέπονται οι ειδοποιήσεις</string>
+</resources>
