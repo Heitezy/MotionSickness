@@ -84,4 +84,5 @@
     <string name="about_libraries">Бібліотеки з відкритим вихідним кодом</string>
     <string name="about_libraries_count">Ліцензії для %1$d використаних бібліотек</string>
     <string name="about_libraries_desc">Цей додаток побудовано на основі таких бібліотек з відкритим вихідним кодом.</string>
+    <string name="allow_notifications">Дозволити сповіщення</string>
 </resources>

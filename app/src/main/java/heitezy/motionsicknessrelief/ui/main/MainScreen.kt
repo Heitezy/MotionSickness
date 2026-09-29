@@ -107,7 +107,7 @@ fun MainScreen(
                 onClick = { notifLauncher.launch(Manifest.permission.POST_NOTIFICATIONS) },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.outlinedButtonColors(),
-            ) { Text("Allow notifications") }
+            ) { Text(stringResource(R.string.allow_notifications)) }
         }
 
         if (!accessibilityOverlayGranted) {

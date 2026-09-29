@@ -85,4 +85,5 @@
     <string name="about_libraries">Open-source libraries</string>
     <string name="about_libraries_count">Licenses for the %1$d libraries used</string>
     <string name="about_libraries_desc">This app is built on the following open-source libraries.</string>
+    <string name="allow_notifications">Allow notifications</string>
 </resources>
