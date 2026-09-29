@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">मोशन सिकनेस से राहत</string>
+
+    <string name="motion_cues_channel_name">मोशन सिकनेस से राहत ओवरले</string>
+    <string name="motion_cues_notification_title">मोशन सिकनेस से राहत सक्रिय है</string>
+    <string name="motion_cues_notification_text">अन्य ऐप्स के ऊपर मोशन डॉट्स दिखाए जा रहे हैं</string>
+    <string name="motion_cues_notification_stop">रोकें</string>
+
+    <string name="main_title">मोशन सिकनेस से राहत</string>
+    <string name="main_subtitle">वाहन की गति के साथ बहने वाले बिंदु दिखाकर मोशन सिकनेस को कम करता है।</string>
+    <string name="main_grant_overlay">अन्य ऐप्स के ऊपर दिखाने की अनुमति दें</string>
+    <string name="main_grant_accessibility_overlay">एक्सेसिबिलिटी अनुमति दें (अनुशंसित)</string>
+    <string name="main_start">संकेत शुरू करें</string>
+    <string name="main_stop">संकेत रोकें</string>
+    <string name="main_open_settings">कस्टमाइज़ करें</string>
+    <string name="main_open_about">के बारे में</string>
+
+    <string name="settings_title">कस्टमाइज़ करें</string>
+    <string name="settings_back">वापस</string>
+
+    <string name="settings_mode_title">बिंदुओं की स्थिति</string>
+    <string name="settings_mode_focus">केवल किनारों पर</string>
+    <string name="settings_mode_uniform">पूरी स्क्रीन</string>
+    <string name="settings_mode_columns">कॉलम</string>
+
+    <string name="settings_shape_title">आकार</string>
+    <string name="settings_shape_circle">वृत्त</string>
+    <string name="settings_shape_diamond">डायमंड</string>
+    <string name="settings_shape_meteoroid">उल्कापिंड</string>
+
+    <string name="settings_color_title">रंग</string>
+    <string name="settings_color_primary">प्राथमिक</string>
+    <string name="settings_color_secondary">द्वितीयक</string>
+    <string name="settings_color_tertiary">तृतीयक</string>
+
+    <string name="settings_opacity_title">अपारदर्शिता</string>
+
+    <string name="settings_dot_size_title">बिंदुओं का आकार</string>
+
+    <string name="settings_density_title">बिंदुओं की संख्या</string>
+    <string name="settings_density_sparse">कम</string>
+    <string name="settings_density_normal">सामान्य</string>
+    <string name="settings_density_dense">अधिक</string>
+
+    <string name="settings_intensity_title">संकेत की तीव्रता</string>
+    <string name="settings_intensity_subtitle">बिंदु गति पर कितनी तीव्रता से प्रतिक्रिया करते हैं — कम मान सूक्ष्म है, अधिक मान अधिक स्पष्ट है</string>
+
+    <string name="settings_motion_feel_title">गति का अनुभव</string>
+    <string name="settings_motion_feel_world_relative">परिवेश के सापेक्ष</string>
+    <string name="settings_motion_feel_raw">प्रत्यक्ष</string>
+    <string name="settings_motion_feel_world_relative_subtitle">जैसे ही आप फोन को घुमाते और हिलाते हैं, बिंदु एक स्थिर परिवेश को ट्रैक करते हैं</string>
+    <string name="settings_motion_feel_raw_subtitle">बिंदु केवल फोन के त्वरण (एक्सीलरेशन) पर प्रतिक्रिया करते हैं, झुकाने या घुमाने पर नहीं</string>
+
+    <string name="settings_randomize_title">आकार और रंग रैंडम करें</string>
+    <string name="settings_randomize_subtitle">हर कुछ सेकंड में रूप-रंग बदलता है</string>
+
+    <string name="settings_autostart_title">चलते वाहन में स्वचालित रूप से शुरू करें</string>
+    <string name="settings_autostart_subtitle">वाहन की गति का पता लगाता है और संकेतों को स्वचालित रूप से चालू और बंद करता है</string>
+    <string name="settings_autostart_grant_permission">शारीरिक गतिविधि एक्सेस की अनुमति दें</string>
+
+    <string name="settings_speed_scale_title">वाहन की गति के अनुसार मोड़ को स्केल करें</string>
+    <string name="settings_speed_scale_subtitle">GPS गति का उपयोग करता है ताकि हाईवे पर मोड़ बड़ा और धीमी ट्रैफ़िक में छोटा दिखे। इसके लिए लोकेशन एक्सेस की आवश्यकता है; केवल इसी गणना के लिए उपयोग किया जाता है।</string>
+
+    <string name="tile_label">मोशन सिकनेस से राहत</string>
+    <string name="accessibility_overlay_description">मोशन सिकनेस से राहत को एक विशेष एक्सेसिबिलिटी ओवरले का उपयोग करने की अनुमति देता है जो अन्य ऐप्स के बटन में बाधा नहीं डालता है।</string>
+
+    <!-- About -->
+    <string name="label_about">के बारे में</string>
+    <string name="about_version">संस्करण %1$s</string>
+    <string name="about_tagline">मोशन सिकनेस को कम करने में मदद के लिए आपके वाहन की गति के साथ बहने वाले बिंदुओं का ओवरले दिखाता है।</string>
+    <string name="about_source">सोर्स कोड</string>
+    <string name="about_source_desc">यह ऐप ओपन-सोर्स है। कोड पढ़ें, कोई समस्या रिपोर्ट करें, या पुल रिक्वेस्ट भेजें।</string>
+    <string name="about_repository">रिपॉजिटरी</string>
+    <string name="about_license">लाइसेंस</string>
+    <string name="about_license_name">GPL-3.0 लाइसेंस</string>
+    <string name="about_license_body">GNU जनरल पब्लिक लाइसेंस v3.0 के तहत जारी किया गया। आप इस ऐप का उपयोग करने, अध्ययन करने, संशोधित करने और साझा करने के लिए स्वतंत्र हैं, बशर्ते कि व्युत्पन्न कार्य उसी लाइसेंस के तहत रहें।</string>
+    <string name="about_license_read">पूरा लाइसेंस पाठ पढ़ें</string>
+    <string name="about_contributors">योगदानकर्ता</string>
+    <string name="about_contributors_desc">GitHub पर इस प्रोजेक्ट में योगदान देने वाले सभी लोगों द्वारा निर्मित।</string>
+    <string name="about_contributors_all">सभी योगदानकर्ताओं को देखें</string>
+    <string name="about_contributors_all_desc">GitHub पर योगदानकर्ता ग्राफ खोलता है</string>
+    <string name="about_libraries">ओपन-सोर्स लाइब्रेरीज़</string>
+    <string name="about_libraries_count">उपयोग की गई %1$d लाइब्रेरीज़ के लाइसेंस</string>
+    <string name="about_libraries_desc">यह ऐप निम्नलिखित ओपन-सोर्स लाइब्रेरीज़ पर बना है।</string>
+    <string name="allow_notifications">नोटिफिकेशन्स की अनुमति दें</string>
+</resources>
