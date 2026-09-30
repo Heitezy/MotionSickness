@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Ulga w chorobie lokomocyjnej</string>
+
+    <string name="motion_cues_channel_name">Nakładka ulgi w chorobie lokomocyjnej</string>
+    <string name="motion_cues_notification_title">Ulga w chorobie lokomocyjnej jest aktywna</string>
+    <string name="motion_cues_notification_text">Wyświetlanie ruchomych kropek nad innymi aplikacjami</string>
+    <string name="motion_cues_notification_stop">Zatrzymaj</string>
+
+    <string name="main_title">Ulga w chorobie lokomocyjnej</string>
+    <string name="main_subtitle">Łagodzi objawy choroby lokomocyjnej, wyświetlając kropki poruszające się wraz z ruchem pojazdu.</string>
+    <string name="main_grant_overlay">Przyznaj uprawnienie do wyświetlania nad innymi aplikacjami</string>
+    <string name="main_grant_accessibility_overlay">Przyznaj uprawnienia dostępności (zalecane)</string>
+    <string name="main_start">Włącz kropki</string>
+    <string name="main_stop">Wyłącz kropki</string>
+    <string name="main_open_settings">Dostosuj</string>
+    <string name="main_open_about">O aplikacji</string>
+
+    <string name="settings_title">Dostosuj</string>
+    <string name="settings_back">Wstecz</string>
+
+    <string name="settings_mode_title">Rozmieszczenie kropek</string>
+    <string name="settings_mode_focus">Tylko krawędzie</string>
+    <string name="settings_mode_uniform">Pełny ekran</string>
+    <string name="settings_mode_columns">Kolumny</string>
+
+    <string name="settings_shape_title">Kształt</string>
+    <string name="settings_shape_circle">Koło</string>
+    <string name="settings_shape_diamond">Romb</string>
+    <string name="settings_shape_meteoroid">Meteoroid</string>
+
+    <string name="settings_color_title">Kolor</string>
+    <string name="settings_color_primary">Główny</string>
+    <string name="settings_color_secondary">Dodatkowy</string>
+    <string name="settings_color_tertiary">Trzeciorzędny</string>
+
+    <string name="settings_opacity_title">Przezroczystość</string>
+
+    <string name="settings_dot_size_title">Rozmiar kropek</string>
+
+    <string name="settings_density_title">Liczba kropek</string>
+    <string name="settings_density_sparse">Mniej</string>
+    <string name="settings_density_normal">Normalna</string>
+    <string name="settings_density_dense">Więcej</string>
+
+    <string name="settings_intensity_title">Intensywność reakcji</string>
+    <string name="settings_intensity_subtitle">Jak silnie kropki reagują na ruch – niższa wartość daje subtelniejszy efekt, wyższa bardziej wyrazisty</string>
+
+    <string name="settings_motion_feel_title">Odczucie ruchu</string>
+    <string name="settings_motion_feel_world_relative">Względem otoczenia</string>
+    <string name="settings_motion_feel_raw">Bezpośrednie</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Kropki podążają za stałym otoczeniem podczas przemieszczania i obracania telefonu</string>
+    <string name="settings_motion_feel_raw_subtitle">Kropki reagują tylko na przyspieszenie telefonu, a nie na jego przechylanie lub obracanie</string>
+
+    <string name="settings_randomize_title">Losuj kształt i kolor</string>
+    <string name="settings_randomize_subtitle">Zmienia wygląd co kilka sekund</string>
+
+    <string name="settings_autostart_title">Uruchamiaj w jadącym pojeździe</string>
+    <string name="settings_autostart_subtitle">Wykrywa ruch pojazdu i automatycznie włącza oraz wyłącza kropki</string>
+    <string name="settings_autostart_grant_permission">Zezwól na dostęp do aktywności fizycznej</string>
+
+    <string name="settings_speed_scale_title">Dostosuj skręty do prędkości pojazdu</string>
+    <string name="settings_speed_scale_subtitle">Używa prędkości GPS, dzięki czemu stały skręt kierownicy wygląda jak większy skręt przy prędkości autostradowej i mniejszy w wolnym ruchu. Wymaga dostępu do lokalizacji; używane wyłącznie do tych obliczeń.</string>
+
+    <string name="tile_label">Ulga w chorobie lokomocyjnej</string>
+    <string name="accessibility_overlay_description">Pozwala aplikacji Ulga w chorobie lokomocyjnej używać specjalnej nakładki dostępności, która nie zakłóca działania przycisków innych aplikacji.</string>
+
+    <!-- About -->
+    <string name="label_about">O aplikacji</string>
+    <string name="about_version">Wersja %1$s</string>
+    <string name="about_tagline">Wyświetla nakładkę z kropkami poruszającymi się wraz z ruchem pojazdu, pomagając złagodzić chorobę lokomocyjną.</string>
+    <string name="about_source">Kod źródłowy</string>
+    <string name="about_source_desc">Ta aplikacja jest otwartym oprogramowaniem. Przeglądaj kod, zgłaszaj problemy lub wysyłaj zgłoszenia pull request.</string>
+    <string name="about_repository">Repozytorium</string>
+    <string name="about_license">Licencja</string>
+    <string name="about_license_name">Licencja GPL-3.0</string>
+    <string name="about_license_body">Wydano na licencji GNU General Public License v3.0. Możesz swobodnie używać, badać, modyfikować i udostępniać tę aplikację, pod warunkiem że prace pochodne pozostaną na tej samej licencji.</string>
+    <string name="about_license_read">Przeczytaj pełny tekst licencji</string>
+    <string name="about_contributors">Współtwórcy</string>
+    <string name="about_contributors_desc">Stworzona przez wszystkich, którzy przyczynili się do rozwoju projektu w serwisie GitHub.</string>
+    <string name="about_contributors_all">Zobacz wszystkich współtwórców</string>
+    <string name="about_contributors_all_desc">Otwiera wykres współtwórców w serwisie GitHub</string>
+    <string name="about_libraries">Biblioteki open source</string>
+    <string name="about_libraries_count">Licencje dla %1$d użytych bibliotek</string>
+    <string name="about_libraries_desc">Ta aplikacja została zbudowana w oparciu o następujące biblioteki open source.</string>
+    <string name="allow_notifications">Zezwól na powiadomienia</string>
+</resources>
