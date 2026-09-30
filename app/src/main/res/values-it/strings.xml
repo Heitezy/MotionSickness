@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Sollievo dal mal di movimento</string>
+
+    <string name="motion_cues_channel_name">Overlay Sollievo dal mal di movimento</string>
+    <string name="motion_cues_notification_title">Sollievo dal mal di movimento attivo</string>
+    <string name="motion_cues_notification_text">Visualizzazione dei punti di movimento sopra le altre app</string>
+    <string name="motion_cues_notification_stop">Interrompi</string>
+
+    <string name="main_title">Sollievo dal mal di movimento</string>
+    <string name="main_subtitle">Riduce il mal di movimento mostrando punti che fluttuano seguendo il movimento del veicolo.</string>
+    <string name="main_grant_overlay">Concedi autorizzazione per la sovrapposizione su altre app</string>
+    <string name="main_grant_accessibility_overlay">Concedi autorizzazione di accessibilità (consigliato)</string>
+    <string name="main_start">Avvia punti</string>
+    <string name="main_stop">Interrompi punti</string>
+    <string name="main_open_settings">Personalizza</string>
+    <string name="main_open_about">Informazioni</string>
+
+    <string name="settings_title">Personalizza</string>
+    <string name="settings_back">Indietro</string>
+
+    <string name="settings_mode_title">Posizionamento dei punti</string>
+    <string name="settings_mode_focus">Solo bordi</string>
+    <string name="settings_mode_uniform">Schermo intero</string>
+    <string name="settings_mode_columns">Colonne</string>
+
+    <string name="settings_shape_title">Forma</string>
+    <string name="settings_shape_circle">Cerchio</string>
+    <string name="settings_shape_diamond">Rombo</string>
+    <string name="settings_shape_meteoroid">Meteora</string>
+
+    <string name="settings_color_title">Colore</string>
+    <string name="settings_color_primary">Primario</string>
+    <string name="settings_color_secondary">Secondario</string>
+    <string name="settings_color_tertiary">Terziario</string>
+
+    <string name="settings_opacity_title">Opacità</string>
+
+    <string name="settings_dot_size_title">Dimensione punti</string>
+
+    <string name="settings_density_title">Numero di punti</string>
+    <string name="settings_density_sparse">Meno</string>
+    <string name="settings_density_normal">Normale</string>
+    <string name="settings_density_dense">Più</string>
+
+    <string name="settings_intensity_title">Intensità movimento</string>
+    <string name="settings_intensity_subtitle">Quanto fortemente i punti reagiscono al movimento — un valore più basso è più discreto, uno più alto è più marcato</string>
+
+    <string name="settings_motion_feel_title">Sensazione di movimento</string>
+    <string name="settings_motion_feel_world_relative">Relativo al mondo</string>
+    <string name="settings_motion_feel_raw">Grezzo</string>
+    <string name="settings_motion_feel_world_relative_subtitle">I punti seguono un mondo fisso mentre muovi e ruoti lo smartphone</string>
+    <string name="settings_motion_feel_raw_subtitle">I punti reagiscono solo all\'accelerazione dello smartphone, non all\'inclinazione o alla rotazione</string>
+
+    <string name="settings_randomize_title">Casuale per forma e colore</string>
+    <string name="settings_randomize_subtitle">Alterna l\'aspetto ogni pochi secondi</string>
+
+    <string name="settings_autostart_title">Avvia in un veicolo in movimento</string>
+    <string name="settings_autostart_subtitle">Rileva il movimento del veicolo e attiva o disattiva i punti automaticamente</string>
+    <string name="settings_autostart_grant_permission">Consenti accesso all\'attività fisica</string>
+
+    <string name="settings_speed_scale_title">Adatta le curve alla velocità del veicolo</string>
+    <string name="settings_speed_scale_subtitle">Utilizza la velocità GPS affinché una sterzata apparirà come una curva più ampia a velocità autostradali e più ridotta nel traffico lento. Richiede l\'accesso alla posizione; utilizzato solo per questo calcolo.</string>
+
+    <string name="tile_label">Sollievo dal mal di movimento</string>
+    <string name="accessibility_overlay_description">Consente a Sollievo dal mal di movimento di utilizzare una sovrapposizione di accessibilità specializzata che non interferisce con i pulsanti delle altre app.</string>
+
+    <!-- About -->
+    <string name="label_about">Informazioni</string>
+    <string name="about_version">Versione %1$s</string>
+    <string name="about_tagline">Mostra una sovrapposizione di punti che seguono il movimento del veicolo per aiutare a ridurre il mal di movimento.</string>
+    <string name="about_source">Codice sorgente</string>
+    <string name="about_source_desc">Questa app è open source. Leggi il codice, segnala un problema o invia una pull request.</string>
+    <string name="about_repository">Repository</string>
+    <string name="about_license">Licenza</string>
+    <string name="about_license_name">Licenza GPL-3.0</string>
+    <string name="about_license_body">Rilasciato sotto la GNU General Public License v3.0. Sei libero di usare, studiare, modificare e condividere questa app, a condizione che le opere derivate mantengano la stessa licenza.</string>
+    <string name="about_license_read">Leggi il testo completo della licenza</string>
+    <string name="about_contributors">Contributori</string>
+    <string name="about_contributors_desc">Sviluppato da tutti coloro che hanno contribuito al progetto su GitHub.</string>
+    <string name="about_contributors_all">Vedi tutti i contributori</string>
+    <string name="about_contributors_all_desc">Apre il grafico dei contributori su GitHub</string>
+    <string name="about_libraries">Librerie open source</string>
+    <string name="about_libraries_count">Licenze per le %1$d librerie utilizzate</string>
+    <string name="about_libraries_desc">Questa app è basata sulle seguenti librerie open source.</string>
+    <string name="allow_notifications">Consenti notifiche</string>
+</resources>
