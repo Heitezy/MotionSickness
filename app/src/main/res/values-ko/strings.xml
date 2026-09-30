@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">멀미 완화</string>
+
+    <string name="motion_cues_channel_name">멀미 완화 오버레이</string>
+    <string name="motion_cues_notification_title">멀미 완화 활성화됨</string>
+    <string name="motion_cues_notification_text">다른 앱 위에 모션 점 표시 중</string>
+    <string name="motion_cues_notification_stop">중지</string>
+
+    <string name="main_title">멀미 완화</string>
+    <string name="main_subtitle">차량의 움직임에 따라 흘러가는 점을 표시하여 멀미를 줄여줍니다.</string>
+    <string name="main_grant_overlay">다른 앱 위에 그리기 권한 허용</string>
+    <string name="main_grant_accessibility_overlay">접근성 권한 허용(권장)</string>
+    <string name="main_start">점 표시 시작</string>
+    <string name="main_stop">점 표시 중지</string>
+    <string name="main_open_settings">사용자 지정</string>
+    <string name="main_open_about">앱 정보</string>
+
+    <string name="settings_title">사용자 지정</string>
+    <string name="settings_back">뒤로</string>
+
+    <string name="settings_mode_title">점 배치</string>
+    <string name="settings_mode_focus">가장자리만</string>
+    <string name="settings_mode_uniform">전체 화면</string>
+    <string name="settings_mode_columns">열 형태</string>
+
+    <string name="settings_shape_title">모양</string>
+    <string name="settings_shape_circle">원형</string>
+    <string name="settings_shape_diamond">다이아몬드</string>
+    <string name="settings_shape_meteoroid">유성체</string>
+
+    <string name="settings_color_title">색상</string>
+    <string name="settings_color_primary">기본</string>
+    <string name="settings_color_secondary">보조</string>
+    <string name="settings_color_tertiary">3차</string>
+
+    <string name="settings_opacity_title">투명도</string>
+
+    <string name="settings_dot_size_title">점 크기</string>
+
+    <string name="settings_density_title">점 개수</string>
+    <string name="settings_density_sparse">적게</string>
+    <string name="settings_density_normal">보통</string>
+    <string name="settings_density_dense">많게</string>
+
+    <string name="settings_intensity_title">움직임 강도</string>
+    <string name="settings_intensity_subtitle">점이 움직임에 반응하는 정도 — 낮을수록 미세하고 높을수록 뚜렷합니다</string>
+
+    <string name="settings_motion_feel_title">움직임 감각</string>
+    <string name="settings_motion_feel_world_relative">공간 기준(월드 상대)</string>
+    <string name="settings_motion_feel_raw">직접 반응(원시 데이터)</string>
+    <string name="settings_motion_feel_world_relative_subtitle">휴대폰을 이동하거나 회전할 때 고정된 공간을 기준으로 점이 움직입니다</string>
+    <string name="settings_motion_feel_raw_subtitle">휴대폰의 기울기나 회전에는 반응하지 않고 가속도에만 반응하여 점이 움직입니다</string>
+
+    <string name="settings_randomize_title">모양 및 색상 무작위 변경</string>
+    <string name="settings_randomize_subtitle">몇 초마다 모양과 색상을 자동으로 순환합니다</string>
+
+    <string name="settings_autostart_title">차량 이동 시 자동 시작</string>
+    <string name="settings_autostart_subtitle">차량의 움직임을 감지하여 점 표시를 자동으로 켜고 끕니다</string>
+    <string name="settings_autostart_grant_permission">신체 활동 데이터 접근 허용</string>
+
+    <string name="settings_speed_scale_title">차량 속도에 따른 회전 비례 조절</string>
+    <string name="settings_speed_scale_subtitle">GPS 속도를 사용하여 같은 핸들 조작이라도 고속에서는 회전이 크게, 저속에서는 작게 나타나도록 조절합니다. 위치 접근 권한이 필요하며 이 계산에만 사용됩니다.</string>
+
+    <string name="tile_label">멀미 완화</string>
+    <string name="accessibility_overlay_description">멀미 완화 앱이 다른 앱의 버튼 조작을 방해하지 않는 전용 접근성 오버레이를 사용할 수 있도록 허용합니다.</string>
+
+    <!-- About -->
+    <string name="label_about">앱 정보</string>
+    <string name="about_version">버전 %1$s</string>
+    <string name="about_tagline">차량의 움직임에 따라 흘러가는 점을 위에 표시하여 멀미를 줄일 수 있도록 도와줍니다.</string>
+    <string name="about_source">소스 코드</string>
+    <string name="about_source_desc">이 앱은 오픈 소스입니다. 코드를 확인하고, 이슈를 등록하거나, 풀 리퀘스트를 보낼 수 있습니다.</string>
+    <string name="about_repository">저장소</string>
+    <string name="about_license">라이선스</string>
+    <string name="about_license_name">GPL-3.0 라이선스</string>
+    <string name="about_license_body">GNU General Public License v3.0에 따라 배포됩니다. 파생 작품이 동일한 라이선스를 유지하는 한 자유롭게 앱을 사용, 연구, 수정 및 공유할 수 있습니다.</string>
+    <string name="about_license_read">라이선스 전문 읽기</string>
+    <string name="about_contributors">기여자</string>
+    <string name="about_contributors_desc">GitHub에서 프로젝트에 기여해 주신 모든 분들이 함께 만들었습니다.</string>
+    <string name="about_contributors_all">모든 기여자 보기</string>
+    <string name="about_contributors_all_desc">GitHub 기여자 그래프를 엽니다</string>
+    <string name="about_libraries">오픈 소스 라이브러리</string>
+    <string name="about_libraries_count">사용된 %1$d개 라이브러리의 라이선스</string>
+    <string name="about_libraries_desc">이 앱은 다음 오픈 소스 라이브러리를 바탕으로 제작되었습니다.</string>
+    <string name="allow_notifications">알림 허용</string>
+</resources>
