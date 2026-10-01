@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Atenuare rău de mișcare</string>
+
+    <string name="motion_cues_channel_name">Superpunere Atenuare rău de mișcare</string>
+    <string name="motion_cues_notification_title">Atenuare rău de mișcare activă</string>
+    <string name="motion_cues_notification_text">Afișează puncte de mișcare peste alte aplicații</string>
+    <string name="motion_cues_notification_stop">Oprește</string>
+
+    <string name="main_title">Atenuare rău de mișcare</string>
+    <string name="main_subtitle">Reduce răul de mișcare afișând puncte ce se deplasează odată cu mișcarea vehiculului.</string>
+    <string name="main_grant_overlay">Acordă permisiunea de afișare peste alte aplicații</string>
+    <string name="main_grant_accessibility_overlay">Acordă permisiunea de accesibilitate (recomandat)</string>
+    <string name="main_start">Pornește punctele</string>
+    <string name="main_stop">Oprește punctele</string>
+    <string name="main_open_settings">Personalizează</string>
+    <string name="main_open_about">Despre</string>
+
+    <string name="settings_title">Personalizare</string>
+    <string name="settings_back">Înapoi</string>
+
+    <string name="settings_mode_title">Plasare puncte</string>
+    <string name="settings_mode_focus">Doar pe margini</string>
+    <string name="settings_mode_uniform">Ecran complet</string>
+    <string name="settings_mode_columns">Coloane</string>
+
+    <string name="settings_shape_title">Formă</string>
+    <string name="settings_shape_circle">Cerc</string>
+    <string name="settings_shape_diamond">Romb</string>
+    <string name="settings_shape_meteoroid">Meteorit</string>
+
+    <string name="settings_color_title">Culoare</string>
+    <string name="settings_color_primary">Primară</string>
+    <string name="settings_color_secondary">Secundară</string>
+    <string name="settings_color_tertiary">Terțiară</string>
+
+    <string name="settings_opacity_title">Opacitate</string>
+
+    <string name="settings_dot_size_title">Dimensiune puncte</string>
+
+    <string name="settings_density_title">Număr de puncte</string>
+    <string name="settings_density_sparse">Mai puține</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Mai multe</string>
+
+    <string name="settings_intensity_title">Intensitate mișcare</string>
+    <string name="settings_intensity_subtitle">Cât de puternic reacționează punctele la mișcare — o valoare mai mică este mai subtilă, iar una mai mare mai pronunțată</string>
+
+    <string name="settings_motion_feel_title">Senzație de mișcare</string>
+    <string name="settings_motion_feel_world_relative">Relativă la mediu</string>
+    <string name="settings_motion_feel_raw">Brută</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Punctele urmăresc un punct de reper fix în timp ce miști și rotești telefonul</string>
+    <string name="settings_motion_feel_raw_subtitle">Punctele reacționează doar la accelerarea telefonului, nu și la înclinarea sau rotirea acestuia</string>
+
+    <string name="settings_randomize_title">Formă și culoare aleatorii</string>
+    <string name="settings_randomize_subtitle">Schimbă aspectul la fiecare câteva secunde</string>
+
+    <string name="settings_autostart_title">Pornire automată în vehicul</string>
+    <string name="settings_autostart_subtitle">Detectează mișcarea vehiculului și pornește sau oprește punctele automat</string>
+    <string name="settings_autostart_grant_permission">Permite accesul la activitatea fizică</string>
+
+    <string name="settings_speed_scale_title">Ajustează virajele în funcție de viteză</string>
+    <string name="settings_speed_scale_subtitle">Utilizează viteza GPS astfel încât un viraj constant să apară mai amplu la viteză mare și mai redus în trafic lent. Necesită acces la locație; utilizat exclusiv pentru acest calcul.</string>
+
+    <string name="tile_label">Atenuare rău de mișcare</string>
+    <string name="accessibility_overlay_description">Permite aplicației Atenuare rău de mișcare să utilizeze o afișare specializată de accesibilitate care nu intervine asupra butoanelor altor aplicații.</string>
+
+    <!-- About -->
+    <string name="label_about">Despre</string>
+    <string name="about_version">Versiunea %1$s</string>
+    <string name="about_tagline">Afișează o suprapunere de puncte care se deplasează odată cu mișcarea vehiculului, pentru a ajuta la reducerea răului de mișcare.</string>
+    <string name="about_source">Cod sursă</string>
+    <string name="about_source_desc">Această aplicație este open source. Citește codul, raportează o problemă sau trimite un pull request.</string>
+    <string name="about_repository">Repozitoriu</string>
+    <string name="about_license">Licență</string>
+    <string name="about_license_name">Licența GPL-3.0</string>
+    <string name="about_license_body">Lansat sub Licența Publică Generală GNU v3.0. Ești liber să folosești, să studiezi, să modifici și să distribui această aplicație, cu condiția ca lucrările derivate să rămână sub aceeași licență.</string>
+    <string name="about_license_read">Citește textul complet al licenței</string>
+    <string name="about_contributors">Contribuitori</string>
+    <string name="about_contributors_desc">Dezvoltat de toți cei care au contribuit la proiect pe GitHub.</string>
+    <string name="about_contributors_all">Vezi toți contribuitorii</string>
+    <string name="about_contributors_all_desc">Deschide graficul contribuitorilor pe GitHub</string>
+    <string name="about_libraries">Biblioteci open-source</string>
+    <string name="about_libraries_count">Licențe pentru cele %1$d biblioteci utilizate</string>
+    <string name="about_libraries_desc">Această aplicație este construită folosind următoarele biblioteci open-source.</string>
+    <string name="allow_notifications">Permite notificări</string>
+</resources>
