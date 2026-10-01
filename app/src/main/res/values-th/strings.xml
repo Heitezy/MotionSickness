@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">บรรเทาอาการเมารถ</string>
+
+    <string name="motion_cues_channel_name">เลเยอร์บรรเทาอาการเมารถ</string>
+    <string name="motion_cues_notification_title">บรรเทาอาการเมารถกำลังทำงาน</string>
+    <string name="motion_cues_notification_text">กำลังแสดงจุดการเคลื่อนไหวทับแอปอื่น</string>
+    <string name="motion_cues_notification_stop">หยุด</string>
+
+    <string name="main_title">บรรเทาอาการเมารถ</string>
+    <string name="main_subtitle">ช่วยลดอาการเมารถโดยการแสดงจุดที่เคลื่อนที่ไปตามการเคลื่อนไหวของรถ</string>
+    <string name="main_grant_overlay">อนุญาตสิทธิ์การแสดงทับแอปอื่น</string>
+    <string name="main_grant_accessibility_overlay">อนุญาตสิทธิ์การเข้าถึง (แนะนำ)</string>
+    <string name="main_start">เริ่มแสดงจุด</string>
+    <string name="main_stop">หยุดแสดงจุด</string>
+    <string name="main_open_settings">ปรับแต่ง</string>
+    <string name="main_open_about">เกี่ยวกับ</string>
+
+    <string name="settings_title">ปรับแต่ง</string>
+    <string name="settings_back">ย้อนกลับ</string>
+
+    <string name="settings_mode_title">การจัดวางจุด</string>
+    <string name="settings_mode_focus">เฉพาะขอบหน้าจอ</string>
+    <string name="settings_mode_uniform">เต็มหน้าจอ</string>
+    <string name="settings_mode_columns">แนวคอลัมน์</string>
+
+    <string name="settings_shape_title">รูปร่าง</string>
+    <string name="settings_shape_circle">วงกลม</string>
+    <string name="settings_shape_diamond">สี่เหลี่ยมข้าวหลามตัด</string>
+    <string name="settings_shape_meteoroid">อุกกาบาต</string>
+
+    <string name="settings_color_title">สี</string>
+    <string name="settings_color_primary">ปฐมภูมิ</string>
+    <string name="settings_color_secondary">ทุติยภูมิ</string>
+    <string name="settings_color_tertiary">ตติยภูมิ</string>
+
+    <string name="settings_opacity_title">ความโปร่งแสง</string>
+
+    <string name="settings_dot_size_title">ขนาดจุด</string>
+
+    <string name="settings_density_title">จำนวนจุด</string>
+    <string name="settings_density_sparse">น้อย</string>
+    <string name="settings_density_normal">ปกติ</string>
+    <string name="settings_density_dense">มาก</string>
+
+    <string name="settings_intensity_title">ความแรงของจุดการเคลื่อนไหว</string>
+    <string name="settings_intensity_subtitle">ระดับการตอบสนองของจุดต่อการเคลื่อนไหว — ค่าน้อยลงจะนุ่มนวลขึ้น ค่ามากขึ้นจะเห็นชัดเจนขึ้น</string>
+
+    <string name="settings_motion_feel_title">รูปแบบการเคลื่อนไหว</string>
+    <string name="settings_motion_feel_world_relative">อ้างอิงโลกภายนอก</string>
+    <string name="settings_motion_feel_raw">อ้างอิงความเร่ง</string>
+    <string name="settings_motion_feel_world_relative_subtitle">จุดจะตรึงอยู่กับพื้นที่ภายนอกเมื่อคุณเคลื่อนที่หรือหมุนโทรศัพท์</string>
+    <string name="settings_motion_feel_raw_subtitle">จุดจะตอบสนองเฉพาะแรงเร่งของโทรศัพท์เท่านั้น โดยไม่ขึ้นกับการเอียงหรือหมุนโทรศัพท์</string>
+
+    <string name="settings_randomize_title">สุ่มรูปร่างและสี</string>
+    <string name="settings_randomize_subtitle">เปลี่ยนรูปลักษณ์ใหม่ทุกๆ ไม่กี่วินาที</string>
+
+    <string name="settings_autostart_title">เริ่มทำงานอัตโนมัติเมื่ออยู่ในยานพาหนะ</string>
+    <string name="settings_autostart_subtitle">ตรวจจับการเคลื่อนที่ของยานพาหนะ และเปิด/ปิดการทำงานโดยอัตโนมัติ</string>
+    <string name="settings_autostart_grant_permission">อนุญาตสิทธิ์การเข้าถึงกิจกรรมทางกาย</string>
+
+    <string name="settings_speed_scale_title">ปรับขนาดการเลี้ยวตามความเร็วของยานพาหนะ</string>
+    <string name="settings_speed_scale_subtitle">ใช้ความเร็วจาก GPS เพื่อปรับให้การเลี้ยวด้วยอัตราคงที่ดูเป็นการเลี้ยวที่กว้างขึ้นเมื่ออยู่บนทางหลวง และเลี้ยวแคบลงเมื่ออยู่ในจราจรที่ติดขัด จำเป็นต้องเข้าถึงตำแหน่งและใช้สำหรับคำนวณนี้เท่านั้น</string>
+
+    <string name="tile_label">บรรเทาอาการเมารถ</string>
+    <string name="accessibility_overlay_description">อนุญาตให้แอปบรรเทาอาการเมารถใช้เลเยอร์การเข้าถึงพิเศษ ซึ่งจะไม่รบกวนปุ่มของแอปอื่น</string>
+
+    <!-- About -->
+    <string name="label_about">เกี่ยวกับ</string>
+    <string name="about_version">เวอร์ชัน %1$s</string>
+    <string name="about_tagline">แสดงเลเยอร์จุดที่ลอยล่องไปตามการเคลื่อนที่ของยานพาหนะ เพื่อช่วยลดอาการเมารถ</string>
+    <string name="about_source">ซอร์สโค้ด</string>
+    <string name="about_source_desc">แอปนี้เป็นโอเพนซอร์ส คุณสามารถอ่านโค้ด แจ้งปัญหา หรือส่ง pull request ได้</string>
+    <string name="about_repository">คลังโค้ด</string>
+    <string name="about_license">สัญญาอนุญาต</string>
+    <string name="about_license_name">สัญญาอนุญาต GPL-3.0</string>
+    <string name="about_license_body">เผยแพร่ภายใต้สัญญาอนุญาต GNU General Public License v3.0 คุณมีอิสระในการใช้งาน ศึกษา แก้ไข และแบ่งปันแอปนี้ ตราบใดที่ผลงานดัดแปลงยังคงใช้สัญญาอนุญาตเดียวกัน</string>
+    <string name="about_license_read">อ่านข้อความสัญญาอนุญาตฉบับเต็ม</string>
+    <string name="about_contributors">ผู้ร่วมพัฒนา</string>
+    <string name="about_contributors_desc">สร้างขึ้นโดยทุกคนที่มีส่วนร่วมในโปรเจกต์บน GitHub</string>
+    <string name="about_contributors_all">ดูผู้ร่วมพัฒนาทั้งหมด</string>
+    <string name="about_contributors_all_desc">เปิดกราฟผู้ร่วมพัฒนาบน GitHub</string>
+    <string name="about_libraries">ไลบรารีโอเพนซอร์ส</string>
+    <string name="about_libraries_count">สัญญาอนุญาตสำหรับ %1$d ไลบรารีที่ใช้</string>
+    <string name="about_libraries_desc">แอปนี้สร้างขึ้นโดยใช้ไลบรารีโอเพนซอร์สดังต่อไปนี้</string>
+    <string name="allow_notifications">อนุญาตการแจ้งเตือน</string>
+</resources>
