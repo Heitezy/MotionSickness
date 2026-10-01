@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Taşıt Tutmasını Hafifletme</string>
+
+    <string name="motion_cues_channel_name">Taşıt Tutmasını Hafifletme katmanı</string>
+    <string name="motion_cues_notification_title">Taşıt Tutmasını Hafifletme aktif</string>
+    <string name="motion_cues_notification_text">Diğer uygulamaların üzerinde hareket noktaları gösteriliyor</string>
+    <string name="motion_cues_notification_stop">Durdur</string>
+
+    <string name="main_title">Taşıt Tutmasını Hafifletme</string>
+    <string name="main_subtitle">Aracın hareketine göre kayan noktalar göstererek taşıt tutmasını azaltır.</string>
+    <string name="main_grant_overlay">Diğer uygulamaların üzerinde görüntüleme izni ver</string>
+    <string name="main_grant_accessibility_overlay">Erişilebilirlik izni ver (önerilir)</string>
+    <string name="main_start">Noktaları başlat</string>
+    <string name="main_stop">Noktaları durdur</string>
+    <string name="main_open_settings">Özelleştir</string>
+    <string name="main_open_about">Hakkında</string>
+
+    <string name="settings_title">Özelleştir</string>
+    <string name="settings_back">Geri</string>
+
+    <string name="settings_mode_title">Nokta yerleşimi</string>
+    <string name="settings_mode_focus">Yalnızca kenarlar</string>
+    <string name="settings_mode_uniform">Tam ekran</string>
+    <string name="settings_mode_columns">Sütunlar</string>
+
+    <string name="settings_shape_title">Şekil</string>
+    <string name="settings_shape_circle">Daire</string>
+    <string name="settings_shape_diamond">Elmas</string>
+    <string name="settings_shape_meteoroid">Meteoroid</string>
+
+    <string name="settings_color_title">Renk</string>
+    <string name="settings_color_primary">Birincil</string>
+    <string name="settings_color_secondary">İkincil</string>
+    <string name="settings_color_tertiary">Üçüncül</string>
+
+    <string name="settings_opacity_title">Opaklık</string>
+
+    <string name="settings_dot_size_title">Nokta boyutu</string>
+
+    <string name="settings_density_title">Nokta sayısı</string>
+    <string name="settings_density_sparse">Daha az</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Daha çok</string>
+
+    <string name="settings_intensity_title">Tepki yoğunluğu</string>
+    <string name="settings_intensity_subtitle">Noktaların harekete ne kadar güçlü tepki vereceği — düşük değer daha ince, yüksek değer daha belirgindir</string>
+
+    <string name="settings_motion_feel_title">Hareket hissi</string>
+    <string name="settings_motion_feel_world_relative">Dünyaya göre</string>
+    <string name="settings_motion_feel_raw">Ham</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Siz telefonu hareket ettirip çevirdikçe noktalar sabit bir dünyayı takip eder</string>
+    <string name="settings_motion_feel_raw_subtitle">Noktalar telefonun eğilmesine veya döndürülmesine değil, yalnızca ivmelenmesine tepki verir</string>
+
+    <string name="settings_randomize_title">Şekil ve rengi rastgele değiştir</string>
+    <string name="settings_randomize_subtitle">Görünümü birkaç saniyede bir değiştirir</string>
+
+    <string name="settings_autostart_title">Hareket eden bir araçta başlat</string>
+    <string name="settings_autostart_subtitle">Araç hareketini algılar ve noktaları otomatik olarak açıp kapatır</string>
+    <string name="settings_autostart_grant_permission">Fiziksel aktivite erişimine izin ver</string>
+
+    <string name="settings_speed_scale_title">Dönüşleri araç hızına göre ölçekle</string>
+    <string name="settings_speed_scale_subtitle">GPS hızını kullanır; böylece sabit bir direksiyon dönüşü otoyol hızında daha büyük, yavaş trafikte ise daha küçük görünür. Konum erişimi gerektirir; yalnızca bu hesaplama için kullanılır.</string>
+
+    <string name="tile_label">Taşıt Tutmasını Hafifletme</string>
+    <string name="accessibility_overlay_description">Taşıt Tutmasını Hafifletme uygulamasının diğer uygulamaların düğmelerini engellemeyen özel bir erişilebilirlik katmanı kullanmasını sağlar.</string>
+
+    <!-- About -->
+    <string name="label_about">Hakkında</string>
+    <string name="about_version">Sürüm %1$s</string>
+    <string name="about_tagline">Taşıt tutmasını azaltmaya yardımcı olmak için aracınızın hareketiyle kayan noktalardan oluşan bir katman çizer.</string>
+    <string name="about_source">Kaynak kodu</string>
+    <string name="about_source_desc">Bu uygulama açık kaynaklıdır. Kodları inceleyin, sorun bildirin veya bir çekme isteği gönderin.</string>
+    <string name="about_repository">Depo</string>
+    <string name="about_license">Lisans</string>
+    <string name="about_license_name">GPL-3.0 Lisansı</string>
+    <string name="about_license_body">GNU Genel Kamu Lisansı v3.0 kapsamında yayınlanmıştır. Türetilmiş çalışmalar aynı lisans altında kaldığı sürece bu uygulamayı özgürce kullanabilir, inceleyebilir, değiştirebilir ve paylaşabilirsiniz.</string>
+    <string name="about_license_read">Tam lisans metnini oku</string>
+    <string name="about_contributors">Katkıda Bulunanlar</string>
+    <string name="about_contributors_desc">GitHub\'da projeye katkıda bulunan herkes tarafından geliştirilmiştir.</string>
+    <string name="about_contributors_all">Tüm katkıda bulunanları görüntüle</string>
+    <string name="about_contributors_all_desc">GitHub\'daki katkıda bulunanlar grafiğini açar</string>
+    <string name="about_libraries">Açık kaynaklı kütüphaneler</string>
+    <string name="about_libraries_count">Kullanılan %1$d kütüphane için lisanslar</string>
+    <string name="about_libraries_desc">Bu uygulama aşağıdaki açık kaynaklı kütüphaneler kullanılarak geliştirilmiştir.</string>
+    <string name="allow_notifications">Bildirimlere izin ver</string>
+</resources>
