@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">晕车缓解</string>
+
+    <string name="motion_cues_channel_name">晕车缓解悬浮窗</string>
+    <string name="motion_cues_notification_title">晕车缓解已启用</string>
+    <string name="motion_cues_notification_text">正在其他应用上显示运动点</string>
+    <string name="motion_cues_notification_stop">停止</string>
+
+    <string name="main_title">晕车缓解</string>
+    <string name="main_subtitle">通过显示随车辆运动漂移的圆点，帮助缓解晕车。</string>
+    <string name="main_grant_overlay">授予在其他应用上层绘制权限</string>
+    <string name="main_grant_accessibility_overlay">授予无障碍权限（推荐）</string>
+    <string name="main_start">启动提示</string>
+    <string name="main_stop">停止提示</string>
+    <string name="main_open_settings">自定义</string>
+    <string name="main_open_about">关于</string>
+
+    <string name="settings_title">自定义</string>
+    <string name="settings_back">返回</string>
+
+    <string name="settings_mode_title">圆点位置</string>
+    <string name="settings_mode_focus">仅边缘</string>
+    <string name="settings_mode_uniform">全屏</string>
+    <string name="settings_mode_columns">分列</string>
+
+    <string name="settings_shape_title">形状</string>
+    <string name="settings_shape_circle">圆形</string>
+    <string name="settings_shape_diamond">菱形</string>
+    <string name="settings_shape_meteoroid">流星</string>
+
+    <string name="settings_color_title">颜色</string>
+    <string name="settings_color_primary">主色</string>
+    <string name="settings_color_secondary">辅助色</string>
+    <string name="settings_color_tertiary">第三色</string>
+
+    <string name="settings_opacity_title">不透明度</string>
+
+    <string name="settings_dot_size_title">圆点大小</string>
+
+    <string name="settings_density_title">圆点数量</string>
+    <string name="settings_density_sparse">较少</string>
+    <string name="settings_density_normal">正常</string>
+    <string name="settings_density_dense">较多</string>
+
+    <string name="settings_intensity_title">提示强度</string>
+    <string name="settings_intensity_subtitle">圆点对运动的反应强度——较低更微弱，较高更明显</string>
+
+    <string name="settings_motion_feel_title">运动感</string>
+    <string name="settings_motion_feel_world_relative">相对世界</string>
+    <string name="settings_motion_feel_raw">原生加速度</string>
+    <string name="settings_motion_feel_world_relative_subtitle">移动或旋转手机时，圆点会追踪固定的空间参照</string>
+    <string name="settings_motion_feel_raw_subtitle">圆点仅对手机加速度做出反应，不对倾斜或旋转做出反应</string>
+
+    <string name="settings_randomize_title">随机切换形状和颜色</string>
+    <string name="settings_randomize_subtitle">每隔几秒自动切换外观</string>
+
+    <string name="settings_autostart_title">在移动的车辆中自动启动</string>
+    <string name="settings_autostart_subtitle">自动检测车辆运动并开启或关闭提示</string>
+    <string name="settings_autostart_grant_permission">允许访问身体活动数据</string>
+
+    <string name="settings_speed_scale_title">根据车速缩放转向幅度</string>
+    <string name="settings_speed_scale_subtitle">使用 GPS 速度，使相同的转向角速度在高速行驶时呈现更大的转向幅度，在低速交通中呈现较小的幅度。需要位置权限，仅用于此计算。</string>
+
+    <string name="tile_label">晕车缓解</string>
+    <string name="accessibility_overlay_description">允许“晕车缓解”使用专用的无障碍悬浮窗，不会干扰其他应用按钮的操作。</string>
+
+    <!-- About -->
+    <string name="label_about">关于</string>
+    <string name="about_version">版本 %1$s</string>
+    <string name="about_tagline">显示随车辆运动漂移的圆点悬浮窗，帮助缓解晕车。</string>
+    <string name="about_source">源代码</string>
+    <string name="about_source_desc">本应用为开源软件。您可以查看代码、提交反馈或发送拉取请求。</string>
+    <string name="about_repository">代码库</string>
+    <string name="about_license">许可证</string>
+    <string name="about_license_name">GPL-3.0 许可证</string>
+    <string name="about_license_body">基于 GNU 通用公共许可证 v3.0 发布。只要衍生作品保留相同许可证，您可以自由使用、研究、修改和分享本应用。</string>
+    <string name="about_license_read">阅读许可证全文</string>
+    <string name="about_contributors">贡献者</string>
+    <string name="about_contributors_desc">由在 GitHub 上为本项目做出贡献的所有人共同构建。</string>
+    <string name="about_contributors_all">查看所有贡献者</string>
+    <string name="about_contributors_all_desc">在 GitHub 上打开贡献者图表</string>
+    <string name="about_libraries">开源第三方库</string>
+    <string name="about_libraries_count">所用 %1$d 个第三方库的许可证</string>
+    <string name="about_libraries_desc">本应用基于以下开源第三方库构建。</string>
+    <string name="allow_notifications">允许通知</string>
+</resources>
