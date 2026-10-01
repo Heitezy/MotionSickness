@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Alívio do Enjoo</string>
+
+    <string name="motion_cues_channel_name">Sobreposição do Alívio do Enjoo</string>
+    <string name="motion_cues_notification_title">Alívio do Enjoo ativo</string>
+    <string name="motion_cues_notification_text">Exibindo pontos de movimento sobre outros aplicativos</string>
+    <string name="motion_cues_notification_stop">Parar</string>
+
+    <string name="main_title">Alívio do Enjoo</string>
+    <string name="main_subtitle">Reduz o enjoo de movimento exibindo pontos que deslizam com o movimento do veículo.</string>
+    <string name="main_grant_overlay">Conceder permissão para sobrepor a outros apps</string>
+    <string name="main_grant_accessibility_overlay">Conceder permissão de acessibilidade (recomendado)</string>
+    <string name="main_start">Iniciar pontos</string>
+    <string name="main_stop">Parar pontos</string>
+    <string name="main_open_settings">Personalizar</string>
+    <string name="main_open_about">Sobre</string>
+
+    <string name="settings_title">Personalizar</string>
+    <string name="settings_back">Voltar</string>
+
+    <string name="settings_mode_title">Posicionamento dos pontos</string>
+    <string name="settings_mode_focus">Apenas nas bordas</string>
+    <string name="settings_mode_uniform">Tela cheia</string>
+    <string name="settings_mode_columns">Colunas</string>
+
+    <string name="settings_shape_title">Formato</string>
+    <string name="settings_shape_circle">Círculo</string>
+    <string name="settings_shape_diamond">Losango</string>
+    <string name="settings_shape_meteoroid">Meteoroide</string>
+
+    <string name="settings_color_title">Cor</string>
+    <string name="settings_color_primary">Primária</string>
+    <string name="settings_color_secondary">Secundária</string>
+    <string name="settings_color_tertiary">Terciária</string>
+
+    <string name="settings_opacity_title">Opacidade</string>
+
+    <string name="settings_dot_size_title">Tamanho dos pontos</string>
+
+    <string name="settings_density_title">Quantidade de pontos</string>
+    <string name="settings_density_sparse">Menos</string>
+    <string name="settings_density_normal">Normal</string>
+    <string name="settings_density_dense">Mais</string>
+
+    <string name="settings_intensity_title">Intensidade dos pontos</string>
+    <string name="settings_intensity_subtitle">A intensidade com que os pontos reagem ao movimento — menor é mais sutil, maior é mais acentuado</string>
+
+    <string name="settings_motion_feel_title">Sensação de movimento</string>
+    <string name="settings_motion_feel_world_relative">Relativo ao mundo</string>
+    <string name="settings_motion_feel_raw">Direto</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Os pontos acompanham um mundo fixo enquanto você move e gira o celular</string>
+    <string name="settings_motion_feel_raw_subtitle">Os pontos reagem apenas à aceleração do celular, não à inclinação ou rotação</string>
+
+    <string name="settings_randomize_title">Alternar formato e cor aleatoriamente</string>
+    <string name="settings_randomize_subtitle">Alterna o visual a cada poucos segundos</string>
+
+    <string name="settings_autostart_title">Iniciar em um veículo em movimento</string>
+    <string name="settings_autostart_subtitle">Detecta o movimento do veículo e ativa ou desativa os pontos automaticamente</string>
+    <string name="settings_autostart_grant_permission">Permitir acesso à atividade física</string>
+
+    <string name="settings_speed_scale_title">Ajustar curvas pela velocidade do veículo</string>
+    <string name="settings_speed_scale_subtitle">Usa a velocidade do GPS para que uma curva ao volante pareça maior em alta velocidade e menor no trânsito lento. Requer acesso à localização; usado apenas para este cálculo.</string>
+
+    <string name="tile_label">Alívio do Enjoo</string>
+    <string name="accessibility_overlay_description">Permite que o Alívio do Enjoo use uma sobreposição de acessibilidade especializada que não interfere nos botões de outros aplicativos.</string>
+
+    <!-- About -->
+    <string name="label_about">Sobre</string>
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_tagline">Exibe uma sobreposição de pontos que deslizam com o movimento do seu veículo para ajudar a reduzir o enjoo.</string>
+    <string name="about_source">Código-fonte</string>
+    <string name="about_source_desc">Este aplicativo é de código aberto. Leia o código, abra um problema ou envie uma solicitação de alterações.</string>
+    <string name="about_repository">Repositório</string>
+    <string name="about_license">Licença</string>
+    <string name="about_license_name">Licença GPL-3.0</string>
+    <string name="about_license_body">Lançado sob a Licença Pública Geral GNU v3.0. Você é livre para usar, estudar, modificar e compartilhar este aplicativo, desde que os trabalhos derivados permaneçam sob a mesma licença.</string>
+    <string name="about_license_read">Ler o texto completo da licença</string>
+    <string name="about_contributors">Colaboradores</string>
+    <string name="about_contributors_desc">Desenvolvido por todas as pessoas que contribuíram para o projeto no GitHub.</string>
+    <string name="about_contributors_all">Ver todos os colaboradores</string>
+    <string name="about_contributors_all_desc">Abre o gráfico de colaboradores no GitHub</string>
+    <string name="about_libraries">Bibliotecas de código aberto</string>
+    <string name="about_libraries_count">Licenças para as %1$d bibliotecas utilizadas</string>
+    <string name="about_libraries_desc">Este aplicativo foi desenvolvido com as seguintes bibliotecas de código aberto.</string>
+    <string name="allow_notifications">Permitir notificações</string>
+</resources>
