@@ -1,0 +1,88 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">暈車緩解</string>
+
+    <string name="motion_cues_channel_name">暈車緩解懸浮視窗</string>
+    <string name="motion_cues_notification_title">暈車緩解已啟用</string>
+    <string name="motion_cues_notification_text">正在其他應用程式上顯示動態圓點</string>
+    <string name="motion_cues_notification_stop">停止</string>
+
+    <string name="main_title">暈車緩解</string>
+    <string name="main_subtitle">透過顯示隨車輛動態漂移的圓點，幫助減輕暈車不適。</string>
+    <string name="main_grant_overlay">授予在其他應用程式上層繪製權限</string>
+    <string name="main_grant_accessibility_overlay">授予無障礙權限（建議）</string>
+    <string name="main_start">啟動提示</string>
+    <string name="main_stop">停止提示</string>
+    <string name="main_open_settings">自訂</string>
+    <string name="main_open_about">關於</string>
+
+    <string name="settings_title">自訂</string>
+    <string name="settings_back">返回</string>
+
+    <string name="settings_mode_title">圓點位置</string>
+    <string name="settings_mode_focus">僅限邊緣</string>
+    <string name="settings_mode_uniform">全螢幕</string>
+    <string name="settings_mode_columns">分列</string>
+
+    <string name="settings_shape_title">形狀</string>
+    <string name="settings_shape_circle">圓形</string>
+    <string name="settings_shape_diamond">菱形</string>
+    <string name="settings_shape_meteoroid">流星</string>
+
+    <string name="settings_color_title">顏色</string>
+    <string name="settings_color_primary">主色</string>
+    <string name="settings_color_secondary">輔助色</string>
+    <string name="settings_color_tertiary">第三色</string>
+
+    <string name="settings_opacity_title">不透明度</string>
+
+    <string name="settings_dot_size_title">圓點大小</string>
+
+    <string name="settings_density_title">圓點數量</string>
+    <string name="settings_density_sparse">較少</string>
+    <string name="settings_density_normal">正常</string>
+    <string name="settings_density_dense">較多</string>
+
+    <string name="settings_intensity_title">提示強度</string>
+    <string name="settings_intensity_subtitle">圓點對動態的反應強度——越低越微弱，越高越明顯</string>
+
+    <string name="settings_motion_feel_title">動態感</string>
+    <string name="settings_motion_feel_world_relative">相對世界</string>
+    <string name="settings_motion_feel_raw">原生加速度</string>
+    <string name="settings_motion_feel_world_relative_subtitle">移動或旋轉手機時，圓點會追蹤固定的空間參照</string>
+    <string name="settings_motion_feel_raw_subtitle">圓點僅對手機加速度做出反應，不會因傾斜或旋轉手機而改變</string>
+
+    <string name="settings_randomize_title">隨機變換形狀與顏色</string>
+    <string name="settings_randomize_subtitle">每隔數秒自動切換外觀</string>
+
+    <string name="settings_autostart_title">在行進中的車輛內自動啟動</string>
+    <string name="settings_autostart_subtitle">自動偵測車輛動態並自動開啟或關閉提示</string>
+    <string name="settings_autostart_grant_permission">允許存取身體活動資料</string>
+
+    <string name="settings_speed_scale_title">根據車速縮放轉向幅度</string>
+    <string name="settings_speed_scale_subtitle">利用 GPS 速度計算，使相同的轉向角速度在高速行駛時展現較大的幅度，低速走走停停時展現較小的幅度。需要位置權限，僅用於此計算。</string>
+
+    <string name="tile_label">暈車緩解</string>
+    <string name="accessibility_overlay_description">允許「暈車緩解」使用專用無障礙懸浮圖層，不會干擾其他應用程式按鈕的操作。</string>
+
+    <!-- About -->
+    <string name="label_about">關於</string>
+    <string name="about_version">版本 %1$s</string>
+    <string name="about_tagline">顯示隨車輛動態漂移的圓點懸浮視窗，幫助減輕暈車不適。</string>
+    <string name="about_source">原始碼</string>
+    <string name="about_source_desc">本應用程式為開源專案。您可以檢視程式碼、回報問題或提交 Pull Request。</string>
+    <string name="about_repository">專案庫</string>
+    <string name="about_license">授權條款</string>
+    <string name="about_license_name">GPL-3.0 授權條款</string>
+    <string name="about_license_body">基於 GNU 通用公共授權條款 v3.0 發布。只要衍生作品維持相同授權，您可以自由使用、研究、修改與分享本應用程式。</string>
+    <string name="about_license_read">閱讀完整授權條款全文</string>
+    <string name="about_contributors">貢獻者</string>
+    <string name="about_contributors_desc">由在 GitHub 上為本專案做出貢獻的所有人共同打造。</string>
+    <string name="about_contributors_all">檢視所有貢獻者</string>
+    <string name="about_contributors_all_desc">在 GitHub 上開啟貢獻者圖表</string>
+    <string name="about_libraries">開源第三方函式庫</string>
+    <string name="about_libraries_count">所使用 %1$d 個第三方函式庫的授權條款</string>
+    <string name="about_libraries_desc">本應用程式基於以下開源第三方函式庫建置。</string>
+    <string name="allow_notifications">允許通知</string>
+</resources>
