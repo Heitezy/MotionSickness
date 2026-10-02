@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Άδειες χρήσης για τις %1$d βιβλιοθήκες που χρησιμοποιούνται</string>
     <string name="about_libraries_desc">Αυτή η εφαρμογή έχει δημιουργηθεί με τις ακόλουθες βιβλιοθήκες ανοιχτού κώδικα.</string>
     <string name="allow_notifications">Να επιτρέπονται οι ειδοποιήσεις</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Γνωστοποίηση Υπηρεσίας Προσβασιμότητας</string>
+    <string name="accessibility_disclosure_message">Η εφαρμογή «Ανακούφιση από τη Ναυτία» χρησιμοποιεί το API Υπηρεσίας Προσβασιμότητας (Accessibility Service API) για την εμφανιση ενός εξειδικευμένου επιθέματος στην οθόνη με κινούμενες κουκκίδες που κινούνται ανάλογα με τη حركة του οχήματος, συμβάλλοντας στη μείωση της ναυτίας.\n\nΗ χρήση αυτής της υπηρεσίας επιτρέπει την προβολή του επιθέματος χωρίς να εμποδίζονται τα αγγίγματα ή η αλληλεπίδραση με άλλες εφαρμογές.\n\nΔεν συλλέγονται, αποθηκεύονται ή μεταδίδονται προσωπικά ή ευαίσθητα δεδομένα χρήστη μέσω του API Υπηρεσίας Προσβασιμότητας.</string>
+    <string name="accessibility_disclosure_agree">Συναίνεση</string>
+    <string name="accessibility_disclosure_cancel">Ακύρωση</string>
 </resources>

@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Kullanılan %1$d kütüphane için lisanslar</string>
     <string name="about_libraries_desc">Bu uygulama aşağıdaki açık kaynaklı kütüphaneler kullanılarak geliştirilmiştir.</string>
     <string name="allow_notifications">Bildirimlere izin ver</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Erişilebilirlik Hizmeti Açıklaması</string>
+    <string name="accessibility_disclosure_message">«Taşıt Tutması Rahatlatıcı» uygulaması, taşıt hareketine göre hareket eden noktalardan oluşan özel bir katmanı ekranda göstererek taşıt tutmasını azaltmaya yardımcı olmak için Erişilebilirlik Hizmeti API\'sini (Accessibility Service API) kullanır.\n\nBu hizmetin kullanılması, dokunmaları engellemeden veya diğer uygulamalarla etkileşimi bozmadan katmanın görüntülenmesini sağlar.\n\nErişilebilirlik Hizmeti API\'si aracılığıyla hiçbir kişisel veya hassas kullanıcı verisi toplanmaz, saklanmaz veya aktarılmaz.</string>
+    <string name="accessibility_disclosure_agree">Kabul Et ve Ayarları Aç</string>
+    <string name="accessibility_disclosure_cancel">İptal</string>
 </resources>

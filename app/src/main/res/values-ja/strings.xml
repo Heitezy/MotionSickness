@@ -85,4 +85,10 @@
     <string name="about_libraries_count">使用している %1$d 個のライブラリのライセンス</string>
     <string name="about_libraries_desc">このアプリは以下のオープンソースライブラリを使用しています。</string>
     <string name="allow_notifications">通知を許可</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">ユーザー補助サービスの開示</string>
+    <string name="accessibility_disclosure_message">「乗り物酔い軽減」は、車の動きに合わせて動くドットを表示する専用のオーバーレイ画面を描画し、乗り物酔いを軽減するためにユーザー補助API（Accessibility Service API）を使用します。\n\nこのサービスを使用することで、タッチ操作を妨げたり他のアプリの操作を邪魔することなくオーバーレイを表示できます。\n\nユーザー補助APIを通じて、個人情報や機密データを収集、保存、または送信することは一切ありません。</string>
+    <string name="accessibility_disclosure_agree">同意して設定を開く</string>
+    <string name="accessibility_disclosure_cancel">キャンセル</string>
 </resources>

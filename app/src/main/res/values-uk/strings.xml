@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Ліцензії для %1$d використаних бібліотек</string>
     <string name="about_libraries_desc">Цей додаток побудовано на основі таких бібліотек з відкритим вихідним кодом.</string>
     <string name="allow_notifications">Дозволити сповіщення</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Використання служб спеціальних можливостей</string>
+    <string name="accessibility_disclosure_message">Додаток «Полегшення заколисування» використовує Accessibility Service API для відображення спеціалізованого оверлею з рухомими точками, які компенсують рух транспортного засобу та зменшують відчуття заколисування.\n\nВикористання цієї служби дозволяє відображати точки поверх екрана без залокування дотиків та перешкод для взаємодії з іншими додатками.\n\nДодаток НЕ збирає, НЕ зберігає та НЕ передає жодних персональних чи чутливих даних користувача через Accessibility Service API.</string>
+    <string name="accessibility_disclosure_agree">Погоджуюся</string>
+    <string name="accessibility_disclosure_cancel">Скасувати</string>
 </resources>

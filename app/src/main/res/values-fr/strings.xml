@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Licences pour les %1$d bibliothèques utilisées</string>
     <string name="about_libraries_desc">Cette application est basée sur les bibliothèques open source suivantes.</string>
     <string name="allow_notifications">Autoriser les notifications</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Déclaration du Service d\'Accessibilité</string>
+    <string name="accessibility_disclosure_message">« Soulagement du mal des transports » utilise l\'API du Service d\'Accessibilité (Accessibility Service API) pour afficher une superposition spécialisée avec des points en mouvement qui se déplacent selon le mouvement du véhicule afin d\'aider à réduire le mal des transports.\n\nL\'utilisation de ce service permet d\'afficher la superposition sans bloquer les interactions tactiles ni interférer avec les autres applications.\n\nAucune donnée personnelle ou sensible n\'est collectée, stockée ou transmise via l\'API du Service d\'Accessibilité.</string>
+    <string name="accessibility_disclosure_agree">Accepter et ouvrir les paramètres</string>
+    <string name="accessibility_disclosure_cancel">Annuler</string>
 </resources>

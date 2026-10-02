@@ -85,4 +85,10 @@
     <string name="about_libraries_count">所用 %1$d 个第三方库的许可证</string>
     <string name="about_libraries_desc">本应用基于以下开源第三方库构建。</string>
     <string name="allow_notifications">允许通知</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">无障碍服务说明</string>
+    <string name="accessibility_disclosure_message">“晕车缓解”使用无障碍服务 API (Accessibility Service API) 在屏幕上显示专门的覆盖层，其中的动态圆点随车辆运动而移动，以帮助减轻晕车症状。\n\n使用此服务可以使覆盖层在不阻塞触摸操作或干扰与其他应用互动的情况下正常显示。\n\n本应用绝不会通过无障碍服务 API 收集、存储或传输任何个人或敏感用户数据。</string>
+    <string name="accessibility_disclosure_agree">同意并打开设置</string>
+    <string name="accessibility_disclosure_cancel">取消</string>
 </resources>

@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Qullanılğan %1$d kitaphane içün litsenziyalar</string>
     <string name="about_libraries_desc">Bu uyğulama aşağıdaki açıq menbalı kitaphaneler esasında yaratılğan.</string>
     <string name="allow_notifications">Bildirişlerge ruhset ber</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Erişilebilirlik hızmeti beyanatı</string>
+    <string name="accessibility_disclosure_message">"Erenlik rahatlığı" uyğulaması, taşıt hareketine köre hareket etken noqtalardan ibaret mahsus üst-qaplamanı köstermek içün Erişilebilirlik Hızmeti API (Accessibility Service API) qullana, bu ise erenlik rahatsızlığını azaltmağa yardım ete.\n\nBu hızmetni qullanuv üst-qaplamanı başqa uyğulamalarğa mane olmadan ve toqunularnı kilitlemeyip köstermege imkân bere.\n\nErişilebilirlik Hızmeti API vasıtasıyla iç bir şahsiy ya da hassas malümat toplanmay, saqlanmay ve berilmey.</string>
+    <string name="accessibility_disclosure_agree">Razım</string>
+    <string name="accessibility_disclosure_cancel">Lâğv etüv</string>
 </resources>

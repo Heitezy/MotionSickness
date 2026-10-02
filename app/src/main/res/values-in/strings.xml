@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Lisensi untuk %1$d pustaka yang digunakan</string>
     <string name="about_libraries_desc">Aplikasi ini dibangun menggunakan pustaka sumber terbuka berikut.</string>
     <string name="allow_notifications">Izinkan notifikasi</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Pengungkapan Layanan Aksesibilitas</string>
+    <string name="accessibility_disclosure_message">«Pereda Mabuk Perjalanan» menggunakan API Layanan Aksesibilitas (Accessibility Service API) untuk menampilkan hamparan khusus pada layar dengan titik-titik bergerak yang mengikuti gerakan kendaraan untuk membantu mengurangi mabuk perjalanan.\n\nMenggunakan layanan ini memungkinkan hamparan ditampilkan tanpa memblokir sentuhan atau mengganggu interaksi Anda dengan aplikasi lain.\n\nTidak ada data pribadi atau sensitif pengguna yang dikumpulkan, disimpan, atau ditransmisikan melalui API Layanan Aksesibilitas.</string>
+    <string name="accessibility_disclosure_agree">Setuju &amp; Buka Pengaturan</string>
+    <string name="accessibility_disclosure_cancel">Batal</string>
 </resources>

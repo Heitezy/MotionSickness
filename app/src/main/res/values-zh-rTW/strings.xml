@@ -85,4 +85,10 @@
     <string name="about_libraries_count">所使用 %1$d 個第三方函式庫的授權條款</string>
     <string name="about_libraries_desc">本應用程式基於以下開源第三方函式庫建置。</string>
     <string name="allow_notifications">允許通知</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">無障礙服務說明</string>
+    <string name="accessibility_disclosure_message">「暈車緩解」使用無障礙服務 API (Accessibility Service API) 在螢幕上顯示專門的覆蓋層，其中的動態圓點隨車輛運動而移動，以幫助減輕暈車症狀。\n\n使用此服務可以使覆蓋層在不阻塞觸控操作或干擾與其他應用互動的情況下正常顯示。\n\n本應用絕不會透過無障礙服務 API 收集、儲存或傳輸任何個人或敏感使用者資料。</string>
+    <string name="accessibility_disclosure_agree">同意並開啟設定</string>
+    <string name="accessibility_disclosure_cancel">取消</string>
 </resources>

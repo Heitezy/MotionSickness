@@ -86,4 +86,10 @@
     <string name="about_libraries_count">Licenses for the %1$d libraries used</string>
     <string name="about_libraries_desc">This app is built on the following open-source libraries.</string>
     <string name="allow_notifications">Allow notifications</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Accessibility Service Disclosure</string>
+    <string name="accessibility_disclosure_message">Motion Sickness Relief uses the Accessibility Service API to display a specialized overlay on your screen with moving dots that drift with vehicle motion to help reduce motion sickness.\n\nUsing this service allows the overlay to draw without blocking touches or interfering with your interaction with other apps.\n\nNo personal or sensitive user data is collected, stored, or transmitted via the Accessibility Service API.</string>
+    <string name="accessibility_disclosure_agree">Agree &amp; Open Settings</string>
+    <string name="accessibility_disclosure_cancel">Cancel</string>
 </resources>

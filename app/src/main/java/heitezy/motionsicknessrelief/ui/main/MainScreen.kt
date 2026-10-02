@@ -17,10 +17,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -57,6 +59,7 @@ fun MainScreen(
     var overlayGranted by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
     var notifGranted by remember { mutableStateOf(hasNotificationPermission(context)) }
     var accessibilityOverlayGranted by remember { mutableStateOf(isAccessibilityOverlayEnabled(context)) }
+    var showAccessibilityDisclosure by remember { mutableStateOf(false) }
     val cuesRunning by MotionCuesService.isRunning.collectAsStateWithLifecycle()
 
     // Permissions can change while we're backgrounded (user toggled them in Settings).
@@ -112,10 +115,35 @@ fun MainScreen(
 
         if (!accessibilityOverlayGranted) {
             Button(
-                onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
+                onClick = { showAccessibilityDisclosure = true },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.outlinedButtonColors(),
             ) { Text(stringResource(R.string.main_grant_accessibility_overlay)) }
+        }
+
+        if (showAccessibilityDisclosure) {
+            AlertDialog(
+                onDismissRequest = { showAccessibilityDisclosure = false },
+                title = { Text(stringResource(R.string.accessibility_disclosure_title)) },
+                text = { Text(stringResource(R.string.accessibility_disclosure_message)) },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showAccessibilityDisclosure = false
+                            context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                        },
+                    ) {
+                        Text(stringResource(R.string.accessibility_disclosure_agree))
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = { showAccessibilityDisclosure = false },
+                    ) {
+                        Text(stringResource(R.string.accessibility_disclosure_cancel))
+                    }
+                },
+            )
         }
 
         Spacer(Modifier.height(8.dp))

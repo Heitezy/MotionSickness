@@ -85,4 +85,10 @@
     <string name="about_libraries_count">สัญญาอนุญาตสำหรับ %1$d ไลบรารีที่ใช้</string>
     <string name="about_libraries_desc">แอปนี้สร้างขึ้นโดยใช้ไลบรารีโอเพนซอร์สดังต่อไปนี้</string>
     <string name="allow_notifications">อนุญาตการแจ้งเตือน</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">คำชี้แจงการใช้บริการการเข้าถึง</string>
+    <string name="accessibility_disclosure_message">แอป «บรรเทาอาการเมารถ» ใช้ Accessibility Service API เพื่อแสดงเลเยอร์จุดที่เคลื่อนไหวตามการเคลื่อนที่ของยานพาหนะบนหน้าจอเพื่อช่วยลดอาการเมารถ\n\nการใช้บริการนี้ช่วยให้สามารถแสดงเลเยอร์โดยไม่บล็อกการสัมผัสหรือไม่รบกวนการใช้งานแอปอื่น ๆ\n\nไม่มีการเก็บรวบรวม จัดเก็บ หรือส่งข้อมูลส่วนบุคคลหรือข้อมูลที่ละเอียดอ่อนของผู้ใช้ผ่าน Accessibility Service API</string>
+    <string name="accessibility_disclosure_agree">ยินยอมและเปิดการตั้งค่า</string>
+    <string name="accessibility_disclosure_cancel">ยกเลิก</string>
 </resources>

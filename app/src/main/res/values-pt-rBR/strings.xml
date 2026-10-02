@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Licenças para as %1$d bibliotecas utilizadas</string>
     <string name="about_libraries_desc">Este aplicativo foi desenvolvido com as seguintes bibliotecas de código aberto.</string>
     <string name="allow_notifications">Permitir notificações</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Declaração do Serviço de Acessibilidade</string>
+    <string name="accessibility_disclosure_message">O «Alívio do Enjoo de Movimento» usa a API do Serviço de Acessibilidade (Accessibility Service API) para exibir uma sobreposição especializada na tela com pontos em movimento que acompanham o movimento do veículo para ajudar a reduzir o enjoo.\n\nO uso deste serviço permite exibir a sobreposição sem bloquear toques ou interferir na interação com outros aplicativos.\n\nNenhum dado pessoal ou sensível do usuário é coletado, armazenado ou transmitido por meio da API do Serviço de Acessibilidade.</string>
+    <string name="accessibility_disclosure_agree">Concordar e abrir Configurações</string>
+    <string name="accessibility_disclosure_cancel">Cancelar</string>
 </resources>

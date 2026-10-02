@@ -85,4 +85,10 @@
     <string name="about_libraries_count">사용된 %1$d개 라이브러리의 라이선스</string>
     <string name="about_libraries_desc">이 앱은 다음 오픈 소스 라이브러리를 바탕으로 제작되었습니다.</string>
     <string name="allow_notifications">알림 허용</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">접근성 서비스 안내</string>
+    <string name="accessibility_disclosure_message">«멀미 완화»는 차량의 움직임에 맞춰 움직이는 점을 화면에 표시하여 멀미를 줄이기 위해 접근성 서비스 API(Accessibility Service API)를 사용합니다.\n\n이 서비스를 사용하면 다른 앱의 터치를 차단하거나 방해하지 않고 오버레이를 표시할 수 있습니다.\n\n접근성 서비스 API를 통해 어떠한 개인 정보나 민감한 사용자 데이터도 수집, 저장 또는 전송되지 않습니다.</string>
+    <string name="accessibility_disclosure_agree">동의 및 설정 열기</string>
+    <string name="accessibility_disclosure_cancel">취소</string>
 </resources>

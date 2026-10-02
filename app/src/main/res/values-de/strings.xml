@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Lizenzen für die %1$d verwendeten Bibliotheken</string>
     <string name="about_libraries_desc">Diese App basiert auf den folgenden Open-Source-Bibliotheken.</string>
     <string name="allow_notifications">Benachrichtigungen zulassen</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Erklärung zur Nutzung von Bedienungshilfen</string>
+    <string name="accessibility_disclosure_message">„Linderung von Reisekrankheit“ nutzt die Barrierefreiheits-API (Accessibility Service API), um ein spezielles Overlay mit sich bewegenden Punkten anzuzeigen, die sich mit der Fahrzeugbewegung mitbewegen, um Reisekrankheit zu lindern.\n\nDie Nutzung dieses Dienstes ermöglicht das Einblenden der Punkte, ohne Berührungen zu blockieren oder die Interaktion mit anderen Apps zu stören.\n\nEs werden keinerlei persönliche oder sensible Nutzerdaten über die Accessibility Service API erfasst, gespeichert oder übertragen.</string>
+    <string name="accessibility_disclosure_agree">Zustimmen &amp; Einstellungen öffnen</string>
+    <string name="accessibility_disclosure_cancel">Abbrechen</string>
 </resources>

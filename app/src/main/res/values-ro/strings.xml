@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Licențe pentru cele %1$d biblioteci utilizate</string>
     <string name="about_libraries_desc">Această aplicație este construită folosind următoarele biblioteci open-source.</string>
     <string name="allow_notifications">Permite notificări</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Declarație privind Serviciul de Accesibilitate</string>
+    <string name="accessibility_disclosure_message">Aplicația «Ameliorarea Răului de Mișcare» utilizează API-ul Serviciului de Accesibilitate (Accessibility Service API) pentru a afișa o suprapunere specializată pe ecran cu puncte în mișcare care urmăresc mișcarea vehiculului pentru a ajuta la reducerea răului de mișcare.\n\nUtilizarea acestui serviciu permite afișarea suprapunerii fără a bloca atingerile și fără a interfera cu alte aplicații.\n\nNiciun fel de date personale sau sensibile ale utilizatorului nu sunt colectate, stocate sau transmise prin intermediul API-ului Serviciului de Accesibilitate.</string>
+    <string name="accessibility_disclosure_agree">De acord și deschide Setările</string>
+    <string name="accessibility_disclosure_cancel">Anulează</string>
 </resources>

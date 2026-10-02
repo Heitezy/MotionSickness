@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Licencje dla %1$d użytych bibliotek</string>
     <string name="about_libraries_desc">Ta aplikacja została zbudowana w oparciu o następujące biblioteki open source.</string>
     <string name="allow_notifications">Zezwól na powiadomienia</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Informacja o Usłudze Dostępności</string>
+    <string name="accessibility_disclosure_message">Aplikacja «Ulga w chorobie lokomocyjnej» używa API Usługi Dostępności (Accessibility Service API) do wyświetlania specjalnej nakładki z poruszającymi się punktami, które podążają za ruchem pojazdu, aby pomóc zmniejszyć objawy choroby lokomocyjnej.\n\nUżycie tej usługi pozwala na wyświetlanie nakładki bez blokowania dotyku i bez zakłócania interakcji z innymi aplikacjami.\n\nŻadne dane osobowe ani wrażliwe dane użytkownika nie są zbierane, przechowywane ani przesyłane za pośrednictwem API Usługi Dostępności.</string>
+    <string name="accessibility_disclosure_agree">Zgadzam się i otwórz Ustawienia</string>
+    <string name="accessibility_disclosure_cancel">Anuluj</string>
 </resources>

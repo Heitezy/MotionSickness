@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Licencias de las %1$d bibliotecas utilizadas</string>
     <string name="about_libraries_desc">Esta aplicación está creada sobre las siguientes bibliotecas de código abierto.</string>
     <string name="allow_notifications">Permitir notificaciones</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Declaración del Servicio de Accesibilidad</string>
+    <string name="accessibility_disclosure_message">«Alivio del mareo» utiliza la API del Servicio de Accesibilidad (Accessibility Service API) para mostrar una capa superpuesta especializada con puntos en movimiento que se desplazan con el movimiento del vehículo para ayudar a reducir el mareo.\n\nEl uso de este servicio permite mostrar los puntos sin bloquear los toques ni interferir con la interacción con otras aplicaciones.\n\nNo se recopilan, almacenan ni transmiten datos personales o sensibles del usuario a través de la API del Servicio de Accesibilidad.</string>
+    <string name="accessibility_disclosure_agree">Aceptar y abrir Ajustes</string>
+    <string name="accessibility_disclosure_cancel">Cancelar</string>
 </resources>

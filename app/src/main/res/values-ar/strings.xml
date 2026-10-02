@@ -85,4 +85,10 @@
     <string name="about_libraries_count">تراخيص المكتبات الـ %1$d المستخدمة</string>
     <string name="about_libraries_desc">تم بناء هذا التطبيق باستخدام المكتبات مفتوحة المصدر التالية.</string>
     <string name="allow_notifications">السماح بالإشعارات</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">إفصاح خدمة إمكانية الوصول</string>
+    <string name="accessibility_disclosure_message">يستخدم تطبيق «تخفيف دوار الحركة» واجهة برمجية لخدمة إمكانية الوصول (Accessibility Service API) لعرض تراكب متخصص على الشاشة يحتوي على نقاط متحرّكة تتحرك مع حركة المركبة للمساعدة في تقليل دوار الحركة.\n\nيتيح استخدام هذه الخدمة لرسم التراكب دون حجب اللمسات أو التداخل مع تفاعلك مع التطبيقات الأخرى.\n\nلا يتم جمع أو تخزين أو نقل أي بيانات شخصية أو حساسة للمستخدم عبر واجهة Accessibility Service API.</string>
+    <string name="accessibility_disclosure_agree">الموافقة وفتح الإعدادات</string>
+    <string name="accessibility_disclosure_cancel">إلغاء</string>
 </resources>

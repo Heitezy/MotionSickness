@@ -85,4 +85,10 @@
     <string name="about_libraries_count">Licenze per le %1$d librerie utilizzate</string>
     <string name="about_libraries_desc">Questa app è basata sulle seguenti librerie open source.</string>
     <string name="allow_notifications">Consenti notifiche</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Informativa sul Servizio di Accessibilità</string>
+    <string name="accessibility_disclosure_message">«Sollievo dal mal di movimento» utilizza l\'API del Servizio di Accessibilità (Accessibility Service API) per mostrare un overlay specializzato sullo schermo con punti in movimento che seguono il movimento del veicolo per aiutare a ridurre il mal di movimento.\n\nL\'uso di questo servizio consente di mostrare l\'overlay senza bloccare i tocchi né interferire con l\'interazione con altre applicazioni.\n\nNessun dato personale o sensibile dell\'utente viene raccolto, memorizzato o trasmesso tramite l\'API del Servizio di Accessibilità.</string>
+    <string name="accessibility_disclosure_agree">Accetta e apri Impostazioni</string>
+    <string name="accessibility_disclosure_cancel">Annulla</string>
 </resources>
