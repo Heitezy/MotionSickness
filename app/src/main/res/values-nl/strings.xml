@@ -1,0 +1,94 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">Reisziekteverlichting</string>
+
+    <string name="motion_cues_channel_name">Overlay voor reisziekteverlichting</string>
+    <string name="motion_cues_notification_title">Reisziekteverlichting actief</string>
+    <string name="motion_cues_notification_text">Toont bewegende punten over andere apps</string>
+    <string name="motion_cues_notification_stop">Stoppen</string>
+
+    <string name="main_title">Reisziekteverlichting</string>
+    <string name="main_subtitle">Vermindert reisziekte door punten te tonen die meebewegen met de beweging van het voertuig.</string>
+    <string name="main_grant_overlay">Toestemming verlenen voor weergave over andere apps</string>
+    <string name="main_grant_accessibility_overlay">Toegankelijkheidstoestemming verlenen (aanbevolen)</string>
+    <string name="main_start">Punten inschakelen</string>
+    <string name="main_stop">Punten uitschakelen</string>
+    <string name="main_open_settings">Aanpassen</string>
+    <string name="main_open_about">Over</string>
+
+    <string name="settings_title">Aanpassen</string>
+    <string name="settings_back">Terug</string>
+
+    <string name="settings_mode_title">Plaatsing van punten</string>
+    <string name="settings_mode_focus">Alleen randen</string>
+    <string name="settings_mode_uniform">Volledig scherm</string>
+    <string name="settings_mode_columns">Kolommen</string>
+
+    <string name="settings_shape_title">Vorm</string>
+    <string name="settings_shape_circle">Cirkel</string>
+    <string name="settings_shape_diamond">Ruit</string>
+    <string name="settings_shape_meteoroid">Meteoor</string>
+
+    <string name="settings_color_title">Kleur</string>
+    <string name="settings_color_primary">Primair</string>
+    <string name="settings_color_secondary">Secundair</string>
+    <string name="settings_color_tertiary">Tertiair</string>
+
+    <string name="settings_opacity_title">Dekking</string>
+
+    <string name="settings_dot_size_title">Puntgrootte</string>
+
+    <string name="settings_density_title">Aantal punten</string>
+    <string name="settings_density_sparse">Minder</string>
+    <string name="settings_density_normal">Normaal</string>
+    <string name="settings_density_dense">Meer</string>
+
+    <string name="settings_intensity_title">Reactie-intensiteit</string>
+    <string name="settings_intensity_subtitle">Hoe sterk de punten reageren op beweging — lager is subtieler, hoger is duidelijker</string>
+
+    <string name="settings_motion_feel_title">Bewegingsgevoel</string>
+    <string name="settings_motion_feel_world_relative">Relatief t.o.v. wereld</string>
+    <string name="settings_motion_feel_raw">Ruw</string>
+    <string name="settings_motion_feel_world_relative_subtitle">Punten volgen een vaste wereld terwijl je de telefoon beweegt en draait</string>
+    <string name="settings_motion_feel_raw_subtitle">Punten reageren alleen op hoe de telefoon versnelt, niet op kantelen of draaien</string>
+
+    <string name="settings_randomize_title">Vorm en kleur willekeurig veranderen</string>
+    <string name="settings_randomize_subtitle">Wisselt het uiterlijk om de paar seconden</string>
+
+    <string name="settings_autostart_title">Starten in een rijdend voertuig</string>
+    <string name="settings_autostart_subtitle">Detecteert de beweging van het voertuig en schakelt de punten automatisch in en uit</string>
+    <string name="settings_autostart_grant_permission">Toegang tot fysieke activiteit toestaan</string>
+
+    <string name="settings_speed_scale_title">Bochtreactie aanpassen aan voertuigsnelheid</string>
+    <string name="settings_speed_scale_subtitle">Gebruikt GPS-snelheid zodat een vaste stuurhoek op de snelweg als een grotere bocht voelt en in langzaam verkeer als een kleinere. Vereist locatietoegang; wordt alleen voor deze berekening gebruikt.</string>
+
+    <string name="tile_label">Reisziekteverlichting</string>
+    <string name="accessibility_overlay_description">Hiermee kan Reisziekteverlichting een gespecialiseerde toegankelijkheidsoverlay gebruiken die de knoppen van andere apps niet blokkeert.</string>
+
+    <!-- About -->
+    <string name="label_about">Over</string>
+    <string name="about_version">Versie %1$s</string>
+    <string name="about_tagline">Toont een overlay van punten die meebewegen met de beweging van je voertuig om reisziekte te verminderen.</string>
+    <string name="about_source">Broncode</string>
+    <string name="about_source_desc">Deze app is open source. Bekijk de code, meld een probleem of stuur een pull request.</string>
+    <string name="about_repository">Repository</string>
+    <string name="about_license">Licentie</string>
+    <string name="about_license_name">GPL-3.0-licentie</string>
+    <string name="about_license_body">Uitgegeven onder de GNU General Public License v3.0. Je bent vrij om deze app te gebruiken, bestuderen, aan te passen en te delen, mits afgeleide werken onder dezelfde licentie blijven.</string>
+    <string name="about_license_read">Lees de volledige licentietekst</string>
+    <string name="about_contributors">Bijdragers</string>
+    <string name="about_contributors_desc">Gemaakt door iedereen die op GitHub aan het project heeft bijgedragen.</string>
+    <string name="about_contributors_all">Bekijk alle bijdragers</string>
+    <string name="about_contributors_all_desc">Opent de bijdragersgrafiek op GitHub</string>
+    <string name="about_libraries">Open-sourcebibliotheken</string>
+    <string name="about_libraries_count">Licenties voor de %1$d gebruikte bibliotheken</string>
+    <string name="about_libraries_desc">Deze app is gebouwd op de volgende open-sourcebibliotheken.</string>
+    <string name="allow_notifications">Meldingen toestaan</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">Verklaring inzake toegankelijkheidsservice</string>
+    <string name="accessibility_disclosure_message">“Reisziekteverlichting” gebruikt de Accessibility Service API om een gespecialiseerde overlay op je scherm te tonen met bewegende punten die meebewegen met de voertuigbeweging om reisziekte te verminderen.\n\nDoor deze service te gebruiken kan de overlay worden weergegeven zonder aanrakingen te blokkeren of je interactie met andere apps te verstoren.\n\nEr worden geen persoonlijke of gevoelige gebruikersgegevens verzameld, opgeslagen of verzonden via de Accessibility Service API.</string>
+    <string name="accessibility_disclosure_agree">Akkoord &amp; Instellingen openen</string>
+    <string name="accessibility_disclosure_cancel">Annuleren</string>
+</resources>
