@@ -1,0 +1,94 @@
+<!-- SPDX-FileCopyrightText: 2026 Heitezy -->
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="app_name">הקלה על מחלת נסיעה</string>
+
+    <string name="motion_cues_channel_name">שכבת תצוגה של הקלה על מחלת נסיעה</string>
+    <string name="motion_cues_notification_title">הקלה על מחלת נסיעה פעילה</string>
+    <string name="motion_cues_notification_text">מציג נקודות תנועה מעל אפליקציות אחרות</string>
+    <string name="motion_cues_notification_stop">עצור</string>
+
+    <string name="main_title">הקלה על מחלת נסיעה</string>
+    <string name="main_subtitle">מפחית מחלת נסיעה על ידי הצגת נקודות הזזות בהתאם לתנועת הרכב.</string>
+    <string name="main_grant_overlay">ענק הרשאת תצוגה מעל אפליקציות אחרות</string>
+    <string name="main_grant_accessibility_overlay">ענק הרשאת נגישות (מומלץ)</string>
+    <string name="main_start">הפעל נקודות תנועה</string>
+    <string name="main_stop">הפסק נקודות תנועה</string>
+    <string name="main_open_settings">התאמה אישית</string>
+    <string name="main_open_about">אודות</string>
+
+    <string name="settings_title">התאמה אישית</string>
+    <string name="settings_back">חזרה</string>
+
+    <string name="settings_mode_title">מיקום הנקודות</string>
+    <string name="settings_mode_focus">בשוליים בלבד</string>
+    <string name="settings_mode_uniform">מסך מלא</string>
+    <string name="settings_mode_columns">עמודות</string>
+
+    <string name="settings_shape_title">צורה</string>
+    <string name="settings_shape_circle">עיגול</string>
+    <string name="settings_shape_diamond">מעוין</string>
+    <string name="settings_shape_meteoroid">מטאורואיד</string>
+
+    <string name="settings_color_title">צבע</string>
+    <string name="settings_color_primary">ראשי</string>
+    <string name="settings_color_secondary">משני</string>
+    <string name="settings_color_tertiary">שלישוני</string>
+
+    <string name="settings_opacity_title">אטימות</string>
+
+    <string name="settings_dot_size_title">גודל הנקודות</string>
+
+    <string name="settings_density_title">כמות הנקודות</string>
+    <string name="settings_density_sparse">פחות</string>
+    <string name="settings_density_normal">רגיל</string>
+    <string name="settings_density_dense">יותר</string>
+
+    <string name="settings_intensity_title">עוצמת התגובה</string>
+    <string name="settings_intensity_subtitle">כמה בחזקה הנקודות מגיבות לתנועה — ערך נמוך עדין יותר, ערך גבוה מודגש יותר</string>
+
+    <string name="settings_motion_feel_title">תחושת תנועה</string>
+    <string name="settings_motion_feel_world_relative">ביחס לעולם</string>
+    <string name="settings_motion_feel_raw">גולמי</string>
+    <string name="settings_motion_feel_world_relative_subtitle">הנקודות עוקבות אחר עולם קבוע בזמן שאתה מזיז ומסובב את הטלפון דרכו</string>
+    <string name="settings_motion_feel_raw_subtitle">הנקודות מגיבות רק לתאוצת הטלפון, ולא להטייתו או לסיבובו</string>
+
+    <string name="settings_randomize_title">שנה צורה וצבע באקראי</string>
+    <string name="settings_randomize_subtitle">משנה את המראה כל כמה שניות</string>
+
+    <string name="settings_autostart_title">הפעל בזמן נסיעה ברכב</string>
+    <string name="settings_autostart_subtitle">מזהה תנועת רכב ומפעיל או מפסיק את הנקודות באופן אוטומטי</string>
+    <string name="settings_autostart_grant_permission">אפשר גישה לפעילות גופנית</string>
+
+    <string name="settings_speed_scale_title">התאם פניות למהירות הרכב</string>
+    <string name="settings_speed_scale_subtitle">משתמש במהירות ה-GPS כך שהיגוי קבוע ייראה כפנייה גדולה יותר במהירות גבוהה וקטנה יותר בתנועה איטית. דורש גישה למיקום; משמש אך ורק לחישוב זה.</string>
+
+    <string name="tile_label">הקלה על מחלת נסיעה</string>
+    <string name="accessibility_overlay_description">מאפשר לאפליקציה \"הקלה על מחלת נסיעה\" להשתמש בשכבת נגישות מיוחדת שאינה מפריעה ללחצנים של אפליקציות אחרות.</string>
+
+    <!-- About -->
+    <string name="label_about">אודות</string>
+    <string name="about_version">גרסה %1$s</string>
+    <string name="about_tagline">מציג שכבת נקודות הזזות בהתאם לתנועת הרכב שלך, כדי לסייע בהפחתת מחלת נסיעה.</string>
+    <string name="about_source">קוד מקור</string>
+    <string name="about_source_desc">אפליקציה זו היא בקוד פתוח. ניתן לקרוא את הקוד, לדווח על תקלה או לשלוח בקשת שינוי (Pull Request).</string>
+    <string name="about_repository">מאגר קוד (Repository)</string>
+    <string name="about_license">רישיון</string>
+    <string name="about_license_name">רישיון GPL-3.0</string>
+    <string name="about_license_body">משוחרר תחת הרישיון הציבורי הכללי של גנו גרסה 3.0 (GNU GPL v3.0). הנך חופשי להשתמש, ללמוד, לשנות ולשתף אפליקציה זו, ובלבד שעבודות נגזרות יישארו תחת אותו הרישיון.</string>
+    <string name="about_license_read">קרא את טקסט הרישיון המלא</string>
+    <string name="about_contributors">תורמים</string>
+    <string name="about_contributors_desc">פותח על ידי כל מי שתרם לפרויקט ב-GitHub.</string>
+    <string name="about_contributors_all">הצג את כל התורמים</string>
+    <string name="about_contributors_all_desc">פותח את תרשים התורמים ב-GitHub</string>
+    <string name="about_libraries">ספריות קוד פתוח</string>
+    <string name="about_libraries_count">רישיונות עבור %1$d הספריות שבשימוש</string>
+    <string name="about_libraries_desc">אפליקציה זו בנויה על ספריות הקוד הפתוח הבאות.</string>
+    <string name="allow_notifications">אפשר התראות</string>
+
+    <!-- Prominent Disclosure for Accessibility Service -->
+    <string name="accessibility_disclosure_title">גילוי נאות של שירות הנגישות</string>
+    <string name="accessibility_disclosure_message">האפליקציה \"הקלה על מחלת נסיעה\" משתמשת ב-API של שירות הנגישות (Accessibility Service API) כדי להציג שכבה מיוחדת על המסך עם נקודות נעות הזזות בהתאם לתנועת הרכב כדי לסייע בהפחתת מחלת נסיעה.\n\nשימוש בשירות זה מאפשר תצוגה של השכבה מבלי לחסום מגע במסך או להפריע לשימוש באפליקציות אחרות.\n\nלא נאסף, נשמר או מועבר שום מידע אישי או רגיש של המשתמש באמצעות ה-API של שירות הנגישות.</string>
+    <string name="accessibility_disclosure_agree">אישור ופתיחת הגדרות</string>
+    <string name="accessibility_disclosure_cancel">ביטול</string>
+</resources>
